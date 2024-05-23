@@ -53,6 +53,13 @@ export default function Homepage(): ReactNode {
       {paginatedSearchResults.map((id) => {
         return <HomepageCard key={id} id={id} />;
       })}
+      {searchResults.length > 0 ? (
+        <PageNav
+          page={page}
+          setSearchParams={setSearchParams}
+          searchResultsTotal={searchResultsTotal}
+        />
+      ) : null}
     </div>
   );
 }
