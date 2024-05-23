@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import { SetURLSearchParams } from "react-router-dom";
+import styles from "./SearchBar.module.css";
 
 export default function SearchBar(props: {
   setSearchParams: SetURLSearchParams;
@@ -15,15 +16,16 @@ export default function SearchBar(props: {
   }
 
   return (
-    <form onSubmit={submitSearch}>
-      <label htmlFor="searchInput">Search Met Museum: </label>
+    <form className={styles.container} onSubmit={submitSearch}>
       <input
+        className={styles.searchInput}
+        id="search"
         type="text"
-        id="searchInput"
+        placeholder="Search Met Museum"
         onChange={(e) => setSearch(e.target.value)}
         required
       />
-      <button>{">>"}</button>
+      <button className={styles.searchBtn}>{">>"}</button>
     </form>
   );
 }
