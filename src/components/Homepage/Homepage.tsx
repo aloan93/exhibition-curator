@@ -40,26 +40,33 @@ export default function Homepage(): ReactNode {
 
   return (
     <div className={styles.container}>
-      <SearchBar setSearchParams={setSearchParams} />
-      {isLoading ? <p>Loading...</p> : null}
-      {error ? <p>{error}</p> : null}
-      {searchResults.length > 0 ? (
-        <PageNav
-          page={page}
-          setSearchParams={setSearchParams}
-          searchResultsTotal={searchResultsTotal}
-        />
-      ) : null}
-      {paginatedSearchResults.map((id) => {
-        return <HomepageCard key={id} id={id} />;
-      })}
-      {searchResults.length > 0 ? (
-        <PageNav
-          page={page}
-          setSearchParams={setSearchParams}
-          searchResultsTotal={searchResultsTotal}
-        />
-      ) : null}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <SearchBar setSearchParams={setSearchParams} />
+          {error ? <p>{error}</p> : null}
+          {searchResults.length > 0 ? (
+            <PageNav
+              page={page}
+              setSearchParams={setSearchParams}
+              searchResultsTotal={searchResultsTotal}
+            />
+          ) : null}
+          <div className={styles.listContainer}>
+            {paginatedSearchResults.map((id) => {
+              return <HomepageCard key={id} id={id} />;
+            })}
+          </div>
+          {searchResults.length > 0 ? (
+            <PageNav
+              page={page}
+              setSearchParams={setSearchParams}
+              searchResultsTotal={searchResultsTotal}
+            />
+          ) : null}
+        </>
+      )}
     </div>
   );
 }

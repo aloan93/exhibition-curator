@@ -27,14 +27,18 @@ export default function PageNav(props: {
 
   return (
     <div className={styles.container}>
-      <button onClick={pageDown} hidden={pageNumber === 1}>
-        {"<"}
-      </button>
-      <p>{pageNumber}</p>
       <button
+        className={styles.navBtn}
+        onClick={pageDown}
+        hidden={pageNumber === 1}>
+        {"<<"}
+      </button>
+      <p className={styles.currentPage}>{pageNumber}</p>
+      <button
+        className={styles.navBtn}
         onClick={pageUp}
         hidden={pageNumber * 20 >= props.searchResultsTotal}>
-        {">"}
+        {">>"}
       </button>
     </div>
   );

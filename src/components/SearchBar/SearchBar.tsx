@@ -11,6 +11,7 @@ export default function SearchBar(props: {
     e.preventDefault();
     props.setSearchParams((prev) => {
       prev.set("query", search);
+      prev.delete("page");
       return prev;
     });
   }
@@ -25,7 +26,7 @@ export default function SearchBar(props: {
         onChange={(e) => setSearch(e.target.value)}
         required
       />
-      <button className={styles.searchBtn}>{">>"}</button>
+      <button className={styles.searchBtn}>{"🔍"}</button>
     </form>
   );
 }
