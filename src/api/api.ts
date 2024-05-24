@@ -4,4 +4,8 @@ const metMuseumAPI = axios.create({
   baseURL: "https://collectionapi.metmuseum.org/public/collection/v1",
 });
 
-export { metMuseumAPI };
+const clevelandMuseumAPI = axios.create({
+  baseURL: "https://openaccess-api.clevelandart.org/api",
+});
+
+export { metMuseumAPI, clevelandMuseumAPI };

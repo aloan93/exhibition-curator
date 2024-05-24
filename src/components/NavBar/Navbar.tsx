@@ -1,16 +1,16 @@
 import styles from "./Navbar.module.css";
 import { ReactNode, useState } from "react";
 import { getImageURL } from "../../utils";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar(): ReactNode {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav className={styles.navbar}>
-      <a className={styles.title} href="/">
+      <Link className={styles.title} to="/">
         Exhibition Curator
-      </a>
+      </Link>
       <div className={styles.menu}>
         <img
           className={styles.menuBtn}
@@ -26,7 +26,7 @@ export default function Navbar(): ReactNode {
           className={`${styles.menuItems} ${isMenuOpen && styles.menuOpen}`}
           onClick={() => setIsMenuOpen(false)}>
           <li>
-            <a href="/test">test</a>
+            <Link to="/cleveland-museum-of-art">Cleveland Museum of Art</Link>
           </li>
           <li>
             <a href="/test2">test2</a>
