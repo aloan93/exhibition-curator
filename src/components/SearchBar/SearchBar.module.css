@@ -1,0 +1,28 @@
+@import "../../vars.css";
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  height: 30px;
+  width: 350px;
+  max-width: 70vw;
+  border: 2px solid whitesmoke;
+  border-radius: 40px 0 0 40px;
+  border-right: none;
+  padding: 2px 10px;
+}
+
+.searchBtn {
+  height: 30px;
+  width: 50px;
+  border: 2px solid whitesmoke;
+  border-radius: 0 40px 40px 0;
+  border-left: none;
+  background: transparent;
+  color: var(--colour-text);
+  font-size: 15px;
+}
