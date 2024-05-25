@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useState } from "react";
-import styles from "./HomepageCard.module.css";
+import styles from "./MuseumCollectionCards.module.css";
 import { metMuseumAPI } from "../../api/api";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
 
-export default function HomepageCard(props: { id: number }): ReactNode {
+export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
   type artifactType = {
     title: string;
     primaryImageSmall: string;

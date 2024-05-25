@@ -1,10 +1,10 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import styles from "./ClevelandMuseumOfArt.module.css";
+import styles from "./MuseumCollections.module.css";
 import { clevelandMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
 import PageNav from "../PageNav/PageNav";
-import ClevelandMuseumOfArtCard from "../ClevelandMuseumOfArtCard/ClevelandMuseumOfArtCard";
+import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
 
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);

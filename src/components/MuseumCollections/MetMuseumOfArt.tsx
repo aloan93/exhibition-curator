@@ -1,12 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import styles from "./Homepage.module.css";
+import styles from "./MuseumCollections.module.css";
 import { metMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
-import HomepageCard from "../HomepageCard/HomepageCard";
+import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
 import PageNav from "../PageNav/PageNav";
 
-export default function Homepage(): ReactNode {
+export default function MetMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<number[]>([]);
   const [searchResultsTotal, setSearchResultsTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +58,7 @@ export default function Homepage(): ReactNode {
           ) : null}
           <div className={styles.listContainer}>
             {paginatedSearchResults.map((id) => {
-              return <HomepageCard key={id} id={id} />;
+              return <MetMuseumOfArtCard key={id} id={id} />;
             })}
           </div>
           {searchResults.length > 0 ? (

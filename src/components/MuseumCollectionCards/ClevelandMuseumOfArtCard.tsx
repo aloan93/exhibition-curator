@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "./ClevelandMuseumOfArtCard.module.css";
+import styles from "./MuseumCollectionCards.module.css";
 import { convertYearToBcOrNot } from "../../utils";
 
 export default function ClevelandMuseumOfArtCard(props: {
