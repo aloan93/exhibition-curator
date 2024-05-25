@@ -26,4 +26,5 @@
   background: transparent;
   color: var(--colour-text);
   font-size: 15px;
+  cursor: pointer;
 }
