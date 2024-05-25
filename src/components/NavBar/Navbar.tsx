@@ -8,8 +8,8 @@ export default function Navbar(): ReactNode {
 
   return (
     <nav className={styles.navbar}>
-      <Link className={styles.title} to="/">
-        Exhibition Curator
+      <Link className={styles.title} to="/home">
+        <h1>Exhibition Curator</h1>
       </Link>
       <div className={styles.menu}>
         <img
@@ -29,10 +29,7 @@ export default function Navbar(): ReactNode {
             <Link to="/cleveland-museum-of-art">Cleveland Museum of Art</Link>
           </li>
           <li>
-            <a href="/test2">test2</a>
-          </li>
-          <li>
-            <a href="/test3">test3</a>
+            <Link to="/met-museum-of-art">Metropolitan Museum of Art</Link>
           </li>
         </ul>
       </div>
