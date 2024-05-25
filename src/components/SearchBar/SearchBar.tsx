@@ -22,7 +22,7 @@ export default function SearchBar(props: {
         className={styles.searchInput}
         id="search"
         type="text"
-        placeholder="Search Met Museum"
+        placeholder="Search Museum Collection"
         onChange={(e) => setSearch(e.target.value)}
         required
       />

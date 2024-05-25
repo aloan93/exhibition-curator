@@ -1,35 +1,42 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import styles from "./Homepage.module.css";
-import { metMuseumAPI } from "../../api/api";
+import styles from "./ClevelandMuseumOfArt.module.css";
+import { clevelandMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
-import HomepageCard from "../HomepageCard/HomepageCard";
 import PageNav from "../PageNav/PageNav";
+import ClevelandMuseumOfArtCard from "../ClevelandMuseumOfArtCard/ClevelandMuseumOfArtCard";
 
-export default function Homepage(): ReactNode {
-  const [searchResults, setSearchResults] = useState<number[]>([]);
+export default function ClevelandMuseumOfArt(): ReactNode {
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [searchResultsTotal, setSearchResultsTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   const page = searchParams.get("page") || "1";
-  const paginatedSearchResults = searchResults.slice(
-    Number(page) * 20 - 20,
-    Number(page) * 20
-  );
 
   useEffect(() => {
     if (query) {
       setIsLoading(true);
       setError("");
-      metMuseumAPI
-        .get(`/search?q=${query}&hasImages=true`)
-        .then(({ data: { total, objectIDs } }) => {
-          !objectIDs ? setSearchResults([]) : setSearchResults(objectIDs);
-          setSearchResultsTotal(total);
-          setIsLoading(false);
-        })
+      clevelandMuseumAPI
+        .get(
+          `/artworks/?q=${query}&has_image=1&limit=20&skip=${
+            (Number(page) - 1) * 20
+          }`
+        )
+        .then(
+          ({
+            data: {
+              data,
+              info: { total },
+            },
+          }) => {
+            !data ? setSearchResults([]) : setSearchResults(data);
+            setSearchResultsTotal(total);
+            setIsLoading(false);
+          }
+        )
         .catch((err) => {
           setError("Something went wrong. Please try again later.");
           setIsLoading(false);
@@ -39,7 +46,7 @@ export default function Homepage(): ReactNode {
       setSearchResults([]);
       setSearchResultsTotal(0);
     }
-  }, [query]);
+  }, [searchParams]);
 
   return (
     <div className={styles.container}>
@@ -57,8 +64,13 @@ export default function Homepage(): ReactNode {
             />
           ) : null}
           <div className={styles.listContainer}>
-            {paginatedSearchResults.map((id) => {
-              return <HomepageCard key={id} id={id} />;
+            {searchResults.map((artifact) => {
+              return (
+                <ClevelandMuseumOfArtCard
+                  key={artifact.id}
+                  artifact={artifact}
+                />
+              );
             })}
           </div>
           {searchResults.length > 0 ? (
