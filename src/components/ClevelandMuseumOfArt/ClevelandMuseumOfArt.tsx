@@ -4,6 +4,7 @@ import styles from "./ClevelandMuseumOfArt.module.css";
 import { clevelandMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
 import PageNav from "../PageNav/PageNav";
+import ClevelandMuseumOfArtCard from "../ClevelandMuseumOfArtCard/ClevelandMuseumOfArtCard";
 
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -64,7 +65,12 @@ export default function ClevelandMuseumOfArt(): ReactNode {
           ) : null}
           <div className={styles.listContainer}>
             {searchResults.map((artifact) => {
-              return <p>{artifact.id}</p>;
+              return (
+                <ClevelandMuseumOfArtCard
+                  key={artifact.id}
+                  artifact={artifact}
+                />
+              );
             })}
           </div>
           {searchResults.length > 0 ? (
