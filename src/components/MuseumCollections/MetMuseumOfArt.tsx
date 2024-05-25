@@ -43,6 +43,7 @@ export default function MetMuseumOfArt(): ReactNode {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>Metropolitan Museum of Art Collection</h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : (

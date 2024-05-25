@@ -50,6 +50,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>Cleveland Museum of Art Collection</h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
