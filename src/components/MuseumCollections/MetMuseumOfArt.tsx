@@ -5,6 +5,7 @@ import { metMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
 import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
 import PageNav from "../PageNav/PageNav";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function MetMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<number[]>([]);
@@ -18,8 +19,10 @@ export default function MetMuseumOfArt(): ReactNode {
     Number(page) * 20 - 20,
     Number(page) * 20
   );
+  const { exhibition } = useExhibition();
 
   useEffect(() => {
+    console.log(exhibition);
     if (query) {
       setIsLoading(true);
       setError("");

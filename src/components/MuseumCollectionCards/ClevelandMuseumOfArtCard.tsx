@@ -4,42 +4,44 @@ import { convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 
 export default function ClevelandMuseumOfArtCard(props: {
-  artifact: any;
+  artefact: any;
 }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
 
   function addToExhibition(e: any) {
     e.preventDefault();
-    console.log(exhibition);
     setExhibition([
       ...exhibition,
-      { collection: "cleveland", id: props.artifact.id },
+      { collection: "cleveland", id: props.artefact.id },
     ]);
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.detailsContainer}>
-        <p className={styles.title}>{props.artifact.title}</p>
+        <p className={styles.title}>{props.artefact.title}</p>
         <p
           className={
             styles.details
-          }>{`${props.artifact.department} - ${props.artifact.type}`}</p>
-        <p className={styles.details}>{props.artifact.culture[0]}</p>
+          }>{`${props.artefact.department} - ${props.artefact.type}`}</p>
+        <p className={styles.details}>{props.artefact.culture[0]}</p>
         <p className={styles.details}>{`${convertYearToBcOrNot(
-          props.artifact.creation_date_earliest
-        )} - ${convertYearToBcOrNot(props.artifact.creation_date_latest)}`}</p>
+          props.artefact.creation_date_earliest
+        )} - ${convertYearToBcOrNot(props.artefact.creation_date_latest)}`}</p>
         <p className={styles.details}>
-          {props.artifact.creators[0]?.description}
+          {props.artefact.creators[0]?.description}
         </p>
-        <button className={styles.addArtefactBtn} onClick={addToExhibition}>
+        <button
+          className={styles.addArtefactBtn}
+          onClick={addToExhibition}
+          hidden={exhibition.some((e) => e.id === props.artefact.id)}>
           Add to exhibition
         </button>
       </div>
       <img
-        className={styles.artifactImage}
-        src={props.artifact.images.web.url}
-        alt="Image of the artifact"
+        className={styles.artefactImage}
+        src={props.artefact.images.web.url}
+        alt="Image of the artefact"
       />
     </div>
   );

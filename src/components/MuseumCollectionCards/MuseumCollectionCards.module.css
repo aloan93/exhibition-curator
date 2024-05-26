@@ -46,7 +46,7 @@
   color: #cc0000;
 }
 
-.artifactImage {
+.artefactImage {
   max-height: 300px;
   max-width: 50%;
   border-radius: 40px;
@@ -65,7 +65,7 @@
     flex-direction: column-reverse;
   }
 
-  .artifactImage {
+  .artefactImage {
     align-self: center;
     max-width: 100%;
   }
