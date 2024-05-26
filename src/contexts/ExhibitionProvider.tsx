@@ -1,10 +1,18 @@
 import { createContext, useState } from "react";
 
-const ExhibitionContext = createContext({});
+type exhibitionType = { collection: string; id: number }[];
+
+const exhibitionContextDefault = {
+  exhibition: [] as exhibitionType,
+  setExhibition: (_exhibition: exhibitionType) => {},
+};
+
+const ExhibitionContext = createContext(exhibitionContextDefault);
 
 function ExhibitionProvider(props: { children: any }) {
-  type exhibitionType = { collection: string; id: string };
-  const [exhibition, setExhibition] = useState<exhibitionType[]>([]);
+  const [exhibition, setExhibition] = useState(
+    exhibitionContextDefault.exhibition
+  );
 
   return (
     <ExhibitionContext.Provider value={{ exhibition, setExhibition }}>

@@ -1,10 +1,22 @@
 import { ReactNode } from "react";
 import styles from "./MuseumCollectionCards.module.css";
 import { convertYearToBcOrNot } from "../../utils";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function ClevelandMuseumOfArtCard(props: {
   artifact: any;
 }): ReactNode {
+  const { exhibition, setExhibition } = useExhibition();
+
+  function addToExhibition(e: any) {
+    e.preventDefault();
+    console.log(exhibition);
+    setExhibition([
+      ...exhibition,
+      { collection: "cleveland", id: props.artifact.id },
+    ]);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.detailsContainer}>
@@ -20,6 +32,9 @@ export default function ClevelandMuseumOfArtCard(props: {
         <p className={styles.details}>
           {props.artifact.creators[0]?.description}
         </p>
+        <button className={styles.addArtefactBtn} onClick={addToExhibition}>
+          Add to exhibition
+        </button>
       </div>
       <img
         className={styles.artifactImage}
