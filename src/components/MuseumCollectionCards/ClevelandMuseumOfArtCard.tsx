@@ -16,6 +16,15 @@ export default function ClevelandMuseumOfArtCard(props: {
     ]);
   }
 
+  function removeFromExhibition(e: any) {
+    e.preventDefault();
+    setExhibition(
+      [...exhibition].filter(
+        (a) => a.collection !== "cleveland" || a.id !== props.artefact.id
+      )
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.detailsContainer}>
@@ -36,6 +45,12 @@ export default function ClevelandMuseumOfArtCard(props: {
           onClick={addToExhibition}
           hidden={exhibition.some((e) => e.id === props.artefact.id)}>
           Add to exhibition
+        </button>
+        <button
+          className={styles.removeArtefactBtn}
+          onClick={removeFromExhibition}
+          hidden={!exhibition.some((e) => e.id === props.artefact.id)}>
+          Remove from exhibition
         </button>
       </div>
       <img
