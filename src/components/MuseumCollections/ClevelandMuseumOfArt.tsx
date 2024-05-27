@@ -9,7 +9,7 @@ import useExhibition from "../../hooks/useExhibition";
 
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [searchResultsTotal, setSearchResultsTotal] = useState(0);
+  const [resultsTotal, setResultsTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,7 +36,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
             },
           }) => {
             !data ? setSearchResults([]) : setSearchResults(data);
-            setSearchResultsTotal(total);
+            setResultsTotal(total);
             setIsLoading(false);
           }
         )
@@ -47,7 +47,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
         });
     } else {
       setSearchResults([]);
-      setSearchResultsTotal(0);
+      setResultsTotal(0);
     }
   }, [searchParams]);
 
@@ -64,7 +64,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
             />
           ) : null}
           <ul className={styles.listContainer}>
@@ -80,7 +80,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
             />
           ) : null}
         </>

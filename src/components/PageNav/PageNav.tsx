@@ -5,7 +5,7 @@ import styles from "./PageNav.module.css";
 export default function PageNav(props: {
   page: string;
   setSearchParams: SetURLSearchParams;
-  searchResultsTotal: number;
+  resultsTotal: number;
 }): ReactNode {
   const pageNumber = Number(props.page);
 
@@ -37,7 +37,7 @@ export default function PageNav(props: {
       <button
         className={styles.navBtn}
         onClick={pageUp}
-        hidden={pageNumber * 20 >= props.searchResultsTotal}>
+        hidden={pageNumber * 20 >= props.resultsTotal}>
         {">>"}
       </button>
     </div>

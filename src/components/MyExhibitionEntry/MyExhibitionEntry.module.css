@@ -82,6 +82,14 @@
     text-align: center;
   }
 
+  .removeArtefactBtn {
+    font-size: 18px;
+    min-width: 218px;
+    max-width: 60vw;
+    height: 42px;
+    margin-top: 1em;
+  }
+
   .artefactImage {
     align-self: center;
     max-width: 100%;

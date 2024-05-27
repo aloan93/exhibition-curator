@@ -9,7 +9,7 @@ import useExhibition from "../../hooks/useExhibition";
 
 export default function MetMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<number[]>([]);
-  const [searchResultsTotal, setSearchResultsTotal] = useState(0);
+  const [resultsTotal, setResultsTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +30,7 @@ export default function MetMuseumOfArt(): ReactNode {
         .get(`/search?q=${query}&hasImages=true`)
         .then(({ data: { total, objectIDs } }) => {
           !objectIDs ? setSearchResults([]) : setSearchResults(objectIDs);
-          setSearchResultsTotal(total);
+          setResultsTotal(total);
           setIsLoading(false);
         })
         .catch((err) => {
@@ -40,7 +40,7 @@ export default function MetMuseumOfArt(): ReactNode {
         });
     } else {
       setSearchResults([]);
-      setSearchResultsTotal(0);
+      setResultsTotal(0);
     }
   }, [query]);
 
@@ -57,7 +57,7 @@ export default function MetMuseumOfArt(): ReactNode {
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
             />
           ) : null}
           <ul className={styles.listContainer}>
@@ -73,7 +73,7 @@ export default function MetMuseumOfArt(): ReactNode {
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
             />
           ) : null}
         </>
