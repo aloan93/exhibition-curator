@@ -32,6 +32,7 @@ export default function MyExhibition(): ReactNode {
           page={page}
           setSearchParams={setSearchParams}
           resultsTotal={resultsTotal}
+          hideText={false}
         />
       ) : null}
       <ul className={styles.listContainer}>
@@ -48,6 +49,7 @@ export default function MyExhibition(): ReactNode {
           page={page}
           setSearchParams={setSearchParams}
           resultsTotal={resultsTotal}
+          hideText={true}
         />
       ) : null}
     </div>

@@ -58,6 +58,7 @@ export default function MetMuseumOfArt(): ReactNode {
               page={page}
               setSearchParams={setSearchParams}
               resultsTotal={resultsTotal}
+              hideText={false}
             />
           ) : null}
           <ul className={styles.listContainer}>
@@ -74,6 +75,7 @@ export default function MetMuseumOfArt(): ReactNode {
               page={page}
               setSearchParams={setSearchParams}
               resultsTotal={resultsTotal}
+              hideText={true}
             />
           ) : null}
         </>

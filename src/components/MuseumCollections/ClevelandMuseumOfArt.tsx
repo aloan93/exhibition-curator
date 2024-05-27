@@ -65,6 +65,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
               page={page}
               setSearchParams={setSearchParams}
               resultsTotal={resultsTotal}
+              hideText={false}
             />
           ) : null}
           <ul className={styles.listContainer}>
@@ -81,6 +82,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
               page={page}
               setSearchParams={setSearchParams}
               resultsTotal={resultsTotal}
+              hideText={true}
             />
           ) : null}
         </>
