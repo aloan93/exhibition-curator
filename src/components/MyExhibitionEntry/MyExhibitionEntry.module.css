@@ -39,6 +39,25 @@
   color: #faa0a0;
 }
 
+.removeArtefactBtn {
+  height: 40px;
+  width: 280px;
+  padding: 0 10px;
+  margin-top: auto;
+  color: #faa0a0;
+  background: transparent;
+  border: 2px solid #faa0a0;
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.removeArtefactBtn:hover {
+  background: #faa0a0;
+  color: black;
+}
+
 .artefactImage {
   max-height: 300px;
   max-width: 50%;

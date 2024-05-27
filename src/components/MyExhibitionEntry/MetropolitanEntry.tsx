@@ -1,8 +1,21 @@
 import { ReactNode } from "react";
 import styles from "./MyExhibitionEntry.module.css";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
+  const { exhibition, setExhibition } = useExhibition();
+
+  function removeFromExhibition(e: any) {
+    e.preventDefault();
+    setExhibition(
+      [...exhibition].filter(
+        (a) =>
+          a.collection !== "metropolitan" || a.id !== props.artefact.objectID
+      )
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.detailsContainer}>
@@ -23,6 +36,12 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
                 unavailable`}
           </p>
         )}
+        <button
+          className={styles.removeArtefactBtn}
+          onClick={removeFromExhibition}
+          hidden={!exhibition.some((e) => e.id === props.artefact.objectID)}>
+          Remove from exhibition
+        </button>
       </div>
       {props.artefact.primaryImageSmall ? (
         <img
