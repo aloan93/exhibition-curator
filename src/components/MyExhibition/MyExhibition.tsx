@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import styles from "./MyExhibition.module.css";
 import useExhibition from "../../hooks/useExhibition";
+import EntrySelecter from "../MyExhibitionEntry/EntrySelecter";
 
 export default function MyExhibition(): ReactNode {
   const { exhibition } = useExhibition();
@@ -9,17 +10,12 @@ export default function MyExhibition(): ReactNode {
     <div className={styles.container}>
       <h2 className={styles.title}>My Exhibiton</h2>
       <ul className={styles.listContainer}>
-        {exhibition.map((artefact) => {
-          if (artefact.collection === "cleveland")
-            return (
-              <p key={`${artefact.collection} - ${artefact.id}`}>cleveland</p>
-            );
-          else if (artefact.collection === "metropolitan")
-            return (
-              <p key={`${artefact.collection} - ${artefact.id}`}>
-                metropolitan
-              </p>
-            );
+        {exhibition.map((entry) => {
+          return (
+            <li key={`${entry.collection} - ${entry.id}`}>
+              <EntrySelecter entry={entry} />
+            </li>
+          );
         })}
       </ul>
     </div>
