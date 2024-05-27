@@ -1,20 +1,10 @@
 import { ReactNode } from "react";
-import styles from "./MuseumCollectionCards.module.css";
+import styles from "./MyExhibitionEntry.module.css";
 import { convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 
-export default function ClevelandMuseumOfArtCard(props: {
-  artefact: any;
-}): ReactNode {
+export default function ClevelandEntry(props: { artefact: any }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
-
-  function addToExhibition(e: any) {
-    e.preventDefault();
-    setExhibition([
-      ...exhibition,
-      { collection: "cleveland", id: props.artefact.id },
-    ]);
-  }
 
   function removeFromExhibition(e: any) {
     e.preventDefault();
@@ -40,12 +30,6 @@ export default function ClevelandMuseumOfArtCard(props: {
         <p className={styles.details}>
           {props.artefact.creators[0]?.description}
         </p>
-        <button
-          className={styles.addArtefactBtn}
-          onClick={addToExhibition}
-          hidden={exhibition.some((e) => e.id === props.artefact.id)}>
-          Add to exhibition
-        </button>
         <button
           className={styles.removeArtefactBtn}
           onClick={removeFromExhibition}

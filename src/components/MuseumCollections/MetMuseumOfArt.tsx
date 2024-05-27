@@ -5,10 +5,11 @@ import { metMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
 import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
 import PageNav from "../PageNav/PageNav";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function MetMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<number[]>([]);
-  const [searchResultsTotal, setSearchResultsTotal] = useState(0);
+  const [resultsTotal, setResultsTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,8 +19,10 @@ export default function MetMuseumOfArt(): ReactNode {
     Number(page) * 20 - 20,
     Number(page) * 20
   );
+  const { exhibition } = useExhibition();
 
   useEffect(() => {
+    console.log(exhibition);
     if (query) {
       setIsLoading(true);
       setError("");
@@ -27,7 +30,7 @@ export default function MetMuseumOfArt(): ReactNode {
         .get(`/search?q=${query}&hasImages=true`)
         .then(({ data: { total, objectIDs } }) => {
           !objectIDs ? setSearchResults([]) : setSearchResults(objectIDs);
-          setSearchResultsTotal(total);
+          setResultsTotal(total);
           setIsLoading(false);
         })
         .catch((err) => {
@@ -37,7 +40,7 @@ export default function MetMuseumOfArt(): ReactNode {
         });
     } else {
       setSearchResults([]);
-      setSearchResultsTotal(0);
+      setResultsTotal(0);
     }
   }, [query]);
 
@@ -54,19 +57,25 @@ export default function MetMuseumOfArt(): ReactNode {
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
+              hideText={false}
             />
           ) : null}
-          <div className={styles.listContainer}>
+          <ul className={styles.listContainer}>
             {paginatedSearchResults.map((id) => {
-              return <MetMuseumOfArtCard key={id} id={id} />;
+              return (
+                <li key={id}>
+                  <MetMuseumOfArtCard id={id} />
+                </li>
+              );
             })}
-          </div>
+          </ul>
           {searchResults.length > 0 ? (
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
+              hideText={true}
             />
           ) : null}
         </>

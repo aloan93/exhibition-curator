@@ -5,9 +5,13 @@ import styles from "./PageNav.module.css";
 export default function PageNav(props: {
   page: string;
   setSearchParams: SetURLSearchParams;
-  searchResultsTotal: number;
+  resultsTotal: number;
+  hideText: boolean;
 }): ReactNode {
   const pageNumber = Number(props.page);
+  const currentlyShown = `Showing results ${pageNumber * 20 - 19} - ${
+    pageNumber * 20 > props.resultsTotal ? props.resultsTotal : pageNumber * 20
+  } of ${props.resultsTotal}`;
 
   function pageDown(e: any) {
     e.preventDefault();
@@ -27,19 +31,26 @@ export default function PageNav(props: {
 
   return (
     <div className={styles.container}>
-      <button
-        className={styles.navBtn}
-        onClick={pageDown}
-        hidden={pageNumber === 1}>
-        {"<<"}
-      </button>
-      <p className={styles.currentPage}>{pageNumber}</p>
-      <button
-        className={styles.navBtn}
-        onClick={pageUp}
-        hidden={pageNumber * 20 >= props.searchResultsTotal}>
-        {">>"}
-      </button>
+      <p className={styles.resultsShown} hidden={props.hideText}>
+        {currentlyShown}
+      </p>
+      {props.resultsTotal < 21 ? null : (
+        <div className={styles.navigation}>
+          <button
+            className={styles.navBtn}
+            onClick={pageDown}
+            hidden={pageNumber === 1}>
+            {"<<"}
+          </button>
+          <p className={styles.currentPage}>{pageNumber}</p>
+          <button
+            className={styles.navBtn}
+            onClick={pageUp}
+            hidden={pageNumber * 20 >= props.resultsTotal}>
+            {">>"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

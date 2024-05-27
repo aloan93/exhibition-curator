@@ -31,6 +31,9 @@ export default function Navbar(): ReactNode {
           <li>
             <Link to="/met-museum-of-art">Metropolitan Museum of Art</Link>
           </li>
+          <li>
+            <Link to="/my-exhibition">My Exhibition</Link>
+          </li>
         </ul>
       </div>
     </nav>

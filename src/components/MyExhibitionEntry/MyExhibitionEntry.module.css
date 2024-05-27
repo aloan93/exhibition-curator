@@ -39,25 +39,6 @@
   color: #faa0a0;
 }
 
-.addArtefactBtn {
-  height: 40px;
-  width: 280px;
-  padding: 0 10px;
-  margin-top: auto;
-  color: var(--colour-text);
-  background: transparent;
-  border: 2px solid var(--colour-text);
-  border-radius: 40px;
-  font-size: 20px;
-  transition: 0.4s;
-  cursor: pointer;
-}
-
-.addArtefactBtn:hover {
-  background: var(--colour-text);
-  color: black;
-}
-
 .removeArtefactBtn {
   height: 40px;
   width: 280px;
@@ -75,12 +56,6 @@
 .removeArtefactBtn:hover {
   background: #faa0a0;
   color: black;
-}
-
-.notFound {
-  font-size: 20px;
-  font-weight: 500;
-  color: #cc0000;
 }
 
 .artefactImage {
@@ -105,12 +80,6 @@
   .detailsContainer {
     align-items: center;
     text-align: center;
-  }
-
-  .addArtefactBtn {
-    min-width: 173px;
-    max-width: 60vw;
-    margin-top: 1em;
   }
 
   .removeArtefactBtn {

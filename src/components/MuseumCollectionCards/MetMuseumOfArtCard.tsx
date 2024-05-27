@@ -2,9 +2,10 @@ import { ReactNode, useEffect, useState } from "react";
 import styles from "./MuseumCollectionCards.module.css";
 import { metMuseumAPI } from "../../api/api";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
-  type artifactType = {
+  type artefactType = {
     title: string;
     primaryImageSmall: string;
     objectName: string;
@@ -14,9 +15,10 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
     objectEndDate: number;
     artistDisplayName: string;
   };
-  const [artifact, setArtifact] = useState<artifactType>();
+  const [artefact, setArtefact] = useState<artefactType>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { exhibition, setExhibition } = useExhibition();
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,7 +38,7 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
             artistDisplayName,
           },
         }) => {
-          setArtifact({
+          setArtefact({
             title,
             primaryImageSmall,
             objectName,
@@ -52,12 +54,29 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
       .catch(({ response: { status } }) => {
         status === 404
           ? setError(
-              "Artifact not found! This entry may have been removed from the collection."
+              "artefact not found! This entry may have been removed from the collection."
             )
           : setError("Something went wrong! Please try again later.");
         setIsLoading(false);
       });
   }, []);
+
+  function addToExhibition(e: any) {
+    e.preventDefault();
+    setExhibition([
+      ...exhibition,
+      { collection: "metropolitan", id: props.id },
+    ]);
+  }
+
+  function removeFromExhibition(e: any) {
+    e.preventDefault();
+    setExhibition(
+      [...exhibition].filter(
+        (a) => a.collection !== "metropolitan" || a.id !== props.id
+      )
+    );
+  }
 
   if (isLoading) return <p>Loading...</p>;
   return (
@@ -67,37 +86,49 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
           <p className={styles.notFound}>{error}</p>
         ) : (
           <>
-            <p className={styles.title}>{artifact?.title}</p>
-            <p className={styles.details}>{`${artifact?.department} - ${
-              artifact?.objectName || "Misc."
+            <p className={styles.title}>{artefact?.title}</p>
+            <p className={styles.details}>{`${artefact?.department} - ${
+              artefact?.objectName || "Misc."
             }`}</p>
-            <p className={styles.details}>{artifact?.culture}</p>
-            {artifact?.objectBeginDate ? (
+            <p className={styles.details}>{artefact?.culture}</p>
+            {artefact?.objectBeginDate ? (
               <p className={styles.details}>{`${convertYearToBcOrNot(
-                artifact.objectBeginDate
-              )} - ${convertYearToBcOrNot(artifact.objectEndDate)}`}</p>
+                artefact.objectBeginDate
+              )} - ${convertYearToBcOrNot(artefact.objectEndDate)}`}</p>
             ) : null}
-            <p className={styles.details}>{artifact?.artistDisplayName}</p>
-            {artifact?.primaryImageSmall ? null : (
+            <p className={styles.details}>{artefact?.artistDisplayName}</p>
+            {artefact?.primaryImageSmall ? null : (
               <p className={styles.noImage}>
-                {`Due to rights restrictions images for this artifact are
+                {`Due to rights restrictions images for this artefact are
                 unavailable`}
               </p>
             )}
+            <button
+              className={styles.addArtefactBtn}
+              onClick={addToExhibition}
+              hidden={exhibition.some((e) => e.id === props.id)}>
+              Add to exhibition
+            </button>
+            <button
+              className={styles.removeArtefactBtn}
+              onClick={removeFromExhibition}
+              hidden={!exhibition.some((e) => e.id === props.id)}>
+              Remove from exhibition
+            </button>
           </>
         )}
       </div>
-      {artifact?.primaryImageSmall ? (
+      {artefact?.primaryImageSmall ? (
         <img
-          className={styles.artifactImage}
-          src={artifact.primaryImageSmall}
+          className={styles.artefactImage}
+          src={artefact.primaryImageSmall}
           alt="Small image of artwork"
         />
       ) : (
         <img
           className={styles.placeholderImage}
           src={getImageURL("placeholder/placeholder.jpg")}
-          alt="Placeholder image for artifact due to rights issues"></img>
+          alt="Placeholder image for artefact due to rights issues"></img>
       )}
     </div>
   );

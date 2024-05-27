@@ -8,9 +8,10 @@
 }
 
 .searchInput {
-  height: 30px;
+  height: 40px;
   width: 350px;
   max-width: 70vw;
+  font-size: 18px;
   border: 2px solid whitesmoke;
   border-radius: 40px 0 0 40px;
   border-right: none;
@@ -18,7 +19,7 @@
 }
 
 .searchBtn {
-  height: 30px;
+  height: 40px;
   width: 50px;
   border: 2px solid whitesmoke;
   border-radius: 0 40px 40px 0;

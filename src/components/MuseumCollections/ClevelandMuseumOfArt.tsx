@@ -5,17 +5,20 @@ import { clevelandMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
 import PageNav from "../PageNav/PageNav";
 import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [searchResultsTotal, setSearchResultsTotal] = useState(0);
+  const [resultsTotal, setResultsTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   const page = searchParams.get("page") || "1";
+  const { exhibition } = useExhibition();
 
   useEffect(() => {
+    console.log(exhibition);
     if (query) {
       setIsLoading(true);
       setError("");
@@ -33,7 +36,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
             },
           }) => {
             !data ? setSearchResults([]) : setSearchResults(data);
-            setSearchResultsTotal(total);
+            setResultsTotal(total);
             setIsLoading(false);
           }
         )
@@ -44,7 +47,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
         });
     } else {
       setSearchResults([]);
-      setSearchResultsTotal(0);
+      setResultsTotal(0);
     }
   }, [searchParams]);
 
@@ -61,24 +64,25 @@ export default function ClevelandMuseumOfArt(): ReactNode {
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
+              hideText={false}
             />
           ) : null}
-          <div className={styles.listContainer}>
-            {searchResults.map((artifact) => {
+          <ul className={styles.listContainer}>
+            {searchResults.map((artefact) => {
               return (
-                <ClevelandMuseumOfArtCard
-                  key={artifact.id}
-                  artifact={artifact}
-                />
+                <li key={artefact.id}>
+                  <ClevelandMuseumOfArtCard artefact={artefact} />
+                </li>
               );
             })}
-          </div>
+          </ul>
           {searchResults.length > 0 ? (
             <PageNav
               page={page}
               setSearchParams={setSearchParams}
-              searchResultsTotal={searchResultsTotal}
+              resultsTotal={resultsTotal}
+              hideText={true}
             />
           ) : null}
         </>

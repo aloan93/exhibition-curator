@@ -4,6 +4,7 @@ import Navbar from "./components/NavBar/Navbar";
 import Homepage from "./components/Hompage/Homepage";
 import MetMuseumOfArt from "./components/MuseumCollections/MetMuseumOfArt";
 import ClevelandMuseumOfArt from "./components/MuseumCollections/ClevelandMuseumOfArt";
+import MyExhibition from "./components/MyExhibition/MyExhibition";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             path="/cleveland-museum-of-art"
             element={<ClevelandMuseumOfArt />}
           />
+          <Route path="/my-exhibition" element={<MyExhibition />} />
         </Routes>
       </main>
     </div>
