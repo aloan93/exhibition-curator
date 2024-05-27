@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { metMuseumAPI, clevelandMuseumAPI } from "../../api/api";
+import ClevelandEntry from "./ClevelandEntry";
+import MetropolitanEntry from "./MetropolitanEntry";
 
 type entryType = {
   collection: string;
@@ -33,9 +35,9 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
 
   if (artefact) {
     if (props.entry.collection === "cleveland")
-      return <img src={artefact.images.web.url} alt="" />;
+      return <ClevelandEntry artefact={artefact} />;
     else if (props.entry.collection === "metropolitan")
-      return <img src={artefact.primaryImageSmall} alt="" />;
+      return <MetropolitanEntry artefact={artefact} />;
   }
   return null;
 }

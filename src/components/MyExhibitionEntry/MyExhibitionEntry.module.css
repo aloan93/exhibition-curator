@@ -1,0 +1,75 @@
+@import "../../vars.css";
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: var(--colour-secondary);
+  border-radius: 40px;
+  padding: 20px 25px;
+  width: 1000px;
+  max-width: 80vw;
+  gap: 15px;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0.5em 0;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 600;
+  max-width: 500px;
+  color: var(--colour-text);
+}
+
+.details {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--colour-text);
+}
+
+.noImage {
+  font-size: 20px;
+  font-weight: 500;
+  color: #faa0a0;
+}
+
+.artefactImage {
+  max-height: 300px;
+  max-width: 50%;
+  border-radius: 40px;
+  align-self: flex-start;
+}
+
+.placeholderImage {
+  max-height: 200px;
+  max-width: 35%;
+  border-radius: 40px;
+  align-self: flex-start;
+}
+
+@media screen and (max-width: 830px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .detailsContainer {
+    align-items: center;
+    text-align: center;
+  }
+
+  .artefactImage {
+    align-self: center;
+    max-width: 100%;
+  }
+
+  .placeholderImage {
+    align-self: center;
+    max-width: 70%;
+  }
+}
