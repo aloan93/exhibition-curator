@@ -60,11 +60,15 @@ export default function MetMuseumOfArt(): ReactNode {
               searchResultsTotal={searchResultsTotal}
             />
           ) : null}
-          <div className={styles.listContainer}>
+          <ul className={styles.listContainer}>
             {paginatedSearchResults.map((id) => {
-              return <MetMuseumOfArtCard key={id} id={id} />;
+              return (
+                <li key={id}>
+                  <MetMuseumOfArtCard id={id} />
+                </li>
+              );
             })}
-          </div>
+          </ul>
           {searchResults.length > 0 ? (
             <PageNav
               page={page}

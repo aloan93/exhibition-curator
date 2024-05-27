@@ -67,16 +67,15 @@ export default function ClevelandMuseumOfArt(): ReactNode {
               searchResultsTotal={searchResultsTotal}
             />
           ) : null}
-          <div className={styles.listContainer}>
+          <ul className={styles.listContainer}>
             {searchResults.map((artefact) => {
               return (
-                <ClevelandMuseumOfArtCard
-                  key={artefact.id}
-                  artefact={artefact}
-                />
+                <li key={artefact.id}>
+                  <ClevelandMuseumOfArtCard artefact={artefact} />
+                </li>
               );
             })}
-          </div>
+          </ul>
           {searchResults.length > 0 ? (
             <PageNav
               page={page}
