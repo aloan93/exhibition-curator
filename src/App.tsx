@@ -8,7 +8,7 @@ import MyExhibition from "./components/MyExhibition/MyExhibition";
 
 function App() {
   return (
-    <div className={styles.App}>
+    <div className={styles.app}>
       <Navbar />
       <main>
         <Routes>

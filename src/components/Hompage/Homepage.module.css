@@ -4,13 +4,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 98px;
+  margin: 98px 10% 100px 10%;
 }
 
 .title {
   color: var(--colour-text);
   font-size: 25px;
   white-space: pre;
+  text-wrap: wrap;
   text-align: center;
   letter-spacing: 0.5px;
 }
