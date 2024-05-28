@@ -16,7 +16,7 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
   }
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.detailsContainer}>
         <p className={styles.title}>{props.artefact.title}</p>
         <p
@@ -24,9 +24,13 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
             styles.details
           }>{`${props.artefact.department} - ${props.artefact.type}`}</p>
         <p className={styles.details}>{props.artefact.culture[0]}</p>
-        <p className={styles.details}>{`${convertYearToBcOrNot(
-          props.artefact.creation_date_earliest
-        )} - ${convertYearToBcOrNot(props.artefact.creation_date_latest)}`}</p>
+        {props.artefact.creation_date_earliest ? (
+          <p className={styles.details}>{`${convertYearToBcOrNot(
+            props.artefact.creation_date_earliest
+          )} - ${convertYearToBcOrNot(
+            props.artefact.creation_date_latest
+          )}`}</p>
+        ) : null}
         <p className={styles.details}>
           {props.artefact.creators[0]?.description}
         </p>
@@ -42,6 +46,6 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
         src={props.artefact.images.web.url}
         alt="Image of the artefact"
       />
-    </div>
+    </>
   );
 }

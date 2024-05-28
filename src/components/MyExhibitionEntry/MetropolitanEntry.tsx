@@ -17,7 +17,7 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
   }
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.detailsContainer}>
         <p className={styles.title}>{props.artefact.title}</p>
         <p className={styles.details}>{`${props.artefact.department} - ${
@@ -55,6 +55,6 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
           src={getImageURL("placeholder/placeholder.jpg")}
           alt="Placeholder image for artefact due to rights issues"></img>
       )}
-    </div>
+    </>
   );
 }

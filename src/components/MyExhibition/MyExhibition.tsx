@@ -16,7 +16,7 @@ export default function MyExhibition(): ReactNode {
   const resultsTotal = exhibition.length;
 
   useEffect(() => {
-    if (exhibition.length < 20 * Number(page) - 19) {
+    if (exhibition.length !== 0 && exhibition.length < 20 * Number(page) - 19) {
       setSearchParams((prev) => {
         prev.set("page", String(Number(page) - 1));
         return prev;

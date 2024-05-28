@@ -23,4 +23,24 @@
   align-items: center;
   margin-top: 49px;
   gap: 25px;
+  list-style-type: none;
+}
+
+.loader {
+  margin-top: 49px;
+  border: 16px solid var(--colour-text);
+  border-top: 16px solid var(--colour-primary);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
