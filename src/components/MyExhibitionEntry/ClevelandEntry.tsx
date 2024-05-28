@@ -16,7 +16,7 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
   }
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.detailsContainer}>
         <p className={styles.title}>{props.artefact.title}</p>
         <p
@@ -42,6 +42,6 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
         src={props.artefact.images.web.url}
         alt="Image of the artefact"
       />
-    </div>
+    </>
   );
 }

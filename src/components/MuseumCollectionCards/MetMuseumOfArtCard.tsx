@@ -78,7 +78,7 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
     );
   }
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <div className={styles.loader}></div>;
   return (
     <div className={styles.container}>
       <div className={styles.detailsContainer}>

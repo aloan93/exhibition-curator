@@ -58,6 +58,12 @@
   color: black;
 }
 
+.notFound {
+  font-size: 20px;
+  font-weight: 500;
+  color: #cc0000;
+}
+
 .artefactImage {
   max-height: 300px;
   max-width: 50%;
@@ -70,6 +76,25 @@
   max-width: 35%;
   border-radius: 40px;
   align-self: flex-start;
+}
+
+.loader {
+  margin-top: 49px;
+  border: 10px solid var(--colour-text);
+  border-top: 10px solid var(--colour-primary);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media screen and (max-width: 830px) {
