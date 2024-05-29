@@ -5,6 +5,7 @@ import Homepage from "./components/Hompage/Homepage";
 import MetMuseumOfArt from "./components/MuseumCollections/MetMuseumOfArt";
 import ClevelandMuseumOfArt from "./components/MuseumCollections/ClevelandMuseumOfArt";
 import MyExhibition from "./components/MyExhibition/MyExhibition";
+import ClevelandArtefactSpotlight from "./components/ArtefactSpotlights/ClevelandArtefactSpotlight";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
             element={<ClevelandMuseumOfArt />}
           />
           <Route path="/my-exhibition" element={<MyExhibition />} />
+          <Route
+            path="/cleveland-museum-of-art/:id"
+            element={<ClevelandArtefactSpotlight />}
+          />
         </Routes>
       </main>
     </div>

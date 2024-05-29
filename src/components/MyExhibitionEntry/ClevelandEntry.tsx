@@ -2,9 +2,11 @@ import { ReactNode } from "react";
 import styles from "./MyExhibitionEntry.module.css";
 import { convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ClevelandEntry(props: { artefact: any }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
+  const navigate = useNavigate();
 
   function removeFromExhibition(e: any) {
     e.preventDefault();
@@ -15,10 +17,21 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
     );
   }
 
+  function goToSpotlight(e: any) {
+    e.preventDefault();
+    navigate(`/cleveland-museum-of-art/${props.artefact.id}`, {
+      state: props.artefact,
+    });
+  }
+
   return (
     <>
       <div className={styles.detailsContainer}>
-        <p className={styles.title}>{props.artefact.title}</p>
+        <Link
+          to={`/cleveland-museum-of-art/${props.artefact.id}`}
+          state={props.artefact}>
+          <p className={styles.title}>{props.artefact.title}</p>
+        </Link>
         <p
           className={
             styles.details
@@ -43,6 +56,7 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
       </div>
       <img
         className={styles.artefactImage}
+        onClick={goToSpotlight}
         src={props.artefact.images.web.url}
         alt="Image of the artefact"
       />

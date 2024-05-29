@@ -20,6 +20,10 @@
   margin: 0.5em 0;
 }
 
+.container a {
+  text-decoration: none;
+}
+
 .title {
   font-size: 25px;
   font-weight: 600;
@@ -69,6 +73,7 @@
   max-width: 50%;
   border-radius: 40px;
   align-self: flex-start;
+  cursor: pointer;
 }
 
 .placeholderImage {
