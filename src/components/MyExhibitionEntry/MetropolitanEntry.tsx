@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import styles from "./MyExhibitionEntry.module.css";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
+import { Link } from "react-router-dom";
 
 export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
@@ -19,7 +20,11 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
   return (
     <>
       <div className={styles.detailsContainer}>
-        <p className={styles.title}>{props.artefact.title}</p>
+        <Link
+          to={`/metropolitan-museum-of-art/${props.artefact.objectID}`}
+          state={props.artefact}>
+          <p className={styles.title}>{props.artefact.title}</p>
+        </Link>
         <p className={styles.details}>{`${props.artefact.department} - ${
           props.artefact.objectName || "Misc."
         }`}</p>

@@ -48,6 +48,12 @@
   width: 80%;
 }
 
+.noImage {
+  font-size: 20px;
+  font-weight: 500;
+  color: #faa0a0;
+}
+
 .loader {
   margin-top: 49px;
   border: 10px solid var(--colour-text);

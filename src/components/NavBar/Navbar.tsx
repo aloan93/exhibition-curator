@@ -29,7 +29,9 @@ export default function Navbar(): ReactNode {
             <Link to="/cleveland-museum-of-art">Cleveland Museum of Art</Link>
           </li>
           <li>
-            <Link to="/met-museum-of-art">Metropolitan Museum of Art</Link>
+            <Link to="/metropolitan-museum-of-art">
+              Metropolitan Museum of Art
+            </Link>
           </li>
           <li>
             <Link to="/my-exhibition">My Exhibition</Link>
