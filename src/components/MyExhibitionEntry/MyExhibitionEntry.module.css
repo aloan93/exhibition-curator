@@ -16,19 +16,21 @@
 .detailsContainer {
   display: flex;
   flex-direction: column;
+  width: 60%;
   gap: 5px;
   margin: 0.5em 0;
-}
-
-.container a {
-  text-decoration: none;
 }
 
 .title {
   font-size: 25px;
   font-weight: 600;
-  max-width: 500px;
+  width: fit-content;
   color: var(--colour-text);
+  text-decoration: none;
+}
+
+.title:hover {
+  text-decoration: underline;
 }
 
 .details {
@@ -45,7 +47,7 @@
 
 .removeArtefactBtn {
   height: 40px;
-  width: 280px;
+  width: 80%;
   padding: 0 10px;
   margin-top: auto;
   color: #faa0a0;
@@ -68,17 +70,27 @@
   color: #cc0000;
 }
 
+.artefactImageLink {
+  border-radius: 40px;
+  max-height: 300px;
+  max-width: 40%;
+}
+
 .artefactImage {
   max-height: 300px;
-  max-width: 50%;
+  max-width: 100%;
   border-radius: 40px;
+  border: 1px solid black;
   align-self: flex-start;
-  cursor: pointer;
+}
+
+.artefactImage:hover {
+  border: 1px solid var(--colour-primary);
 }
 
 .placeholderImage {
-  max-height: 200px;
-  max-width: 35%;
+  max-height: 300px;
+  max-width: 100%;
   border-radius: 40px;
   align-self: flex-start;
 }
@@ -110,23 +122,19 @@
   .detailsContainer {
     align-items: center;
     text-align: center;
+    width: 100%;
   }
 
   .removeArtefactBtn {
     font-size: 18px;
     min-width: 218px;
-    max-width: 60vw;
+    width: 90%;
     height: 42px;
     margin-top: 1em;
   }
 
-  .artefactImage {
+  .artefactImageLink {
     align-self: center;
     max-width: 100%;
-  }
-
-  .placeholderImage {
-    align-self: center;
-    max-width: 70%;
   }
 }

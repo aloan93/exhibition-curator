@@ -2,11 +2,10 @@ import { ReactNode } from "react";
 import styles from "./MyExhibitionEntry.module.css";
 import { convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function ClevelandEntry(props: { artefact: any }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
-  const navigate = useNavigate();
 
   function removeFromExhibition(e: any) {
     e.preventDefault();
@@ -17,26 +16,23 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
     );
   }
 
-  function goToSpotlight(e: any) {
-    e.preventDefault();
-    navigate(`/cleveland-museum-of-art/${props.artefact.id}`, {
-      state: props.artefact,
-    });
-  }
-
   return (
     <>
       <div className={styles.detailsContainer}>
         <Link
+          className={styles.title}
           to={`/cleveland-museum-of-art/${props.artefact.id}`}
           state={props.artefact}>
-          <p className={styles.title}>{props.artefact.title}</p>
+          {props.artefact.title}
         </Link>
+
         <p
           className={
             styles.details
           }>{`${props.artefact.department} - ${props.artefact.type}`}</p>
+
         <p className={styles.details}>{props.artefact.culture[0]}</p>
+
         {props.artefact.creation_date_earliest ? (
           <p className={styles.details}>{`${convertYearToBcOrNot(
             props.artefact.creation_date_earliest
@@ -44,9 +40,11 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
             props.artefact.creation_date_latest
           )}`}</p>
         ) : null}
+
         <p className={styles.details}>
           {props.artefact.creators[0]?.description}
         </p>
+
         <button
           className={styles.removeArtefactBtn}
           onClick={removeFromExhibition}
@@ -54,12 +52,17 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
           Remove from exhibition
         </button>
       </div>
-      <img
-        className={styles.artefactImage}
-        onClick={goToSpotlight}
-        src={props.artefact.images.web.url}
-        alt="Image of the artefact"
-      />
+
+      <Link
+        className={styles.artefactImageLink}
+        to={`/cleveland-museum-of-art/${props.artefact.id}`}
+        state={props.artefact}>
+        <img
+          className={styles.artefactImage}
+          src={props.artefact.images.web.url}
+          alt="Image of the artefact"
+        />
+      </Link>
     </>
   );
 }
