@@ -114,8 +114,11 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
             ) : null}
 
             {artefact.url ? (
-              <Link to={artefact.url}>
-                <p className={styles.details}>{artefact.url}</p>
+              <Link
+                className={styles.externalLink}
+                to={artefact.url}
+                target="_blank">
+                {`View at clevelandart.org`}
               </Link>
             ) : null}
           </div>

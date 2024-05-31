@@ -120,8 +120,11 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
             ) : null}
 
             {artefact.objectURL ? (
-              <Link to={artefact.objectURL}>
-                <p className={styles.details}>{artefact.objectURL}</p>
+              <Link
+                className={styles.externalLink}
+                to={artefact.objectURL}
+                target="_blank">
+                {`View at metmuseum.org`}
               </Link>
             ) : null}
           </div>
