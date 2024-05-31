@@ -10,13 +10,13 @@
   padding: 20px 25px;
   width: 1000px;
   max-width: 80vw;
-  gap: 15px;
+  gap: 2%;
 }
 
 .detailsContainer {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 58%;
   gap: 5px;
   margin: 0.5em 0;
 }

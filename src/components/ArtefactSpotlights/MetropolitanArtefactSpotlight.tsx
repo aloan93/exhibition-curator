@@ -93,7 +93,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
 
             {artefact.culture ? (
               <p className={styles.details}>{`${artefact.culture}${
-                artefact.period ? ` - ${artefact.period}` : null
+                artefact.period ? ` - ${artefact.period}` : ""
               }`}</p>
             ) : null}
 
@@ -109,7 +109,13 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
 
             {artefact.artistDisplayName ? (
               <p className={styles.details}>
-                {`${artefact.artistDisplayName} (${artefact.artistNationality}, ${artefact.artistBeginDate}-${artefact.artistEndDate})`}
+                {`${artefact.artistDisplayName}${
+                  artefact.artistNationality
+                    ? ` (${artefact.artistNationality}, ${
+                        artefact.artistBeginDate || "Unknown"
+                      }-${artefact.artistEndDate || "Unknown"})`
+                    : ""
+                }`}
               </p>
             ) : null}
 

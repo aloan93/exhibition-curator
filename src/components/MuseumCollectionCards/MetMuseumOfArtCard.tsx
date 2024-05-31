@@ -3,19 +3,10 @@ import styles from "./MuseumCollectionCards.module.css";
 import { metMuseumAPI } from "../../api/api";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
+import { Link } from "react-router-dom";
 
 export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
-  type artefactType = {
-    title: string;
-    primaryImageSmall: string;
-    objectName: string;
-    department: string;
-    culture: string;
-    objectBeginDate: number;
-    objectEndDate: number;
-    artistDisplayName: string;
-  };
-  const [artefact, setArtefact] = useState<artefactType>();
+  const [artefact, setArtefact] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { exhibition, setExhibition } = useExhibition();
@@ -25,32 +16,10 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
     setError("");
     metMuseumAPI
       .get(`/objects/${props.id}`)
-      .then(
-        ({
-          data: {
-            title,
-            primaryImageSmall,
-            objectName,
-            department,
-            culture,
-            objectBeginDate,
-            objectEndDate,
-            artistDisplayName,
-          },
-        }) => {
-          setArtefact({
-            title,
-            primaryImageSmall,
-            objectName,
-            department,
-            culture,
-            objectBeginDate,
-            objectEndDate,
-            artistDisplayName,
-          });
-          setIsLoading(false);
-        }
-      )
+      .then(({ data }) => {
+        setArtefact(data);
+        setIsLoading(false);
+      })
       .catch(({ response: { status } }) => {
         status === 404
           ? setError(
@@ -86,29 +55,41 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
           <p className={styles.notFound}>{error}</p>
         ) : (
           <>
-            <p className={styles.title}>{artefact?.title}</p>
+            <Link
+              className={styles.title}
+              to={`/metropolitan-museum-of-art/${props.id}`}
+              state={artefact}>
+              {artefact?.title}
+            </Link>
+
             <p className={styles.details}>{`${artefact?.department} - ${
               artefact?.objectName || "Misc."
             }`}</p>
+
             <p className={styles.details}>{artefact?.culture}</p>
+
             {artefact?.objectBeginDate ? (
               <p className={styles.details}>{`${convertYearToBcOrNot(
                 artefact.objectBeginDate
               )} - ${convertYearToBcOrNot(artefact.objectEndDate)}`}</p>
             ) : null}
+
             <p className={styles.details}>{artefact?.artistDisplayName}</p>
+
             {artefact?.primaryImageSmall ? null : (
               <p className={styles.noImage}>
                 {`Due to rights restrictions images for this artefact are
                 unavailable`}
               </p>
             )}
+
             <button
               className={styles.addArtefactBtn}
               onClick={addToExhibition}
               hidden={exhibition.some((e) => e.id === props.id)}>
               Add to exhibition
             </button>
+
             <button
               className={styles.removeArtefactBtn}
               onClick={removeFromExhibition}
@@ -118,18 +99,24 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
           </>
         )}
       </div>
-      {artefact?.primaryImageSmall ? (
-        <img
-          className={styles.artefactImage}
-          src={artefact.primaryImageSmall}
-          alt="Small image of artwork"
-        />
-      ) : (
-        <img
-          className={styles.placeholderImage}
-          src={getImageURL("placeholder/placeholder.jpg")}
-          alt="Placeholder image for artefact due to rights issues"></img>
-      )}
+
+      <Link
+        className={styles.artefactImageLink}
+        to={`/metropolitan-museum-of-art/${props.id}`}
+        state={artefact}>
+        {artefact?.primaryImageSmall ? (
+          <img
+            className={styles.artefactImage}
+            src={artefact.primaryImageSmall}
+            alt="Small image of artwork"
+          />
+        ) : (
+          <img
+            className={styles.placeholderImage}
+            src={getImageURL("placeholder/placeholder.jpg")}
+            alt="Placeholder image for artefact due to rights issues"></img>
+        )}
+      </Link>
     </div>
   );
 }
