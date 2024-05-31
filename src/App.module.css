@@ -6,3 +6,9 @@
   overflow: hidden;
   margin-bottom: 98px;
 }
+
+.app main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
