@@ -14,6 +14,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
   const [artefact, setArtefact] = useState(location.state);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [focusedImage, setFocusedImage] = useState("");
 
   useEffect(() => {
     if (!artefact) {
@@ -53,19 +54,23 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
                   className={styles.mainImage}
                   src={artefact.primaryImageSmall}
                   alt="Image of the artefact"
+                  onClick={() => setFocusedImage(artefact.primaryImage)}
                 />
 
-                {artefact.additionalImages
-                  ? artefact.additionalImages.map((image: any) => {
-                      return (
-                        <img
-                          className={styles.alternateImage}
-                          src={image}
-                          alt=""
-                        />
-                      );
-                    })
-                  : null}
+                <div className={styles.alternateImagesContainer}>
+                  {artefact.additionalImages
+                    ? artefact.additionalImages.map((image: any) => {
+                        return (
+                          <img
+                            className={styles.alternateImage}
+                            src={image}
+                            alt="Alternate image of the artefact"
+                            onClick={() => setFocusedImage(image)}
+                          />
+                        );
+                      })
+                    : null}
+                </div>
               </>
             ) : (
               <>
@@ -130,6 +135,12 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
           </div>
         </>
       )}
+
+      {focusedImage ? (
+        <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
+          <img src={focusedImage} alt="Focused image of the artefact" />
+        </div>
+      ) : null}
     </div>
   );
 }

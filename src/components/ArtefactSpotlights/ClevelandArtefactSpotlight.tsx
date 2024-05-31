@@ -14,6 +14,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
   const [artefact, setArtefact] = useState(location.state);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [focusedImage, setFocusedImage] = useState("");
 
   useEffect(() => {
     if (!artefact) {
@@ -53,19 +54,23 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
                   className={styles.mainImage}
                   src={artefact.images.web.url}
                   alt="Image of the artefact"
+                  onClick={() => setFocusedImage(artefact.images.print.url)}
                 />
 
-                {artefact.alternate_images
-                  ? artefact.alternate_images.map((image: any) => {
-                      return (
-                        <img
-                          className={styles.alternateImage}
-                          src={image.web.url}
-                          alt=""
-                        />
-                      );
-                    })
-                  : null}
+                <div className={styles.alternateImagesContainer}>
+                  {artefact.alternate_images
+                    ? artefact.alternate_images.map((image: any) => {
+                        return (
+                          <img
+                            className={styles.alternateImage}
+                            src={image.web.url}
+                            alt="Alternate image of the artefact"
+                            onClick={() => setFocusedImage(image.print.url)}
+                          />
+                        );
+                      })
+                    : null}
+                </div>
               </>
             ) : (
               <img
@@ -124,6 +129,12 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           </div>
         </>
       )}
+
+      {focusedImage ? (
+        <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
+          <img src={focusedImage} alt="Focused image of the artefact" />
+        </div>
+      ) : null}
     </div>
   );
 }
