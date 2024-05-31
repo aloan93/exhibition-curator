@@ -44,8 +44,7 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
         <p className={styles.noImage}>
           {props.artefact.primaryImageSmall
             ? ""
-            : `Due to rights restrictions images for this artefact are
-                unavailable`}
+            : `Images for this artefact are unavailable, this may be due to rights restrictions`}
         </p>
 
         <button

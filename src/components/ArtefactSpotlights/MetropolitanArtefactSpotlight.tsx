@@ -80,8 +80,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
                   alt="Placeholder image"
                 />
                 <p className={styles.noImage}>
-                  {`Due to rights restrictions images for this artefact are
-                unavailable`}
+                  {`Images for this artefact are unavailable, this may be due to rights restrictions`}
                 </p>
               </>
             )}

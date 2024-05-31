@@ -30,7 +30,7 @@ export default function MetMuseumOfArt(): ReactNode {
       setIsLoading(true);
       setError("");
       metMuseumAPI
-        .get(`/search?q=${query}&hasImages=true`)
+        .get(`/search?q=${query}`)
         .then(({ data: { total, objectIDs } }) => {
           !objectIDs ? setSearchResults([]) : setSearchResults(objectIDs);
           setResultsTotal(total);
