@@ -17,6 +17,12 @@
   font-size: 30px;
 }
 
+.prompt {
+  color: var(--colour-text);
+  margin-top: 98px;
+  font-size: 25px;
+}
+
 .listContainer {
   display: flex;
   flex-direction: column;

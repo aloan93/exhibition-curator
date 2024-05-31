@@ -55,6 +55,8 @@ export default function ClevelandMuseumOfArtCard(props: {
           {props.artefact.creators[0]?.description}
         </p>
 
+        <p className={styles.noImage}></p>
+
         <button
           className={styles.addArtefactBtn}
           onClick={addToExhibition}

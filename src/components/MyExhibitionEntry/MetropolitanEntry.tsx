@@ -41,12 +41,12 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
 
         <p className={styles.details}>{props.artefact.artistDisplayName}</p>
 
-        {props.artefact.primaryImageSmall ? null : (
-          <p className={styles.noImage}>
-            {`Due to rights restrictions images for this artefact are
+        <p className={styles.noImage}>
+          {props.artefact.primaryImageSmall
+            ? ""
+            : `Due to rights restrictions images for this artefact are
                 unavailable`}
-          </p>
-        )}
+        </p>
 
         <button
           className={styles.removeArtefactBtn}
