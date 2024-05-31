@@ -10,6 +10,9 @@ import useExhibition from "../../hooks/useExhibition";
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [resultsTotal, setResultsTotal] = useState(0);
+  const [prompt, setPrompt] = useState(
+    "~ Enter search criteria above to query the art collection ~"
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,17 +40,22 @@ export default function ClevelandMuseumOfArt(): ReactNode {
           }) => {
             !data ? setSearchResults([]) : setSearchResults(data);
             setResultsTotal(total);
+            total === 0
+              ? setPrompt("No matching results found :(")
+              : setPrompt("");
             setIsLoading(false);
           }
         )
         .catch((err) => {
           setError("Something went wrong. Please try again later.");
+          setPrompt("");
           setIsLoading(false);
           console.log(err);
         });
     } else {
       setSearchResults([]);
       setResultsTotal(0);
+      setPrompt("~ Enter search criteria above to query the art collection ~");
     }
   }, [searchParams]);
 
@@ -60,6 +68,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
         <>
           <SearchBar setSearchParams={setSearchParams} />
           {error ? <p>{error}</p> : null}
+          {prompt ? <p className={styles.prompt}>{prompt}</p> : null}
           {searchResults.length > 0 ? (
             <PageNav
               page={page}
