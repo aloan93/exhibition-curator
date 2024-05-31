@@ -23,7 +23,7 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
       .catch(({ response: { status } }) => {
         status === 404
           ? setError(
-              "artefact not found! This entry may have been removed from the collection."
+              "Artefact not found! This entry may have been removed from the collection."
             )
           : setError("Something went wrong! Please try again later.");
         setIsLoading(false);
@@ -76,12 +76,12 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
 
             <p className={styles.details}>{artefact?.artistDisplayName}</p>
 
-            {artefact?.primaryImageSmall ? null : (
-              <p className={styles.noImage}>
-                {`Due to rights restrictions images for this artefact are
+            <p className={styles.noImage}>
+              {artefact?.primaryImageSmall
+                ? ""
+                : `Due to rights restrictions images for this artefact are
                 unavailable`}
-              </p>
-            )}
+            </p>
 
             <button
               className={styles.addArtefactBtn}
@@ -100,23 +100,25 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
         )}
       </div>
 
-      <Link
-        className={styles.artefactImageLink}
-        to={`/metropolitan-museum-of-art/${props.id}`}
-        state={artefact}>
-        {artefact?.primaryImageSmall ? (
-          <img
-            className={styles.artefactImage}
-            src={artefact.primaryImageSmall}
-            alt="Small image of artwork"
-          />
-        ) : (
-          <img
-            className={styles.placeholderImage}
-            src={getImageURL("placeholder/placeholder.jpg")}
-            alt="Placeholder image for artefact due to rights issues"></img>
-        )}
-      </Link>
+      {error ? null : (
+        <Link
+          className={styles.artefactImageLink}
+          to={`/metropolitan-museum-of-art/${props.id}`}
+          state={artefact}>
+          {artefact?.primaryImageSmall ? (
+            <img
+              className={styles.artefactImage}
+              src={artefact.primaryImageSmall}
+              alt="Small image of artwork"
+            />
+          ) : (
+            <img
+              className={styles.placeholderImage}
+              src={getImageURL("placeholder/placeholder.jpg")}
+              alt="Placeholder image for artefact due to rights issues"></img>
+          )}
+        </Link>
+      )}
     </div>
   );
 }

@@ -35,14 +35,13 @@
 
 .details {
   font-size: 20px;
-  font-weight: 500;
   color: var(--colour-text);
 }
 
 .noImage {
   font-size: 20px;
-  font-weight: 500;
   color: #faa0a0;
+  margin: 1em 0;
 }
 
 .addArtefactBtn {
@@ -86,7 +85,7 @@
 .notFound {
   font-size: 20px;
   font-weight: 500;
-  color: #cc0000;
+  color: #faa0a0;
 }
 
 .artefactImageLink {
@@ -111,7 +110,12 @@
   max-height: 300px;
   max-width: 100%;
   border-radius: 40px;
+  border: 1px solid black;
   align-self: flex-start;
+}
+
+.placeholderImage:hover {
+  border: 1px solid var(--colour-primary);
 }
 
 .loader {
