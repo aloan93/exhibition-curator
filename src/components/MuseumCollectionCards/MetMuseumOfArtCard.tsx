@@ -79,8 +79,7 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
             <p className={styles.noImage}>
               {artefact?.primaryImageSmall
                 ? ""
-                : `Due to rights restrictions images for this artefact are
-                unavailable`}
+                : `Images for this artefact are unavailable, this may be due to rights restrictions`}
             </p>
 
             <button
