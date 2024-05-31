@@ -45,6 +45,8 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
           {props.artefact.creators[0]?.description}
         </p>
 
+        <p className={styles.noImage}></p>
+
         <button
           className={styles.removeArtefactBtn}
           onClick={removeFromExhibition}

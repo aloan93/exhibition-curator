@@ -34,7 +34,11 @@ export default function MyExhibition(): ReactNode {
           resultsTotal={resultsTotal}
           hideText={false}
         />
-      ) : null}
+      ) : (
+        <p className={styles.prompt}>
+          {"No artefacts currently in this exhibition - Try adding some!"}
+        </p>
+      )}
       <ul className={styles.listContainer}>
         {paginatedExhibition.map((entry) => {
           return (
