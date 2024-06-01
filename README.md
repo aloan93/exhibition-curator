@@ -1,8 +1,8 @@
 # Exhibition Curator Web Application
 
-A web application where users can browse antiquities & fine artwork from public art collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the 'Metropolitan Museum of Art' and the 'Cleveland Museum of Art' via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
+A web application where users can browse antiquities & fine artwork from public collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the 'Metropolitan Museum of Art' and the 'Cleveland Museum of Art' via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
 
-**PS. Users' own virtual exhibitions persist for the duration of their session only! (Navigating away from the site or refreshing to cause the exhibition to be emptied)**
+**PS. Users' own virtual exhibitions persist for the duration of their session only! (Navigating away from the site or refreshing will cause the exhibition to be flushed)**
 
 ## Running the App Locally
 
@@ -14,7 +14,7 @@ Here! --> https://nodejs.org/en/download
 
 ### Step 1: Cloning
 
-Clone this repository to your machine and navigate to the root directory with the following terminal commends:
+Clone this repository to your machine and navigate to the root directory with the following terminal commands:
 
 ```
 git clone https://github.com/aloan93/fe-exhibition-curator.git
@@ -29,7 +29,7 @@ Install all the packages required to run this depositry via NPM using the follow
 npm install
 ```
 
-### Step 3: Running in Local
+### Step 3: Lauching the App
 
 Once all the dependancies have been installed you will then be able to run the application, and for this purpose you can use the following script in your terminal:
 
