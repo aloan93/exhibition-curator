@@ -29,7 +29,7 @@ Install all the packages required to run this depositry via NPM using the follow
 npm install
 ```
 
-### Step 3: Lauching the App
+### Step 3: Launching the App
 
 Once all the dependancies have been installed you will then be able to run the application, and for this purpose you can use the following script in your terminal:
 
