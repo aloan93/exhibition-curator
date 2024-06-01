@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# Exhibition Curator Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application where users can browse antiquities & fine artwork from public art collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the 'Metropolitan Museum of Art' and the 'Cleveland Museum of Art' via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
 
-Currently, two official plugins are available:
+**PS. Users' own virtual exhibitions persist for the duration of their session only! (Navigating away from the site or refreshing to cause the exhibition to be emptied)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running the App Locally
 
-## Expanding the ESLint configuration
+To run this project locally you will first need to have Node.js installed on your machine (minimum version required - v20.3.1).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Instructions for doing this can be found...
 
-- Configure the top-level `parserOptions` property like this:
+Here! --> https://nodejs.org/en/download
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Step 1: Cloning
+
+Clone this repository to your machine and navigate to the root directory with the following terminal commends:
+
+```
+git clone https://github.com/aloan93/fe-exhibition-curator.git
+cd fe-exhibition-curator
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Step 2: Installing Dependencies
+
+Install all the packages required to run this depositry via NPM using the following terminal command:
+
+```
+npm install
+```
+
+### Step 3: Running in Local
+
+Once all the dependancies have been installed you will then be able to run the application, and for this purpose you can use the following script in your terminal:
+
+```
+npm run dev
+```
+
+Your terminal should now show show your local host along with the port being used. If your local host does not automatically open in your browser, you open a tab manually by ctrl + click on the local link.
+
+### And Done! Happy Curating
