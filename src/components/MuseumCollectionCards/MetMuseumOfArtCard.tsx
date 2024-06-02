@@ -4,6 +4,7 @@ import { metMuseumAPI } from "../../api/api";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 import { Link } from "react-router-dom";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
   const [artefact, setArtefact] = useState<any>();
@@ -105,11 +106,9 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
           to={`/metropolitan-museum-of-art/${props.id}`}
           state={artefact}>
           {artefact?.primaryImageSmall ? (
-            <img
-              className={styles.artefactImage}
-              src={artefact.primaryImageSmall}
-              alt="Small image of artwork"
-            />
+            <div className={styles.artefactImageContainer}>
+              <ImageLoader imageLink={artefact.primaryImageSmall} />
+            </div>
           ) : (
             <img
               className={styles.placeholderImage}

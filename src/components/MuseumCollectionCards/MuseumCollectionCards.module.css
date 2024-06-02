@@ -111,12 +111,12 @@
   max-height: 300px;
   max-width: 100%;
   border-radius: 40px;
-  border: 1px solid black;
+  border: 2px solid black;
   align-self: flex-start;
 }
 
 .placeholderImage:hover {
-  border: 1px solid var(--colour-primary);
+  border: 2px solid var(--colour-primary);
 }
 
 .loader {
@@ -152,7 +152,6 @@
   .addArtefactBtn {
     min-width: 218px;
     width: 90%;
-    /* margin-top: 10px; */
   }
 
   .removeArtefactBtn {
@@ -160,7 +159,6 @@
     min-width: 218px;
     width: 90%;
     height: 40px;
-    /* margin-top: 10px; */
   }
 
   .artefactImageLink {
@@ -168,9 +166,4 @@
     max-width: 100%;
     margin-bottom: 10px;
   }
-
-  /* .placeholderImage {
-    align-self: center;
-    max-width: 100%;
-  } */
 }
