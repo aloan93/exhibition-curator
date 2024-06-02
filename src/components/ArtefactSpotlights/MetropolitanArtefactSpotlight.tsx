@@ -7,6 +7,7 @@ import {
   capitaliseString,
   getImageURL,
 } from "../../utils";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function MetropolitanArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -50,23 +51,23 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.primaryImageSmall ? (
               <>
-                <img
-                  className={styles.mainImage}
-                  src={artefact.primaryImageSmall}
-                  alt="Image of the artefact"
-                  onClick={() => setFocusedImage(artefact.primaryImage)}
-                />
+                <div className={styles.mainImageContainer}>
+                  <ImageLoader
+                    imageLink={artefact.primaryImage}
+                    setFocusedImage={setFocusedImage}
+                  />
+                </div>
 
                 <div className={styles.alternateImagesContainer}>
                   {artefact.additionalImages
                     ? artefact.additionalImages.map((image: any) => {
                         return (
-                          <img
-                            className={styles.alternateImage}
-                            src={image}
-                            alt="Alternate image of the artefact"
-                            onClick={() => setFocusedImage(image)}
-                          />
+                          <div className={styles.alternateImageContainer}>
+                            <ImageLoader
+                              imageLink={image}
+                              setFocusedImage={setFocusedImage}
+                            />
+                          </div>
                         );
                       })
                     : null}
@@ -137,7 +138,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
 
       {focusedImage ? (
         <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
-          <img src={focusedImage} alt="Focused image of the artefact" />
+          <ImageLoader imageLink={focusedImage} />
         </div>
       ) : null}
     </div>
