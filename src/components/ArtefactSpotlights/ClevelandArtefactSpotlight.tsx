@@ -7,6 +7,7 @@ import {
   capitaliseString,
   getImageURL,
 } from "../../utils";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -50,23 +51,23 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.images.web.url ? (
               <>
-                <img
-                  className={styles.mainImage}
-                  src={artefact.images.web.url}
-                  alt="Image of the artefact"
-                  onClick={() => setFocusedImage(artefact.images.print.url)}
-                />
+                <div className={styles.mainImageContainer}>
+                  <ImageLoader
+                    imageLink={artefact.images.web.url}
+                    setFocusedImage={setFocusedImage}
+                  />
+                </div>
 
                 <div className={styles.alternateImagesContainer}>
                   {artefact.alternate_images
                     ? artefact.alternate_images.map((image: any) => {
                         return (
-                          <img
-                            className={styles.alternateImage}
-                            src={image.web.url}
-                            alt="Alternate image of the artefact"
-                            onClick={() => setFocusedImage(image.print.url)}
-                          />
+                          <div className={styles.alternateImageContainer}>
+                            <ImageLoader
+                              imageLink={image.web.url}
+                              setFocusedImage={setFocusedImage}
+                            />
+                          </div>
                         );
                       })
                     : null}
@@ -76,7 +77,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
               <img
                 className={styles.placeholderImage}
                 src={getImageURL("/placeholder.placeholder.png")}
-                alt="PLaceholder image"
+                alt="Placeholder image"
               />
             )}
           </div>
@@ -132,7 +133,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
 
       {focusedImage ? (
         <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
-          <img src={focusedImage} alt="Focused image of the artefact" />
+          <ImageLoader imageLink={focusedImage} />
         </div>
       ) : null}
     </div>

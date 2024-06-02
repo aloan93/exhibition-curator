@@ -1,0 +1,36 @@
+@import "../../vars.css";
+
+.loader {
+  display: block;
+  margin-top: 49px;
+  border: 5px solid var(--colour-text);
+  border-top: 5px solid var(--colour-primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.imageContainer {
+  max-height: inherit;
+  max-width: 100%;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  max-height: inherit;
+}
+
+.displayNone {
+  display: none;
+}

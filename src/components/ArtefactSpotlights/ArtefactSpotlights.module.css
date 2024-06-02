@@ -45,14 +45,16 @@
   width: 50%;
 }
 
-.mainImage {
+.mainImageContainer {
   max-width: 100%;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 40px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.mainImage:hover {
-  border: 1px solid var(--colour-primary);
+.mainImageContainer:hover {
+  border: 2px solid var(--colour-primary);
 }
 
 .alternateImagesContainer {
@@ -65,19 +67,21 @@
   row-gap: 30px;
 }
 
-.alternateImage {
+.alternateImageContainer {
   max-width: 30%;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 40px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.alternateImage:hover {
-  border: 1px solid var(--colour-primary);
+.alternateImageContainer:hover {
+  border: 2px solid var(--colour-primary);
 }
 
 .placeholderImage {
   width: 80%;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 40px;
 }
 
@@ -117,6 +121,12 @@
   max-width: 95%;
   max-height: 95%;
   object-fit: contain;
+}
+
+.imagePopup :is(div) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 @keyframes spin {
