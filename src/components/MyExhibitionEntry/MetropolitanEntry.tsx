@@ -3,6 +3,7 @@ import styles from "./MyExhibitionEntry.module.css";
 import { getImageURL, convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 import { Link } from "react-router-dom";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
@@ -60,11 +61,9 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
         to={`/metropolitan-museum-of-art/${props.artefact.objectID}`}
         state={props.artefact}>
         {props.artefact.primaryImageSmall ? (
-          <img
-            className={styles.artefactImage}
-            src={props.artefact.primaryImageSmall}
-            alt="Small image of artwork"
-          />
+          <div className={styles.artefactImageContainer}>
+            <ImageLoader imageLink={props.artefact.primaryImageSmall} />
+          </div>
         ) : (
           <img
             className={styles.placeholderImage}

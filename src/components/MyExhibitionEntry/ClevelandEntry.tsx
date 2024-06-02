@@ -3,6 +3,7 @@ import styles from "./MyExhibitionEntry.module.css";
 import { convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 import { Link } from "react-router-dom";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function ClevelandEntry(props: { artefact: any }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
@@ -59,11 +60,9 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
         className={styles.artefactImageLink}
         to={`/cleveland-museum-of-art/${props.artefact.id}`}
         state={props.artefact}>
-        <img
-          className={styles.artefactImage}
-          src={props.artefact.images.web.url}
-          alt="Image of the artefact"
-        />
+        <div className={styles.artefactImageContainer}>
+          <ImageLoader imageLink={props.artefact.images.web.url} />
+        </div>
       </Link>
     </>
   );
