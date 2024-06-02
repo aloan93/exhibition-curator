@@ -14,7 +14,9 @@ export default function ImageLoader(props: {
           !isLoading && styles.displayNone
         }`}></div>
       <figure
-        className={`${isLoading && styles.displayNone}`}
+        className={`${styles.imageContainer} ${
+          isLoading && styles.displayNone
+        }`}
         onClick={() =>
           props.setFocusedImage ? props.setFocusedImage(props.imageLink) : null
         }>

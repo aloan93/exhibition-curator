@@ -3,6 +3,7 @@ import styles from "./MuseumCollectionCards.module.css";
 import { convertYearToBcOrNot } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 import { Link } from "react-router-dom";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function ClevelandMuseumOfArtCard(props: {
   artefact: any;
@@ -51,9 +52,11 @@ export default function ClevelandMuseumOfArtCard(props: {
           )}`}</p>
         ) : null}
 
-        <p className={styles.details}>
-          {props.artefact.creators[0]?.description}
-        </p>
+        {props.artefact.creators[0] ? (
+          <p className={styles.details}>
+            {props.artefact.creators[0]?.description}
+          </p>
+        ) : null}
 
         <p className={styles.noImage}></p>
 
@@ -76,11 +79,9 @@ export default function ClevelandMuseumOfArtCard(props: {
         className={styles.artefactImageLink}
         to={`/cleveland-museum-of-art/${props.artefact.id}`}
         state={props.artefact}>
-        <img
-          className={styles.artefactImage}
-          src={props.artefact.images.web.url}
-          alt="Image of the artefact"
-        />
+        <div className={styles.artefactImageContainer}>
+          <ImageLoader imageLink={props.artefact.images.web.url} />
+        </div>
       </Link>
     </div>
   );
