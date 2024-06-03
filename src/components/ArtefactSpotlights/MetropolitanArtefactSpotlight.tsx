@@ -2,11 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { metMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
-import {
-  convertYearToBcOrNot,
-  capitaliseString,
-  getImageURL,
-} from "../../utils";
+import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function MetropolitanArtefactSpotlight(): ReactNode {
@@ -91,9 +87,12 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
             <h2 className={styles.title}>{artefact.title}</h2>
 
             {artefact.objectBeginDate ? (
-              <p className={styles.details}>{`${convertYearToBcOrNot(
-                artefact.objectBeginDate
-              )} - ${convertYearToBcOrNot(artefact.objectEndDate)}`}</p>
+              <p className={styles.details}>
+                {getDateRangeString(
+                  artefact.objectBeginDate,
+                  artefact.objectEndDate
+                )}
+              </p>
             ) : null}
 
             {artefact.culture ? (
