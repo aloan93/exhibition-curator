@@ -21,6 +21,7 @@
   color: var(--colour-text);
   font-size: 25px;
   margin-top: 98px;
+  text-align: center;
 }
 
 .listContainer {

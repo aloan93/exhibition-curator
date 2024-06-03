@@ -28,12 +28,6 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
           {props.artefact.title}
         </Link>
 
-        <p className={styles.details}>{`${props.artefact.department} - ${
-          props.artefact.objectName || "Misc."
-        }`}</p>
-
-        <p className={styles.details}>{props.artefact.culture}</p>
-
         {props.artefact.objectBeginDate ? (
           <p className={styles.details}>
             {getDateRangeString(
@@ -43,7 +37,27 @@ export default function MetropolitanEntry(props: { artefact: any }): ReactNode {
           </p>
         ) : null}
 
-        <p className={styles.details}>{props.artefact.artistDisplayName}</p>
+        {props.artefact.culture ? (
+          <p className={styles.details}>{`${props.artefact.culture}${
+            props.artefact.period ? ` - ${props.artefact.period}` : ""
+          }`}</p>
+        ) : null}
+
+        <p className={styles.details}>{`${
+          props.artefact.department || "Dept. unknown"
+        } - ${props.artefact.objectName || "Misc."}`}</p>
+
+        {props.artefact.artistDisplayName ? (
+          <p className={styles.details}>
+            {`${props.artefact.artistDisplayName}${
+              props.artefact.artistNationality
+                ? ` (${props.artefact.artistNationality}, ${
+                    props.artefact.artistBeginDate || "Unknown"
+                  }-${props.artefact.artistEndDate || "Unknown"})`
+                : ""
+            }`}
+          </p>
+        ) : null}
 
         <p className={styles.noImage}>
           {props.artefact.primaryImageSmall
