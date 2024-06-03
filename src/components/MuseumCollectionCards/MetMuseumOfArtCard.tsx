@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import styles from "./MuseumCollectionCards.module.css";
 import { metMuseumAPI } from "../../api/api";
-import { getImageURL, convertYearToBcOrNot } from "../../utils";
+import { getImageURL, getDateRangeString } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 import { Link } from "react-router-dom";
 import ImageLoader from "../ImageLoader/ImageLoader";
@@ -70,9 +70,12 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
             <p className={styles.details}>{artefact?.culture}</p>
 
             {artefact?.objectBeginDate ? (
-              <p className={styles.details}>{`${convertYearToBcOrNot(
-                artefact.objectBeginDate
-              )} - ${convertYearToBcOrNot(artefact.objectEndDate)}`}</p>
+              <p className={styles.details}>
+                {getDateRangeString(
+                  artefact.objectBeginDate,
+                  artefact.objectEndDate
+                )}
+              </p>
             ) : null}
 
             <p className={styles.details}>{artefact?.artistDisplayName}</p>

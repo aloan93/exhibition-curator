@@ -2,11 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { clevelandMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
-import {
-  convertYearToBcOrNot,
-  capitaliseString,
-  getImageURL,
-} from "../../utils";
+import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
@@ -86,9 +82,12 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
             <h2 className={styles.title}>{artefact.title}</h2>
 
             {artefact.creation_date_earliest ? (
-              <p className={styles.details}>{`${convertYearToBcOrNot(
-                artefact.creation_date_earliest
-              )} - ${convertYearToBcOrNot(artefact.creation_date_latest)}`}</p>
+              <p className={styles.details}>
+                {getDateRangeString(
+                  artefact.creation_date_earliest,
+                  artefact.creation_date_latest
+                )}
+              </p>
             ) : null}
 
             {artefact.culture[0] ? (

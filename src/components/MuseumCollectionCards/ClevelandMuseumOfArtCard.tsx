@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styles from "./MuseumCollectionCards.module.css";
-import { convertYearToBcOrNot } from "../../utils";
+import { getDateRangeString } from "../../utils";
 import useExhibition from "../../hooks/useExhibition";
 import { Link } from "react-router-dom";
 import ImageLoader from "../ImageLoader/ImageLoader";
@@ -45,11 +45,12 @@ export default function ClevelandMuseumOfArtCard(props: {
         <p className={styles.details}>{props.artefact.culture[0]}</p>
 
         {props.artefact.creation_date_earliest ? (
-          <p className={styles.details}>{`${convertYearToBcOrNot(
-            props.artefact.creation_date_earliest
-          )} - ${convertYearToBcOrNot(
-            props.artefact.creation_date_latest
-          )}`}</p>
+          <p className={styles.details}>
+            {getDateRangeString(
+              props.artefact.creation_date_earliest,
+              props.artefact.creation_date_latest
+            )}
+          </p>
         ) : null}
 
         {props.artefact.creators[0] ? (
