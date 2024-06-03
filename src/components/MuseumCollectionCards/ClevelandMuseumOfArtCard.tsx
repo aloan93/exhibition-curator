@@ -37,13 +37,6 @@ export default function ClevelandMuseumOfArtCard(props: {
           {props.artefact.title}
         </Link>
 
-        <p
-          className={
-            styles.details
-          }>{`${props.artefact.department} - ${props.artefact.type}`}</p>
-
-        <p className={styles.details}>{props.artefact.culture[0]}</p>
-
         {props.artefact.creation_date_earliest ? (
           <p className={styles.details}>
             {getDateRangeString(
@@ -52,6 +45,14 @@ export default function ClevelandMuseumOfArtCard(props: {
             )}
           </p>
         ) : null}
+
+        {props.artefact.culture[0] ? (
+          <p className={styles.details}>{props.artefact.culture[0]}</p>
+        ) : null}
+
+        <p className={styles.details}>{`${
+          props.artefact.department || "Dept. unknown"
+        } - ${props.artefact.type || "Misc."}`}</p>
 
         {props.artefact.creators[0] ? (
           <p className={styles.details}>

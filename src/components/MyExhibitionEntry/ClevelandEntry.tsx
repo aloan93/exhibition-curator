@@ -27,13 +27,6 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
           {props.artefact.title}
         </Link>
 
-        <p
-          className={
-            styles.details
-          }>{`${props.artefact.department} - ${props.artefact.type}`}</p>
-
-        <p className={styles.details}>{props.artefact.culture[0]}</p>
-
         {props.artefact.creation_date_earliest ? (
           <p className={styles.details}>
             {getDateRangeString(
@@ -43,9 +36,19 @@ export default function ClevelandEntry(props: { artefact: any }): ReactNode {
           </p>
         ) : null}
 
-        <p className={styles.details}>
-          {props.artefact.creators[0]?.description}
-        </p>
+        {props.artefact.culture[0] ? (
+          <p className={styles.details}>{props.artefact.culture[0]}</p>
+        ) : null}
+
+        <p className={styles.details}>{`${
+          props.artefact.department || "Dept. unknown"
+        } - ${props.artefact.type || "Misc."}`}</p>
+
+        {props.artefact.creators[0] ? (
+          <p className={styles.details}>
+            {props.artefact.creators[0]?.description}
+          </p>
+        ) : null}
 
         <p className={styles.noImage}></p>
 

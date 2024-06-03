@@ -63,12 +63,6 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
               {artefact?.title}
             </Link>
 
-            <p className={styles.details}>{`${artefact?.department} - ${
-              artefact?.objectName || "Misc."
-            }`}</p>
-
-            <p className={styles.details}>{artefact?.culture}</p>
-
             {artefact?.objectBeginDate ? (
               <p className={styles.details}>
                 {getDateRangeString(
@@ -78,7 +72,27 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
               </p>
             ) : null}
 
-            <p className={styles.details}>{artefact?.artistDisplayName}</p>
+            {artefact?.culture ? (
+              <p className={styles.details}>{`${artefact.culture}${
+                artefact.period ? ` - ${artefact.period}` : ""
+              }`}</p>
+            ) : null}
+
+            <p className={styles.details}>{`${
+              artefact?.department || "Dept. unknown"
+            } - ${artefact?.objectName || "Misc."}`}</p>
+
+            {artefact?.artistDisplayName ? (
+              <p className={styles.details}>
+                {`${artefact.artistDisplayName}${
+                  artefact.artistNationality
+                    ? ` (${artefact.artistNationality}, ${
+                        artefact.artistBeginDate || "Unknown"
+                      }-${artefact.artistEndDate || "Unknown"})`
+                    : ""
+                }`}
+              </p>
+            ) : null}
 
             <p className={styles.noImage}>
               {artefact?.primaryImageSmall

@@ -56,9 +56,11 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
 
                 <div className={styles.alternateImagesContainer}>
                   {artefact.alternate_images
-                    ? artefact.alternate_images.map((image: any) => {
+                    ? artefact.alternate_images.map((image: any, id: any) => {
                         return (
-                          <div className={styles.alternateImageContainer}>
+                          <div
+                            className={styles.alternateImageContainer}
+                            key={id}>
                             <ImageLoader
                               imageLink={image.web.url}
                               setFocusedImage={setFocusedImage}

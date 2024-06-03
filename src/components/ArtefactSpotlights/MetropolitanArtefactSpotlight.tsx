@@ -56,9 +56,11 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
 
                 <div className={styles.alternateImagesContainer}>
                   {artefact.additionalImages
-                    ? artefact.additionalImages.map((image: any) => {
+                    ? artefact.additionalImages.map((image: any, id: any) => {
                         return (
-                          <div className={styles.alternateImageContainer}>
+                          <div
+                            className={styles.alternateImageContainer}
+                            key={id}>
                             <ImageLoader
                               imageLink={image}
                               setFocusedImage={setFocusedImage}
