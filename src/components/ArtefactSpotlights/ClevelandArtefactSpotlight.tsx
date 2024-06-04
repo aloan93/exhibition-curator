@@ -85,7 +85,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
 
             <div className={styles.detailsContainer}>
               {artefact.creation_date_earliest ? (
-                <p className={styles.details}>
+                <p className={styles.date}>
                   {getDateRangeString(
                     artefact.creation_date_earliest,
                     artefact.creation_date_latest

@@ -90,7 +90,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
 
             <div className={styles.detailsContainer}>
               {artefact.objectBeginDate ? (
-                <p className={styles.details}>
+                <p className={styles.date}>
                   {getDateRangeString(
                     artefact.objectBeginDate,
                     artefact.objectEndDate

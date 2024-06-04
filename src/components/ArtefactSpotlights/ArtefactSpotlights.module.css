@@ -19,7 +19,7 @@
 
 .title {
   color: var(--colour-text);
-  font-size: 45px;
+  font-size: 42px;
   padding-left: 15px;
 }
 
@@ -36,6 +36,12 @@
   );
   padding: 15px;
   border-radius: 20px;
+}
+
+.date {
+  color: var(--colour-text);
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .details {
