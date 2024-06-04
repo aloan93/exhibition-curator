@@ -31,7 +31,7 @@
   width: fit-content;
   color: var(--colour-text);
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .title:hover {
@@ -41,6 +41,10 @@
 .details {
   font-size: 20px;
   color: var(--colour-text);
+}
+
+.date {
+  font-weight: 600;
 }
 
 .noImage {
