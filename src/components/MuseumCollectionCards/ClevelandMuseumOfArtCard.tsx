@@ -38,7 +38,7 @@ export default function ClevelandMuseumOfArtCard(props: {
         </Link>
 
         {props.artefact.creation_date_earliest ? (
-          <p className={styles.details}>
+          <p className={`${styles.details} ${styles.date}`}>
             {getDateRangeString(
               props.artefact.creation_date_earliest,
               props.artefact.creation_date_latest

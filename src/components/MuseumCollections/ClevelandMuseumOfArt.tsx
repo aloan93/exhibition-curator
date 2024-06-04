@@ -5,7 +5,6 @@ import { clevelandMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
 import PageNav from "../PageNav/PageNav";
 import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
-import useExhibition from "../../hooks/useExhibition";
 
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -18,10 +17,8 @@ export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   const page = searchParams.get("page") || "1";
-  const { exhibition } = useExhibition();
 
   useEffect(() => {
-    console.log(exhibition);
     if (query) {
       setIsLoading(true);
       setError("");

@@ -64,7 +64,7 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
             </Link>
 
             {artefact?.objectBeginDate ? (
-              <p className={styles.details}>
+              <p className={`${styles.details} ${styles.date}`}>
                 {getDateRangeString(
                   artefact.objectBeginDate,
                   artefact.objectEndDate

@@ -85,54 +85,56 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
             )}
           </div>
 
-          <div className={styles.detailsContainer}>
+          <div className={styles.infoContainer}>
             <h2 className={styles.title}>{artefact.title}</h2>
 
-            {artefact.objectBeginDate ? (
-              <p className={styles.details}>
-                {getDateRangeString(
-                  artefact.objectBeginDate,
-                  artefact.objectEndDate
-                )}
-              </p>
-            ) : null}
+            <div className={styles.detailsContainer}>
+              {artefact.objectBeginDate ? (
+                <p className={styles.date}>
+                  {getDateRangeString(
+                    artefact.objectBeginDate,
+                    artefact.objectEndDate
+                  )}
+                </p>
+              ) : null}
 
-            {artefact.culture ? (
-              <p className={styles.details}>{`${artefact.culture}${
-                artefact.period ? ` - ${artefact.period}` : ""
-              }`}</p>
-            ) : null}
+              {artefact.culture ? (
+                <p className={styles.details}>{`${artefact.culture}${
+                  artefact.period ? ` - ${artefact.period}` : ""
+                }`}</p>
+              ) : null}
 
-            <p className={styles.details}>{`${
-              artefact.department || "Dept. unknown"
-            } - ${artefact.objectName || "Misc."}`}</p>
+              <p className={styles.details}>{`${
+                artefact.department || "Dept. unknown"
+              } - ${artefact.objectName || "Misc."}`}</p>
 
-            {artefact.medium ? (
-              <p className={styles.details}>
-                {capitaliseString(artefact.medium)}
-              </p>
-            ) : null}
+              {artefact.medium ? (
+                <p className={styles.details}>
+                  {capitaliseString(artefact.medium)}
+                </p>
+              ) : null}
 
-            {artefact.artistDisplayName ? (
-              <p className={styles.details}>
-                {`${artefact.artistDisplayName}${
-                  artefact.artistNationality
-                    ? ` (${artefact.artistNationality}, ${
-                        artefact.artistBeginDate || "Unknown"
-                      }-${artefact.artistEndDate || "Unknown"})`
-                    : ""
-                }`}
-              </p>
-            ) : null}
+              {artefact.artistDisplayName ? (
+                <p className={styles.details}>
+                  {`${artefact.artistDisplayName}${
+                    artefact.artistNationality
+                      ? ` (${artefact.artistNationality}, ${
+                          artefact.artistBeginDate || "Unknown"
+                        }-${artefact.artistEndDate || "Unknown"})`
+                      : ""
+                  }`}
+                </p>
+              ) : null}
 
-            {artefact.objectURL ? (
-              <Link
-                className={styles.externalLink}
-                to={artefact.objectURL}
-                target="_blank">
-                {`View at metmuseum.org`}
-              </Link>
-            ) : null}
+              {artefact.objectURL ? (
+                <Link
+                  className={styles.externalLink}
+                  to={artefact.objectURL}
+                  target="_blank">
+                  {`View at metmuseum.org`}
+                </Link>
+              ) : null}
+            </div>
           </div>
         </>
       )}

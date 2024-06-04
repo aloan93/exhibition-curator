@@ -5,7 +5,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: var(--colour-secondary);
+  background: linear-gradient(
+    180deg,
+    var(--colour-secondary) 0%,
+    var(--colour-dark) 100%
+  );
   border-radius: 40px;
   padding: 20px 25px;
   width: 1000px;
@@ -27,6 +31,7 @@
   width: fit-content;
   color: var(--colour-text);
   text-decoration: none;
+  margin-bottom: 8px;
 }
 
 .title:hover {
@@ -36,6 +41,10 @@
 .details {
   font-size: 20px;
   color: var(--colour-text);
+}
+
+.date {
+  font-weight: 600;
 }
 
 .noImage {
