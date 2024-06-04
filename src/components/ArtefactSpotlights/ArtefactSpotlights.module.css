@@ -20,6 +20,7 @@
 .title {
   color: var(--colour-text);
   font-size: 45px;
+  margin-bottom: 10px;
 }
 
 .details {

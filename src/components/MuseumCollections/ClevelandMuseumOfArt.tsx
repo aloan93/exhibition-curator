@@ -21,7 +21,6 @@ export default function ClevelandMuseumOfArt(): ReactNode {
   const { exhibition } = useExhibition();
 
   useEffect(() => {
-    console.log(exhibition);
     if (query) {
       setIsLoading(true);
       setError("");

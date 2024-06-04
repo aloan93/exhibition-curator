@@ -25,7 +25,6 @@ export default function MetMuseumOfArt(): ReactNode {
   const { exhibition } = useExhibition();
 
   useEffect(() => {
-    console.log(exhibition);
     if (query) {
       setIsLoading(true);
       setError("");
