@@ -21,12 +21,17 @@ export default function SearchBar(props: {
       <input
         className={styles.searchInput}
         id="search"
+        aria-label="Search"
+        autoComplete="off"
+        autoCorrect="off"
         type="text"
-        placeholder="Search Museum Collection"
+        placeholder="Search"
         onChange={(e) => setSearch(e.target.value)}
         required
       />
-      <button className={styles.searchBtn}>{"🔍"}</button>
+      <button className={styles.searchBtn} aria-label="Search">
+        {"🔍"}
+      </button>
     </form>
   );
 }
