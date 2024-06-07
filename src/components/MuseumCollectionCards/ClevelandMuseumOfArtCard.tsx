@@ -30,12 +30,14 @@ export default function ClevelandMuseumOfArtCard(props: {
   return (
     <div className={styles.container}>
       <div className={styles.detailsContainer}>
-        <Link
-          className={styles.title}
-          to={`/cleveland-museum-of-art/${props.artefact.id}`}
-          state={props.artefact}>
-          {props.artefact.title}
-        </Link>
+        <h3 className={styles.title}>
+          <Link
+            className={styles.titleLink}
+            to={`/cleveland-museum-of-art/${props.artefact.id}`}
+            state={props.artefact}>
+            {props.artefact.title}
+          </Link>
+        </h3>
 
         {props.artefact.creation_date_earliest ? (
           <p className={`${styles.details} ${styles.date}`}>

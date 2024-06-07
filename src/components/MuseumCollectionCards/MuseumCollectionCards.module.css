@@ -27,14 +27,15 @@
 
 .title {
   font-size: 25px;
-  font-weight: 600;
-  width: fit-content;
-  color: var(--colour-text);
-  text-decoration: none;
   margin-bottom: 8px;
 }
 
-.title:hover {
+.titleLink {
+  color: var(--colour-text);
+  text-decoration: none;
+}
+
+.titleLink:hover {
   text-decoration: underline;
 }
 

@@ -56,12 +56,14 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
           <p className={styles.notFound}>{error}</p>
         ) : (
           <>
-            <Link
-              className={styles.title}
-              to={`/metropolitan-museum-of-art/${props.id}`}
-              state={artefact}>
-              {artefact?.title}
-            </Link>
+            <h3 className={styles.title}>
+              <Link
+                className={styles.titleLink}
+                to={`/metropolitan-museum-of-art/${props.id}`}
+                state={artefact}>
+                {artefact?.title}
+              </Link>
+            </h3>
 
             {artefact?.objectBeginDate ? (
               <p className={`${styles.details} ${styles.date}`}>
