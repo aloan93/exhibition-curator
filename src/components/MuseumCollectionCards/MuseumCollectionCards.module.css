@@ -94,12 +94,6 @@
   color: black;
 }
 
-.notFound {
-  font-size: 20px;
-  font-weight: 500;
-  color: #faa0a0;
-}
-
 .artefactImageContainer {
   max-height: 300px;
   max-width: 40%;
