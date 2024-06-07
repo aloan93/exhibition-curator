@@ -117,23 +117,24 @@ export default function MetMuseumOfArtCard(props: { id: number }): ReactNode {
         )}
       </div>
 
-      {error ? null : (
-        <Link
-          className={styles.artefactImageLink}
-          to={`/metropolitan-museum-of-art/${props.id}`}
-          state={artefact}>
-          {artefact?.primaryImageSmall ? (
-            <div className={styles.artefactImageContainer}>
+      <div className={styles.artefactImageContainer}>
+        {error ? null : (
+          <Link
+            className={styles.artefactImageLink}
+            to={`/metropolitan-museum-of-art/${props.id}`}
+            state={artefact}>
+            {artefact?.primaryImageSmall ? (
               <ImageLoader imageLink={artefact.primaryImageSmall} />
-            </div>
-          ) : (
-            <img
-              className={styles.placeholderImage}
-              src={getImageURL("placeholder/placeholder.jpg")}
-              alt="Placeholder image for artefact due to rights issues"></img>
-          )}
-        </Link>
-      )}
+            ) : (
+              <img
+                className={styles.placeholderImage}
+                src={getImageURL("placeholder/placeholder.jpg")}
+                alt="Placeholder image for artefact due to rights issues"
+              />
+            )}
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

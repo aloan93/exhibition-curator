@@ -77,14 +77,14 @@ export default function ClevelandMuseumOfArtCard(props: {
         </button>
       </div>
 
-      <Link
-        className={styles.artefactImageLink}
-        to={`/cleveland-museum-of-art/${props.artefact.id}`}
-        state={props.artefact}>
-        <div className={styles.artefactImageContainer}>
+      <div className={styles.artefactImageContainer}>
+        <Link
+          className={styles.artefactImageLink}
+          to={`/cleveland-museum-of-art/${props.artefact.id}`}
+          state={props.artefact}>
           <ImageLoader imageLink={props.artefact.images.web.url} />
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 }
