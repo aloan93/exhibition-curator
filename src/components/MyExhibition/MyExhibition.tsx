@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import styles from "./MyExhibition.module.css";
 import useExhibition from "../../hooks/useExhibition";
-import EntrySelecter from "../MyExhibitionEntry/EntrySelecter";
+import EntrySelecter from "./EntrySelecter";
 import PageNav from "../PageNav/PageNav";
 
 export default function MyExhibition(): ReactNode {

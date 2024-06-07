@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
 import { metMuseumAPI, clevelandMuseumAPI } from "../../api/api";
-import ClevelandEntry from "./ClevelandEntry";
-import MetropolitanEntry from "./MetropolitanEntry";
-import styles from "./MyExhibitionEntry.module.css";
+import styles from "./MyExhibition.module.css";
+import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
+import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
 
 type entryType = {
   collection: string;
@@ -27,7 +27,7 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
         .catch(({ response: { status } }) => {
           status === 404
             ? setError(
-                "artefact not found! This entry may have been removed from the collection."
+                "Artefact not found! This entry may have been removed from the collection."
               )
             : setError("Something went wrong! Please try again later.");
           setIsLoading(false);
@@ -44,7 +44,7 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
         .catch(({ response: { status } }) => {
           status === 404
             ? setError(
-                "artefact not found! This entry may have been removed from the collection."
+                "Artefact not found! This entry may have been removed from the collection."
               )
             : setError("Something went wrong! Please try again later.");
           setIsLoading(false);
@@ -53,20 +53,20 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
   }, []);
 
   if (isLoading) return <div className={styles.loader}></div>;
-  return (
-    <div className={styles.container}>
-      {error ? (
+  if (error)
+    return (
+      <div className={styles.errorContainer}>
         <p className={styles.notFound}>{error}</p>
-      ) : (
-        <>
-          {props.entry.collection === "cleveland" ? (
-            <ClevelandEntry artefact={artefact} />
-          ) : null}
-          {props.entry.collection === "metropolitan" ? (
-            <MetropolitanEntry artefact={artefact} />
-          ) : null}
-        </>
-      )}
-    </div>
+      </div>
+    );
+  return (
+    <>
+      {props.entry.collection === "cleveland" ? (
+        <ClevelandMuseumOfArtCard artefact={artefact} />
+      ) : null}
+      {props.entry.collection === "metropolitan" ? (
+        <MetMuseumOfArtCard artefact={artefact} />
+      ) : null}
+    </>
   );
 }
