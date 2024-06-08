@@ -4,6 +4,7 @@ import { clevelandMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import ImageLoader from "../ImageLoader/ImageLoader";
+import ImagePopup from "./ImagePopup";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -71,12 +72,10 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
                             className={styles.alternateImageContainer}
                             key={id}
                             tabIndex={0}
-                            onClick={() =>
-                              setFocusedImage(artefact.images.web.url)
-                            }
+                            onClick={() => setFocusedImage(image.web.url)}
                             onKeyDown={(e) => {
                               if (e.key === "Enter")
-                                setFocusedImage(artefact.images.web.url);
+                                setFocusedImage(image.web.url);
                             }}>
                             <ImageLoader imageLink={image.web.url} />
                           </div>
@@ -151,9 +150,10 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
       )}
 
       {focusedImage ? (
-        <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
-          <ImageLoader imageLink={focusedImage} />
-        </div>
+        <ImagePopup
+          imageLink={focusedImage}
+          setFocusedImage={setFocusedImage}
+        />
       ) : null}
     </div>
   );
