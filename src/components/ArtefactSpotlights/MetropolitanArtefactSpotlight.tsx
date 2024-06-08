@@ -26,7 +26,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
         .catch(({ response: { status } }) => {
           status === 404
             ? setError(
-                "artefact not found! This entry may have been removed from the collection."
+                "Artefact not found! This entry may have been removed from the collection, or does not exist."
               )
             : setError("Something went wrong! Please try again later.");
           setIsLoading(false);
@@ -37,7 +37,12 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
     }
   }, []);
 
-  if (error) return <p>{error}</p>;
+  if (error)
+    return (
+      <div className={styles.errorContainer}>
+        <p className={styles.notFound}>{error}</p>
+      </div>
+    );
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -45,13 +50,17 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
       ) : (
         <>
           <div className={styles.imagesContainer}>
-            {artefact.primaryImageSmall ? (
+            {artefact.primaryImage ? (
               <>
-                <div className={styles.mainImageContainer}>
-                  <ImageLoader
-                    imageLink={artefact.primaryImage}
-                    setFocusedImage={setFocusedImage}
-                  />
+                <div
+                  className={styles.mainImageContainer}
+                  tabIndex={0}
+                  onClick={() => setFocusedImage(artefact.primaryImage)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter")
+                      setFocusedImage(artefact.primaryImage);
+                  }}>
+                  <ImageLoader imageLink={artefact.primaryImage} />
                 </div>
 
                 <div className={styles.alternateImagesContainer}>
@@ -60,11 +69,13 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
                         return (
                           <div
                             className={styles.alternateImageContainer}
-                            key={id}>
-                            <ImageLoader
-                              imageLink={image}
-                              setFocusedImage={setFocusedImage}
-                            />
+                            key={id}
+                            tabIndex={0}
+                            onClick={() => setFocusedImage(image)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") setFocusedImage(image);
+                            }}>
+                            <ImageLoader imageLink={image} />
                           </div>
                         );
                       })
@@ -127,12 +138,14 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
               ) : null}
 
               {artefact.objectURL ? (
-                <Link
-                  className={styles.externalLink}
-                  to={artefact.objectURL}
-                  target="_blank">
-                  {`View at metmuseum.org`}
-                </Link>
+                <p className={styles.externalCollection}>
+                  <Link
+                    className={styles.externalCollectionLink}
+                    to={artefact.objectURL}
+                    target="_blank">
+                    {`View at metmuseum.org`}
+                  </Link>
+                </p>
               ) : null}
             </div>
           </div>

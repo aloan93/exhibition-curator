@@ -26,7 +26,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
         .catch(({ response: { status } }) => {
           status === 404
             ? setError(
-                "artefact not found! This entry may have been removed from the collection."
+                "Artefact not found! This entry may have been removed from the collection, or does not exist."
               )
             : setError("Something went wrong! Please try again later.");
           setIsLoading(false);
@@ -37,7 +37,12 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
     }
   }, []);
 
-  if (error) return <p>{error}</p>;
+  if (error)
+    return (
+      <div className={styles.errorContainer}>
+        <p className={styles.notFound}>{error}</p>
+      </div>
+    );
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -47,11 +52,15 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.images.web.url ? (
               <>
-                <div className={styles.mainImageContainer}>
-                  <ImageLoader
-                    imageLink={artefact.images.web.url}
-                    setFocusedImage={setFocusedImage}
-                  />
+                <div
+                  className={styles.mainImageContainer}
+                  tabIndex={0}
+                  onClick={() => setFocusedImage(artefact.images.web.url)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter")
+                      setFocusedImage(artefact.images.web.url);
+                  }}>
+                  <ImageLoader imageLink={artefact.images.web.url} />
                 </div>
 
                 <div className={styles.alternateImagesContainer}>
@@ -60,11 +69,16 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
                         return (
                           <div
                             className={styles.alternateImageContainer}
-                            key={id}>
-                            <ImageLoader
-                              imageLink={image.web.url}
-                              setFocusedImage={setFocusedImage}
-                            />
+                            key={id}
+                            tabIndex={0}
+                            onClick={() =>
+                              setFocusedImage(artefact.images.web.url)
+                            }
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter")
+                                setFocusedImage(artefact.images.web.url);
+                            }}>
+                            <ImageLoader imageLink={image.web.url} />
                           </div>
                         );
                       })
@@ -122,12 +136,14 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
               ) : null}
 
               {artefact.url ? (
-                <Link
-                  className={styles.externalLink}
-                  to={artefact.url}
-                  target="_blank">
-                  {`View at clevelandart.org`}
-                </Link>
+                <p className={styles.externalCollection}>
+                  <Link
+                    className={styles.externalCollectionLink}
+                    to={artefact.url}
+                    target="_blank">
+                    {`View at clevelandart.org`}
+                  </Link>
+                </p>
               ) : null}
             </div>
           </div>
