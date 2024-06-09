@@ -5,6 +5,7 @@ import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ImagePopup from "./ImagePopup";
+import MainImage from "./MainImage";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -53,7 +54,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.images.web.url ? (
               <>
-                <div
+                {/* <div
                   className={styles.mainImageContainer}
                   tabIndex={0}
                   onClick={() => setFocusedImage(artefact.images.web.url)}
@@ -62,7 +63,8 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
                       setFocusedImage(artefact.images.web.url);
                   }}>
                   <ImageLoader imageLink={artefact.images.web.url} />
-                </div>
+                </div> */}
+                <MainImage imageLink={artefact.images.web.url} />
 
                 <div className={styles.alternateImagesContainer}>
                   {artefact.alternate_images
@@ -149,12 +151,12 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
         </>
       )}
 
-      {focusedImage ? (
+      {/* {focusedImage ? (
         <ImagePopup
           imageLink={focusedImage}
           setFocusedImage={setFocusedImage}
         />
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

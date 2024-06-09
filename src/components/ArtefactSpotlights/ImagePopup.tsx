@@ -4,7 +4,8 @@ import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function ImagePopup(props: {
   imageLink: string;
-  setFocusedImage: React.Dispatch<React.SetStateAction<string>>;
+  setInspectedImage: React.Dispatch<React.SetStateAction<string>>;
+  previousRef: React.RefObject<HTMLDivElement>;
 }): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -17,8 +18,11 @@ export default function ImagePopup(props: {
       className={styles.imagePopup}
       tabIndex={0}
       ref={containerRef}
-      onClick={() => props.setFocusedImage("")}
-      onKeyDown={() => props.setFocusedImage("")}>
+      onClick={() => props.setInspectedImage("")}
+      onKeyDown={() => {
+        props.setInspectedImage("");
+        props.previousRef.current?.focus();
+      }}>
       <ImageLoader imageLink={props.imageLink} />
     </div>
   );
