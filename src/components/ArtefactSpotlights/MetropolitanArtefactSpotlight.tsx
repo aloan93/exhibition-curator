@@ -45,7 +45,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
   return (
     <div className={styles.container}>
       {isLoading ? (
-        <div className={styles.loader}></div>
+        <div className={styles.loader} aria-label="Loading"></div>
       ) : (
         <>
           <div className={styles.imagesContainer}>

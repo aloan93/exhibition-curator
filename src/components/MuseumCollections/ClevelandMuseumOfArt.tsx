@@ -60,7 +60,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
     <div className={styles.container}>
       <h2 className={styles.title}>Cleveland Museum of Art Collection</h2>
       {isLoading ? (
-        <div className={styles.loader}></div>
+        <div className={styles.loader} aria-label="Loading"></div>
       ) : (
         <>
           <SearchBar setSearchParams={setSearchParams} />

@@ -52,7 +52,8 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
     }
   }, []);
 
-  if (isLoading) return <div className={styles.loader}></div>;
+  if (isLoading)
+    return <div className={styles.loader} aria-label="Loading"></div>;
   if (error)
     return (
       <div className={styles.errorContainer}>

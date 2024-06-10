@@ -53,7 +53,7 @@ export default function MetMuseumOfArt(): ReactNode {
     <div className={styles.container}>
       <h2 className={styles.title}>Metropolitan Museum of Art Collection</h2>
       {isLoading ? (
-        <div className={styles.loader}></div>
+        <div className={styles.loader} aria-label="Loading"></div>
       ) : (
         <>
           <SearchBar setSearchParams={setSearchParams} />

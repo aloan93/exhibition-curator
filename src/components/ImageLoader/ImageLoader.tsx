@@ -7,9 +7,8 @@ export default function ImageLoader(props: { imageLink: string }): ReactNode {
   return (
     <>
       <div
-        className={`${styles.loader} ${
-          !isLoading && styles.displayNone
-        }`}></div>
+        className={`${styles.loader} ${!isLoading && styles.displayNone}`}
+        aria-label="Loading"></div>
       <figure
         className={`${styles.imageContainer} ${
           isLoading && styles.displayNone
