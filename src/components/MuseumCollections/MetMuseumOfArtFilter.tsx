@@ -27,7 +27,8 @@ export default function MetMuseumOfArtFilter(props: { id: number }): ReactNode {
       });
   }, []);
 
-  if (isLoading) return <div className={styles.loader}></div>;
+  if (isLoading)
+    return <div className={styles.loader} aria-label="Loading"></div>;
   if (error)
     return (
       <div className={styles.errorContainer}>

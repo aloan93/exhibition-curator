@@ -8,14 +8,14 @@ export default function SpotlightImage(props: {
   style: string;
 }): ReactNode {
   const [inspectedImage, setInspectedImage] = useState("");
-  const mainImageRef = useRef<HTMLDivElement>(null);
+  const spotlightImageRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <div
         className={styles[props.style]}
         tabIndex={0}
-        ref={mainImageRef}
+        ref={spotlightImageRef}
         onClick={() => setInspectedImage(props.imageLink)}
         onKeyDown={(e) => {
           if (e.key === "Enter") setInspectedImage(props.imageLink);
@@ -27,7 +27,7 @@ export default function SpotlightImage(props: {
         <ImagePopup
           imageLink={inspectedImage}
           setInspectedImage={setInspectedImage}
-          previousRef={mainImageRef}
+          previousRef={spotlightImageRef}
         />
       ) : null}
     </>
