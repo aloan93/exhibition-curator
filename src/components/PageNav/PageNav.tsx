@@ -35,21 +35,27 @@ export default function PageNav(props: {
         {currentlyShown}
       </p>
       {props.resultsTotal < 21 ? null : (
-        <div className={styles.navigation}>
+        <nav className={styles.navigation} aria-label="Pagination Navigation">
           <button
             className={styles.navBtn}
             onClick={pageDown}
+            aria-label={`Goto Page ${pageNumber - 1}`}
             hidden={pageNumber === 1}>
             {"<<"}
           </button>
-          <p className={styles.currentPage}>{pageNumber}</p>
+          <p
+            className={styles.currentPage}
+            aria-label={`Current Page, Page ${pageNumber}`}>
+            {pageNumber}
+          </p>
           <button
             className={styles.navBtn}
             onClick={pageUp}
+            aria-label={`Goto Page ${pageNumber + 1}`}
             hidden={pageNumber * 20 >= props.resultsTotal}>
             {">>"}
           </button>
-        </div>
+        </nav>
       )}
     </div>
   );

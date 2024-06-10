@@ -3,7 +3,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { clevelandMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
-import ImageLoader from "../ImageLoader/ImageLoader";
+import SpotlightImage from "./SpotlightImage";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -11,7 +11,6 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
   const [artefact, setArtefact] = useState(location.state);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [focusedImage, setFocusedImage] = useState("");
 
   useEffect(() => {
     if (!artefact) {
@@ -26,7 +25,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
         .catch(({ response: { status } }) => {
           status === 404
             ? setError(
-                "artefact not found! This entry may have been removed from the collection."
+                "Artefact not found! This entry may have been removed from the collection, or does not exist."
               )
             : setError("Something went wrong! Please try again later.");
           setIsLoading(false);
@@ -37,7 +36,12 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
     }
   }, []);
 
-  if (error) return <p>{error}</p>;
+  if (error)
+    return (
+      <div className={styles.errorContainer}>
+        <p className={styles.notFound}>{error}</p>
+      </div>
+    );
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -47,29 +51,24 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.images.web.url ? (
               <>
-                <div className={styles.mainImageContainer}>
-                  <ImageLoader
-                    imageLink={artefact.images.web.url}
-                    setFocusedImage={setFocusedImage}
-                  />
-                </div>
+                <SpotlightImage
+                  imageLink={artefact.images.web.url}
+                  style="mainImageContainer"
+                />
 
-                <div className={styles.alternateImagesContainer}>
-                  {artefact.alternate_images
-                    ? artefact.alternate_images.map((image: any, id: any) => {
-                        return (
-                          <div
-                            className={styles.alternateImageContainer}
-                            key={id}>
-                            <ImageLoader
-                              imageLink={image.web.url}
-                              setFocusedImage={setFocusedImage}
-                            />
-                          </div>
-                        );
-                      })
-                    : null}
-                </div>
+                {artefact.alternate_images ? (
+                  <div className={styles.alternateImagesContainer}>
+                    {artefact.alternate_images.map((image: any, id: any) => {
+                      return (
+                        <SpotlightImage
+                          key={id}
+                          imageLink={image.web.url}
+                          style="alternateImageContainer"
+                        />
+                      );
+                    })}
+                  </div>
+                ) : null}
               </>
             ) : (
               <img
@@ -122,23 +121,19 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
               ) : null}
 
               {artefact.url ? (
-                <Link
-                  className={styles.externalLink}
-                  to={artefact.url}
-                  target="_blank">
-                  {`View at clevelandart.org`}
-                </Link>
+                <p className={styles.externalCollection}>
+                  <Link
+                    className={styles.externalCollectionLink}
+                    to={artefact.url}
+                    target="_blank">
+                    {`View at clevelandart.org`}
+                  </Link>
+                </p>
               ) : null}
             </div>
           </div>
         </>
       )}
-
-      {focusedImage ? (
-        <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
-          <ImageLoader imageLink={focusedImage} />
-        </div>
-      ) : null}
     </div>
   );
 }

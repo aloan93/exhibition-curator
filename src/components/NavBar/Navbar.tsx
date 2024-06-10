@@ -8,9 +8,11 @@ export default function Navbar(): ReactNode {
 
   return (
     <nav className={styles.navbar}>
-      <Link className={styles.title} to="/home">
-        <h1>Exhibition Curator</h1>
-      </Link>
+      <h1 className={styles.title}>
+        <Link className={styles.titleLink} to="/home">
+          Exhibition Curator
+        </Link>
+      </h1>
       <div className={styles.menu}>
         <img
           className={styles.menuBtn}

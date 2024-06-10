@@ -1,10 +1,7 @@
 import { ReactNode, useState } from "react";
 import styles from "./ImageLoader.module.css";
 
-export default function ImageLoader(props: {
-  imageLink: string;
-  setFocusedImage?: React.Dispatch<React.SetStateAction<string>>;
-}): ReactNode {
+export default function ImageLoader(props: { imageLink: string }): ReactNode {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -16,10 +13,7 @@ export default function ImageLoader(props: {
       <figure
         className={`${styles.imageContainer} ${
           isLoading && styles.displayNone
-        }`}
-        onClick={() =>
-          props.setFocusedImage ? props.setFocusedImage(props.imageLink) : null
-        }>
+        }`}>
         <img
           className={styles.image}
           src={props.imageLink}

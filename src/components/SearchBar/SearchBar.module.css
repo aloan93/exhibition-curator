@@ -31,7 +31,8 @@
   transition: 0.4s;
 }
 
-.searchBtn:hover {
+.searchBtn:hover,
+.searchBtn:focus {
   background: var(--colour-text);
   border-left: 2px solid black;
 }

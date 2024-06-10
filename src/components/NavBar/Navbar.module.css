@@ -12,11 +12,13 @@
 
 .title {
   font-size: 25px;
-  font-weight: 600;
+  width: 80%;
+  margin-right: 35px;
+}
+
+.titleLink {
   text-decoration: none;
   color: var(--colour-text);
-  width: 80%;
-  margin-right: 47px;
 }
 
 .menuBtn {

@@ -41,7 +41,8 @@
   cursor: pointer;
 }
 
-.navBtn:hover {
+.navBtn:hover,
+.navBtn:focus {
   background: var(--colour-text);
   color: black;
 }

@@ -10,7 +10,7 @@
     var(--colour-secondary) 0%,
     var(--colour-dark) 100%
   );
-  border-radius: 40px;
+  border-radius: 20px;
   padding: 20px 25px;
   width: 1000px;
   max-width: 80vw;
@@ -27,14 +27,15 @@
 
 .title {
   font-size: 25px;
-  font-weight: 600;
-  width: fit-content;
-  color: var(--colour-text);
-  text-decoration: none;
   margin-bottom: 8px;
 }
 
-.title:hover {
+.titleLink {
+  color: var(--colour-text);
+  text-decoration: none;
+}
+
+.titleLink:hover {
   text-decoration: underline;
 }
 
@@ -67,7 +68,8 @@
   cursor: pointer;
 }
 
-.addArtefactBtn:hover {
+.addArtefactBtn:hover,
+.addArtefactBtn:focus {
   background: var(--colour-text);
   color: black;
 }
@@ -86,46 +88,36 @@
   cursor: pointer;
 }
 
-.removeArtefactBtn:hover {
+.removeArtefactBtn:hover,
+.removeArtefactBtn:focus {
   background: #faa0a0;
   color: black;
 }
 
-.notFound {
-  font-size: 20px;
-  font-weight: 500;
-  color: #faa0a0;
+.artefactImageContainer {
+  max-height: 300px;
+  max-width: 40%;
+  align-self: flex-start;
 }
 
 .artefactImageLink {
-  border-radius: 40px;
-  max-height: 300px;
-  max-width: 40%;
-}
-
-.artefactImageContainer {
+  display: block;
   max-height: 300px;
   max-width: 100%;
-  border-radius: 40px;
-  border: 2px solid black;
-  align-self: flex-start;
+  border-radius: 20px;
+  border: 2px solid transparent;
   overflow: hidden;
 }
 
-.artefactImageContainer:hover {
+.artefactImageLink:hover,
+.artefactImageLink:focus {
   border: 2px solid var(--colour-primary);
 }
 
 .placeholderImage {
-  max-height: 300px;
+  display: block;
+  max-height: 200px;
   max-width: 100%;
-  border-radius: 40px;
-  border: 2px solid black;
-  align-self: flex-start;
-}
-
-.placeholderImage:hover {
-  border: 2px solid var(--colour-primary);
 }
 
 .loader {
@@ -170,9 +162,9 @@
     height: 40px;
   }
 
-  .artefactImageLink {
+  .artefactImageContainer {
     align-self: center;
-    max-width: 100%;
     margin-bottom: 10px;
+    max-width: 100%;
   }
 }

@@ -3,8 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import styles from "./MuseumCollections.module.css";
 import { metMuseumAPI } from "../../api/api";
 import SearchBar from "../SearchBar/SearchBar";
-import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
 import PageNav from "../PageNav/PageNav";
+import MetMuseumOfArtFilter from "./MetMuseumOfArtFilter";
 
 export default function MetMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<number[]>([]);
@@ -71,7 +71,7 @@ export default function MetMuseumOfArt(): ReactNode {
             {paginatedSearchResults.map((id) => {
               return (
                 <li key={id}>
-                  <MetMuseumOfArtCard id={id} />
+                  <MetMuseumOfArtFilter id={id} />
                 </li>
               );
             })}
