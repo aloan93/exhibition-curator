@@ -3,9 +3,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { clevelandMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
-import ImageLoader from "../ImageLoader/ImageLoader";
-import ImagePopup from "./ImagePopup";
-import MainImage from "./MainImage";
+import SpotlightImage from "./SpotlightImage";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -13,7 +11,6 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
   const [artefact, setArtefact] = useState(location.state);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [focusedImage, setFocusedImage] = useState("");
 
   useEffect(() => {
     if (!artefact) {
@@ -54,37 +51,24 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.images.web.url ? (
               <>
-                {/* <div
-                  className={styles.mainImageContainer}
-                  tabIndex={0}
-                  onClick={() => setFocusedImage(artefact.images.web.url)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter")
-                      setFocusedImage(artefact.images.web.url);
-                  }}>
-                  <ImageLoader imageLink={artefact.images.web.url} />
-                </div> */}
-                <MainImage imageLink={artefact.images.web.url} />
+                <SpotlightImage
+                  imageLink={artefact.images.web.url}
+                  style="mainImageContainer"
+                />
 
-                <div className={styles.alternateImagesContainer}>
-                  {artefact.alternate_images
-                    ? artefact.alternate_images.map((image: any, id: any) => {
-                        return (
-                          <div
-                            className={styles.alternateImageContainer}
-                            key={id}
-                            tabIndex={0}
-                            onClick={() => setFocusedImage(image.web.url)}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter")
-                                setFocusedImage(image.web.url);
-                            }}>
-                            <ImageLoader imageLink={image.web.url} />
-                          </div>
-                        );
-                      })
-                    : null}
-                </div>
+                {artefact.alternate_images ? (
+                  <div className={styles.alternateImagesContainer}>
+                    {artefact.alternate_images.map((image: any, id: any) => {
+                      return (
+                        <SpotlightImage
+                          key={id}
+                          imageLink={image.web.url}
+                          style="alternateImageContainer"
+                        />
+                      );
+                    })}
+                  </div>
+                ) : null}
               </>
             ) : (
               <img
@@ -150,13 +134,6 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
           </div>
         </>
       )}
-
-      {/* {focusedImage ? (
-        <ImagePopup
-          imageLink={focusedImage}
-          setFocusedImage={setFocusedImage}
-        />
-      ) : null} */}
     </div>
   );
 }

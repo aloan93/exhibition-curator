@@ -3,14 +3,17 @@ import styles from "./ArtefactSpotlights.module.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ImagePopup from "./ImagePopup";
 
-export default function MainImage(props: { imageLink: string }): ReactNode {
+export default function SpotlightImage(props: {
+  imageLink: string;
+  style: string;
+}): ReactNode {
   const [inspectedImage, setInspectedImage] = useState("");
   const mainImageRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <div
-        className={styles.mainImageContainer}
+        className={styles[props.style]}
         tabIndex={0}
         ref={mainImageRef}
         onClick={() => setInspectedImage(props.imageLink)}
@@ -19,6 +22,7 @@ export default function MainImage(props: { imageLink: string }): ReactNode {
         }}>
         <ImageLoader imageLink={props.imageLink} />
       </div>
+
       {inspectedImage ? (
         <ImagePopup
           imageLink={inspectedImage}
