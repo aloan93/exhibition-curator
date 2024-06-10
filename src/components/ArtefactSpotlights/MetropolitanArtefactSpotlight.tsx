@@ -3,7 +3,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { metMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
-import ImageLoader from "../ImageLoader/ImageLoader";
+import SpotlightImage from "./SpotlightImage";
 
 export default function MetropolitanArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -11,7 +11,6 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
   const [artefact, setArtefact] = useState(location.state);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [focusedImage, setFocusedImage] = useState("");
 
   useEffect(() => {
     if (!artefact) {
@@ -52,35 +51,24 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
           <div className={styles.imagesContainer}>
             {artefact.primaryImage ? (
               <>
-                <div
-                  className={styles.mainImageContainer}
-                  tabIndex={0}
-                  onClick={() => setFocusedImage(artefact.primaryImage)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter")
-                      setFocusedImage(artefact.primaryImage);
-                  }}>
-                  <ImageLoader imageLink={artefact.primaryImage} />
-                </div>
+                <SpotlightImage
+                  imageLink={artefact.primaryImage}
+                  style="mainImageContainer"
+                />
 
-                <div className={styles.alternateImagesContainer}>
-                  {artefact.additionalImages
-                    ? artefact.additionalImages.map((image: any, id: any) => {
-                        return (
-                          <div
-                            className={styles.alternateImageContainer}
-                            key={id}
-                            tabIndex={0}
-                            onClick={() => setFocusedImage(image)}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") setFocusedImage(image);
-                            }}>
-                            <ImageLoader imageLink={image} />
-                          </div>
-                        );
-                      })
-                    : null}
-                </div>
+                {artefact.additionalImages ? (
+                  <div className={styles.alternateImagesContainer}>
+                    {artefact.additionalImages.map((image: any, id: any) => {
+                      return (
+                        <SpotlightImage
+                          key={id}
+                          imageLink={image}
+                          style="alternateImageContainer"
+                        />
+                      );
+                    })}
+                  </div>
+                ) : null}
               </>
             ) : (
               <>
@@ -151,12 +139,6 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
           </div>
         </>
       )}
-
-      {focusedImage ? (
-        <div className={styles.imagePopup} onClick={() => setFocusedImage("")}>
-          <ImageLoader imageLink={focusedImage} />
-        </div>
-      ) : null}
     </div>
   );
 }
