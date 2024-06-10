@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import { metMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
@@ -11,6 +11,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
   const [artefact, setArtefact] = useState(location.state);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!artefact) {
@@ -40,6 +41,12 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
     return (
       <div className={styles.errorContainer}>
         <p className={styles.notFound}>{error}</p>
+        <button
+          className={styles.backBtn}
+          aria-label="Back to previous page"
+          onClick={() => navigate(-1)}>
+          Back
+        </button>
       </div>
     );
   return (
@@ -135,6 +142,13 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
                   </Link>
                 </p>
               ) : null}
+
+              <button
+                className={styles.backBtn}
+                aria-label="Back to previous page"
+                onClick={() => navigate(-1)}>
+                Back
+              </button>
             </div>
           </div>
         </>
