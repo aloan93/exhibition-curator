@@ -12,3 +12,19 @@
   flex-direction: column;
   align-items: center;
 }
+
+.skipToMain {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: black;
+  color: white;
+  opacity: 0;
+}
+
+.skipToMain:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+}
