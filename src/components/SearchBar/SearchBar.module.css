@@ -1,7 +1,12 @@
 @import "../../vars.css";
 
 .container {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formContainer {
   display: flex;
   align-items: center;
   margin-top: 49px;
@@ -35,4 +40,37 @@
 .searchBtn:focus {
   background: var(--colour-text);
   border-left: 2px solid black;
+}
+
+.queryContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.currentQuery {
+  color: var(--colour-text);
+  font-size: 20px;
+  text-align: center;
+}
+
+.clearBtn {
+  height: 40px;
+  padding: 0 10px;
+  color: #faa0a0;
+  background: transparent;
+  border: 2px solid #faa0a0;
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.clearBtn:hover,
+.clearBtn:focus {
+  background: #faa0a0;
+  color: black;
 }
