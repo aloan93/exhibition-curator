@@ -1,6 +1,8 @@
 # Exhibition Curator Web Application
 
-A web application where users can browse antiquities & fine artwork from public collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the 'Metropolitan Museum of Art' and the 'Cleveland Museum of Art' via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
+Hosted here --> https://aloan93-exhibitioncurator.netlify.app/
+
+A web application where users can browse antiquities & fine artwork from public collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the ['Metropolitan Museum of Art'](https://metmuseum.github.io/) and the ['Cleveland Museum of Art'](https://openaccess-api.clevelandart.org/) via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
 
 **PS. Users' own virtual exhibitions persist for the duration of their session only! (Navigating away from the site or refreshing will cause the exhibition to be flushed)**
 
