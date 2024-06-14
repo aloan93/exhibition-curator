@@ -12,8 +12,11 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 function App() {
   return (
     <div className={styles.app}>
+      <a href="#main" className={styles.skipToMain}>
+        Skip to main content
+      </a>
       <Navbar />
-      <main>
+      <main id="main">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/home" element={<Homepage />} />
