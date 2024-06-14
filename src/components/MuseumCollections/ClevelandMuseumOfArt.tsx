@@ -63,7 +63,7 @@ export default function ClevelandMuseumOfArt(): ReactNode {
         <div className={styles.loader} aria-label="Loading"></div>
       ) : (
         <>
-          <SearchBar setSearchParams={setSearchParams} />
+          <SearchBar setSearchParams={setSearchParams} currentQuery={query} />
           {error ? <p>{error}</p> : null}
           {prompt ? <p className={styles.prompt}>{prompt}</p> : null}
           {searchResults.length > 0 ? (
