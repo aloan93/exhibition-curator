@@ -7,6 +7,7 @@ import ClevelandMuseumOfArt from "./components/MuseumCollections/ClevelandMuseum
 import MyExhibition from "./components/MyExhibition/MyExhibition";
 import ClevelandArtefactSpotlight from "./components/ArtefactSpotlights/ClevelandArtefactSpotlight";
 import MetropolitanArtefactSpotlight from "./components/ArtefactSpotlights/MetropolitanArtefactSpotlight";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             path="/metropolitan-museum-of-art/:id"
             element={<MetropolitanArtefactSpotlight />}
           />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </main>
     </div>

@@ -1,0 +1,36 @@
+@import "../../vars.css";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 98px 10% 49px 10%;
+  gap: 30px;
+  max-width: 2200px;
+}
+
+.title {
+  color: #faa0a0;
+  font-size: 30px;
+  text-align: center;
+}
+
+.backBtn {
+  height: 40px;
+  width: 90%;
+  align-self: center;
+  padding: 0 10px;
+  color: var(--colour-text);
+  background: transparent;
+  border: 2px solid var(--colour-text);
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.backBtn:hover,
+.backBtn:focus {
+  background: var(--colour-text);
+  color: black;
+}
