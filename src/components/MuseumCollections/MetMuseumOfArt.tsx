@@ -9,9 +9,7 @@ import MetMuseumOfArtFilter from "./MetMuseumOfArtFilter";
 export default function MetMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<number[]>([]);
   const [resultsTotal, setResultsTotal] = useState(0);
-  const [prompt, setPrompt] = useState(
-    "~ Enter search criteria above to query the art collection ~"
-  );
+  const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,30 +21,25 @@ export default function MetMuseumOfArt(): ReactNode {
   );
 
   useEffect(() => {
-    if (query) {
-      setIsLoading(true);
-      setError("");
-      metMuseumAPI
-        .get(`/search?isOnView=true&hasImages=true&q=${query}`)
-        .then(({ data: { total, objectIDs } }) => {
-          !objectIDs ? setSearchResults([]) : setSearchResults(objectIDs);
-          setResultsTotal(total);
-          total === 0
-            ? setPrompt("No matching results found :(")
-            : setPrompt("");
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setError("Something went wrong. Please try again later.");
-          setPrompt("");
-          setIsLoading(false);
-          console.log(err);
-        });
-    } else {
-      setSearchResults([]);
-      setResultsTotal(0);
-      setPrompt("~ Enter search criteria above to query the art collection ~");
-    }
+    setIsLoading(true);
+    setError("");
+    setPrompt("");
+    metMuseumAPI
+      .get(
+        `/search?isOnView=true&hasImages=true&q=${query ? `${query}` : "met"}`
+      )
+      .then(({ data: { total, objectIDs } }) => {
+        !objectIDs ? setSearchResults([]) : setSearchResults(objectIDs);
+        setResultsTotal(total);
+        total === 0 ? setPrompt("No matching results found :(") : null;
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError("Something went wrong. Please try again later.");
+        setPrompt("");
+        setIsLoading(false);
+        console.log(err);
+      });
   }, [query]);
 
   return (
