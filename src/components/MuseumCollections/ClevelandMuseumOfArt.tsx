@@ -9,9 +9,7 @@ import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOf
 export default function ClevelandMuseumOfArt(): ReactNode {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [resultsTotal, setResultsTotal] = useState(0);
-  const [prompt, setPrompt] = useState(
-    "~ Enter search criteria above to query the art collection ~"
-  );
+  const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,41 +17,34 @@ export default function ClevelandMuseumOfArt(): ReactNode {
   const page = searchParams.get("page") || "1";
 
   useEffect(() => {
-    if (query) {
-      setIsLoading(true);
-      setError("");
-      clevelandMuseumAPI
-        .get(
-          `/artworks/?q=${query}&has_image=1&limit=20&skip=${
-            (Number(page) - 1) * 20
-          }`
-        )
-        .then(
-          ({
-            data: {
-              data,
-              info: { total },
-            },
-          }) => {
-            !data ? setSearchResults([]) : setSearchResults(data);
-            setResultsTotal(total);
-            total === 0
-              ? setPrompt("No matching results found :(")
-              : setPrompt("");
-            setIsLoading(false);
-          }
-        )
-        .catch((err) => {
-          setError("Something went wrong. Please try again later.");
-          setPrompt("");
+    setIsLoading(true);
+    setError("");
+    setPrompt("");
+    clevelandMuseumAPI
+      .get(
+        `/artworks/?q=${query}&has_image=1&limit=20&skip=${
+          (Number(page) - 1) * 20
+        }`
+      )
+      .then(
+        ({
+          data: {
+            data,
+            info: { total },
+          },
+        }) => {
+          !data ? setSearchResults([]) : setSearchResults(data);
+          setResultsTotal(total);
+          total === 0 ? setPrompt("No matching results found :(") : null;
           setIsLoading(false);
-          console.log(err);
-        });
-    } else {
-      setSearchResults([]);
-      setResultsTotal(0);
-      setPrompt("~ Enter search criteria above to query the art collection ~");
-    }
+        }
+      )
+      .catch((err) => {
+        setError("Something went wrong. Please try again later.");
+        setPrompt("");
+        setIsLoading(false);
+        console.log(err);
+      });
   }, [searchParams]);
 
   return (
