@@ -49,6 +49,12 @@
   font-size: 25px;
 }
 
+.description {
+  color: var(--colour-text);
+  font-size: 25px;
+  font-style: italic;
+}
+
 .externalCollection {
   font-size: 25px;
 }
@@ -133,7 +139,7 @@
 .placeholderImage {
   width: 80%;
   border: 2px solid transparent;
-  border-radius: 40px;
+  border-radius: 20px;
 }
 
 .noImage {
@@ -157,6 +163,7 @@
   padding: 20px 25px;
   width: 1000px;
   max-width: 80vw;
+  gap: 20px;
 }
 
 .notFound {
@@ -221,18 +228,13 @@
     font-size: 35px;
   }
 
-  .details {
+  .details,
+  .description,
+  .externalCollection {
     font-size: 20px;
   }
 
-  .externalLink {
-    font-size: 20px;
-  }
-
-  .imagesContainer {
-    width: 100%;
-  }
-
+  .imagesContainer,
   .infoContainer {
     width: 100%;
   }

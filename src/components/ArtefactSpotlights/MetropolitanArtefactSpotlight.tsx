@@ -132,6 +132,14 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
                 </p>
               ) : null}
 
+              <p className={styles.details}>- - - - - - - - - -</p>
+
+              <p className={styles.details}>
+                {artefact.GalleryNumber
+                  ? `Displayed at: Gallery No. ${artefact.GalleryNumber}`
+                  : "Not currently displayed"}
+              </p>
+
               {artefact.objectURL ? (
                 <p className={styles.externalCollection}>
                   <Link
