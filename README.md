@@ -20,7 +20,7 @@ Clone this repository to your machine and navigate to the root directory with th
 
 ```
 git clone https://github.com/aloan93/fe-exhibition-curator.git
-cd fe-exhibition-curator
+cd exhibition-curator
 ```
 
 ### Step 2: Installing Dependencies
