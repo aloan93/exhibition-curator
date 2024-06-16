@@ -120,12 +120,20 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
               ) : null}
 
               {artefact.description ? (
-                <p className={styles.details}>{artefact.description}</p>
+                <p className={styles.description}>{artefact.description}</p>
               ) : null}
 
               {artefact.did_you_know ? (
-                <p className={styles.details}>{artefact.did_you_know}</p>
+                <p className={styles.description}>{artefact.did_you_know}</p>
               ) : null}
+
+              <p className={styles.details}>- - - - - - - - - -</p>
+
+              <p className={styles.details}>
+                {artefact.current_location
+                  ? `Displayed at: ${artefact.current_location}`
+                  : "Not currently displayed"}
+              </p>
 
               {artefact.url ? (
                 <p className={styles.externalCollection}>

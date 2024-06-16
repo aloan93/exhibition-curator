@@ -49,6 +49,12 @@
   font-size: 25px;
 }
 
+.description {
+  color: var(--colour-text);
+  font-size: 25px;
+  font-style: italic;
+}
+
 .externalCollection {
   font-size: 25px;
 }
