@@ -50,33 +50,41 @@ export default function MetMuseumOfArt(): ReactNode {
       ) : (
         <>
           <SearchBar setSearchParams={setSearchParams} currentQuery={query} />
-          {error ? <p>{error}</p> : null}
-          {prompt ? <p className={styles.prompt}>{prompt}</p> : null}
-          {searchResults.length > 0 ? (
-            <PageNav
-              page={page}
-              setSearchParams={setSearchParams}
-              resultsTotal={resultsTotal}
-              hideText={false}
-            />
-          ) : null}
-          <ul className={styles.listContainer}>
-            {paginatedSearchResults.map((id) => {
-              return (
-                <li key={id}>
-                  <MetMuseumOfArtFilter id={id} />
-                </li>
-              );
-            })}
-          </ul>
-          {searchResults.length > 0 ? (
-            <PageNav
-              page={page}
-              setSearchParams={setSearchParams}
-              resultsTotal={resultsTotal}
-              hideText={true}
-            />
-          ) : null}
+          {error ? (
+            <div
+              className={`${styles.errorContainer} ${styles.errorContainerMain}`}>
+              <p className={styles.notFound}>{error}</p>
+            </div>
+          ) : (
+            <>
+              {prompt ? <p className={styles.prompt}>{prompt}</p> : null}
+              {searchResults.length > 0 ? (
+                <PageNav
+                  page={page}
+                  setSearchParams={setSearchParams}
+                  resultsTotal={resultsTotal}
+                  hideText={false}
+                />
+              ) : null}
+              <ul className={styles.listContainer}>
+                {paginatedSearchResults.map((id) => {
+                  return (
+                    <li key={id}>
+                      <MetMuseumOfArtFilter id={id} />
+                    </li>
+                  );
+                })}
+              </ul>
+              {searchResults.length > 0 ? (
+                <PageNav
+                  page={page}
+                  setSearchParams={setSearchParams}
+                  resultsTotal={resultsTotal}
+                  hideText={true}
+                />
+              ) : null}
+            </>
+          )}
         </>
       )}
     </div>
