@@ -3,6 +3,7 @@ import { metMuseumAPI, clevelandMuseumAPI } from "../../api/api";
 import styles from "./MyExhibition.module.css";
 import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
 import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
+import useExhibition from "../../hooks/useExhibition";
 
 type entryType = {
   collection: string;
@@ -13,6 +14,7 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
   const [artefact, setArtefact] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const { exhibition, setExhibition } = useExhibition();
 
   useEffect(() => {
     if (props.entry.collection === "cleveland") {
@@ -52,12 +54,27 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
     }
   }, []);
 
+  function removeFromExhibition(e: any) {
+    e.preventDefault();
+    setExhibition(
+      [...exhibition].filter(
+        (a) =>
+          a.collection !== props.entry.collection || a.id !== props.entry.id
+      )
+    );
+  }
+
   if (isLoading)
     return <div className={styles.loader} aria-label="Loading"></div>;
   if (error)
     return (
       <div className={styles.errorContainer}>
         <p className={styles.notFound}>{error}</p>
+        <button
+          className={styles.removeArtefactBtn}
+          onClick={removeFromExhibition}>
+          Remove from exhibition
+        </button>
       </div>
     );
   return (
