@@ -23,8 +23,8 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
           setArtefact(data);
           setIsLoading(false);
         })
-        .catch(({ response: { status } }) => {
-          status === 404
+        .catch(({ response }) => {
+          response?.status === 404
             ? setError(
                 "Artefact not found! This entry may have been removed from the collection, or does not exist."
               )

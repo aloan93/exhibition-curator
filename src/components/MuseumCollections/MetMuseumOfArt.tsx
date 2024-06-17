@@ -34,11 +34,10 @@ export default function MetMuseumOfArt(): ReactNode {
         total === 0 ? setPrompt("No matching results found :(") : null;
         setIsLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Something went wrong. Please try again later.");
         setPrompt("");
         setIsLoading(false);
-        console.log(err);
       });
   }, [query]);
 
