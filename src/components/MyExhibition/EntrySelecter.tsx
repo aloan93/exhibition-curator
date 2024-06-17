@@ -21,7 +21,7 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
       setIsLoading(true);
       setError("");
       clevelandMuseumAPI
-        .get(`/artworks/${props.entry.id}`)
+        .get(`/artworks/${props.entry.id}?indent=1`)
         .then(({ data: { data } }) => {
           setArtefact(data);
           setIsLoading(false);

@@ -18,7 +18,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
       setIsLoading(true);
       setError("");
       clevelandMuseumAPI
-        .get(`/artworks/${id}`)
+        .get(`/artworks/${id}?indent=1`)
         .then(({ data: { data } }) => {
           setArtefact(data);
           setIsLoading(false);
