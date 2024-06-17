@@ -21,13 +21,17 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
       setIsLoading(true);
       setError("");
       clevelandMuseumAPI
-        .get(`/artworks/${props.entry.id}`)
+        .get(`/artworks/${props.entry.id}`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
         .then(({ data: { data } }) => {
           setArtefact(data);
           setIsLoading(false);
         })
-        .catch(({ response: { status } }) => {
-          status === 404
+        .catch(({ response }) => {
+          response?.status === 404
             ? setError(
                 "Artefact not found! This entry may have been removed from the collection."
               )

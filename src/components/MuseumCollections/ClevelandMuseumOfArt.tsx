@@ -39,11 +39,10 @@ export default function ClevelandMuseumOfArt(): ReactNode {
           setIsLoading(false);
         }
       )
-      .catch((err) => {
+      .catch(() => {
         setError("Something went wrong. Please try again later.");
         setPrompt("");
         setIsLoading(false);
-        console.log(err);
       });
   }, [searchParams]);
 
