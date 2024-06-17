@@ -21,11 +21,7 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
       setIsLoading(true);
       setError("");
       clevelandMuseumAPI
-        .get(`/artworks/${props.entry.id}`, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
+        .get(`/artworks/${props.entry.id}`)
         .then(({ data: { data } }) => {
           setArtefact(data);
           setIsLoading(false);
