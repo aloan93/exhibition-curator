@@ -4,6 +4,7 @@ import { clevelandMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import SpotlightImage from "./SpotlightImage";
+import useExhibition from "../../hooks/useExhibition";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -12,6 +13,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { exhibition, setExhibition } = useExhibition();
 
   useEffect(() => {
     if (!artefact) {
@@ -36,6 +38,23 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
       setIsLoading(false);
     }
   }, []);
+
+  function addToExhibition(e: any) {
+    e.preventDefault();
+    setExhibition([
+      ...exhibition,
+      { collection: "cleveland", id: artefact.id },
+    ]);
+  }
+
+  function removeFromExhibition(e: any) {
+    e.preventDefault();
+    setExhibition(
+      [...exhibition].filter(
+        (a) => a.collection !== "cleveland" || a.id !== artefact.id
+      )
+    );
+  }
 
   if (error)
     return (
@@ -145,6 +164,20 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
                   </Link>
                 </p>
               ) : null}
+
+              <button
+                className={styles.addArtefactBtn}
+                onClick={addToExhibition}
+                hidden={exhibition.some((e) => e.id === artefact.id)}>
+                Add to exhibition
+              </button>
+
+              <button
+                className={styles.removeArtefactBtn}
+                onClick={removeFromExhibition}
+                hidden={!exhibition.some((e) => e.id === artefact.id)}>
+                Remove from exhibition
+              </button>
 
               <button
                 className={styles.backBtn}
