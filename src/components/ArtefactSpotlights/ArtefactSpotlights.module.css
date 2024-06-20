@@ -57,6 +57,7 @@
 
 .externalCollection {
   font-size: 25px;
+  margin-bottom: 10px;
 }
 
 .externalCollectionLink {
@@ -68,24 +69,43 @@
   text-decoration: underline;
 }
 
-.backBtn {
+.backBtn,
+.addArtefactBtn,
+.removeArtefactBtn {
   height: 40px;
   width: 90%;
   align-self: center;
   padding: 0 10px;
-  margin-top: 10px;
-  color: var(--colour-text);
-  background: transparent;
-  border: 2px solid var(--colour-text);
   border-radius: 40px;
   font-size: 20px;
   transition: 0.4s;
   cursor: pointer;
 }
 
+.backBtn,
+.addArtefactBtn {
+  color: var(--colour-text);
+  background: transparent;
+  border: 2px solid var(--colour-text);
+}
+
+.removeArtefactBtn {
+  color: #faa0a0;
+  background: transparent;
+  border: 2px solid #faa0a0;
+}
+
 .backBtn:hover,
-.backBtn:focus {
+.backBtn:focus,
+.addArtefactBtn:hover,
+.addArtefactBtn:focus {
   background: var(--colour-text);
+  color: black;
+}
+
+.removeArtefactBtn:hover,
+.removeArtefactBtn:focus {
+  background: #faa0a0;
   color: black;
 }
 
@@ -232,6 +252,17 @@
   .description,
   .externalCollection {
     font-size: 20px;
+  }
+
+  .backBtn,
+  .addArtefactBtn,
+  .removeArtefactBtn {
+    min-width: 218px;
+    width: 90%;
+  }
+
+  .removeArtefactBtn {
+    font-size: 18px;
   }
 
   .imagesContainer,
