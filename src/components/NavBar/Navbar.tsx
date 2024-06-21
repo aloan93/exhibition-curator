@@ -2,9 +2,11 @@ import styles from "./Navbar.module.css";
 import { ReactNode, useState } from "react";
 import { getImageURL } from "../../utils";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export default function Navbar(): ReactNode {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { currentUser } = useAuth();
 
   return (
     <nav className={styles.navbar}>
@@ -38,6 +40,15 @@ export default function Navbar(): ReactNode {
           <li>
             <Link to="/my-exhibition">My Exhibition</Link>
           </li>
+          {currentUser ? (
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

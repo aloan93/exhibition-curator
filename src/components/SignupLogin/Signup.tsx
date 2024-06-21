@@ -1,6 +1,7 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import styles from "./SignupLogin.module.css";
 import useAuth from "../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Signup(): ReactNode {
   const [emailInput, setEmailInput] = useState("");
@@ -9,6 +10,13 @@ export default function Signup(): ReactNode {
   const { currentUser, signup } = useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/profile";
+
+  useEffect(() => {
+    currentUser ? navigate(from, { replace: true }) : null;
+  }, [currentUser]);
 
   function handleSignup(e: any) {
     e.preventDefault();
@@ -29,10 +37,9 @@ export default function Signup(): ReactNode {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Signup</h2>
-      <h2 className={styles.title}>{currentUser && currentUser.email}</h2>
 
       <form className={styles.formContainer} onSubmit={handleSignup}>
-        <p className={styles.error}>{error}</p>
+        {error ? <p className={styles.error}>{error}</p> : null}
 
         <input
           className={styles.formInput}

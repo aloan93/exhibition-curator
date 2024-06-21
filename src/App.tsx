@@ -9,6 +9,7 @@ import ClevelandArtefactSpotlight from "./components/ArtefactSpotlights/Clevelan
 import MetropolitanArtefactSpotlight from "./components/ArtefactSpotlights/MetropolitanArtefactSpotlight";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Signup from "./components/SignupLogin/Signup";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           <Route path="/home" element={<Homepage />} />
 
           <Route path="/signup" element={<Signup />} />
+
+          <Route path="/profile" element={<Profile />} />
 
           <Route
             path="/metropolitan-museum-of-art"
