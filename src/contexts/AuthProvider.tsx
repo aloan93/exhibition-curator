@@ -9,6 +9,8 @@ const authContextDefault = {
   login: (_email: string, _password: string) => any,
   // @ts-ignore
   logout: () => any,
+  // @ts-ignore
+  resetPassword: (_email: string) => any,
 };
 
 const AuthContext = createContext(authContextDefault);
@@ -31,6 +33,10 @@ function AuthProvider(props: { children: any }) {
     return auth.signOut();
   }
 
+  function resetPassword(email: string) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setIsLoading(false);
@@ -41,7 +47,8 @@ function AuthProvider(props: { children: any }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, logout }}>
+    <AuthContext.Provider
+      value={{ currentUser, signup, login, logout, resetPassword }}>
       {!isLoading && props.children}
     </AuthContext.Provider>
   );

@@ -11,6 +11,7 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Signup from "./components/SignupLogin/Signup";
 import Profile from "./components/Profile/Profile";
 import Login from "./components/SignupLogin/Login";
+import ForgotPassword from "./components/SignupLogin/ForgotPassword";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           <Route path="/login" element={<Login />} />
+
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           <Route path="/profile" element={<Profile />} />
 
