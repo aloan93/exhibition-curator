@@ -8,6 +8,7 @@ import MyExhibition from "./components/MyExhibition/MyExhibition";
 import ClevelandArtefactSpotlight from "./components/ArtefactSpotlights/ClevelandArtefactSpotlight";
 import MetropolitanArtefactSpotlight from "./components/ArtefactSpotlights/MetropolitanArtefactSpotlight";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
+import Signup from "./components/SignupLogin/Signup";
 
 function App() {
   return (
@@ -19,24 +20,33 @@ function App() {
       <main id="main">
         <Routes>
           <Route path="/" element={<Homepage />} />
+
           <Route path="/home" element={<Homepage />} />
+
+          <Route path="/signup" element={<Signup />} />
+
           <Route
             path="/metropolitan-museum-of-art"
             element={<MetMuseumOfArt />}
           />
+
           <Route
             path="/cleveland-museum-of-art"
             element={<ClevelandMuseumOfArt />}
           />
+
           <Route path="/my-exhibition" element={<MyExhibition />} />
+
           <Route
             path="/cleveland-museum-of-art/:id"
             element={<ClevelandArtefactSpotlight />}
           />
+
           <Route
             path="/metropolitan-museum-of-art/:id"
             element={<MetropolitanArtefactSpotlight />}
           />
+
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </main>
