@@ -28,7 +28,7 @@
   border-radius: 20px;
   padding: 20px 25px;
   max-width: 90vw;
-  gap: 15px;
+  gap: 20px;
 }
 
 .formInput {
@@ -60,6 +60,15 @@
 .formBtn:focus {
   background: var(--colour-text);
   color: black;
+}
+
+.altLink {
+  color: var(--colour-text);
+  font-size: 20px;
+}
+
+.altLink a {
+  color: #99a5d6;
 }
 
 .error {

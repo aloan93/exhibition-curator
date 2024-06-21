@@ -35,7 +35,8 @@
   list-style: none;
 }
 
-.menuItems a {
+.menuItems a,
+.menuItems p {
   font-size: 20px;
   color: var(--colour-text);
   text-decoration: none;

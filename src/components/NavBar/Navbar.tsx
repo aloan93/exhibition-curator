@@ -46,7 +46,11 @@ export default function Navbar(): ReactNode {
             </li>
           ) : (
             <li>
-              <Link to="/signup">Signup</Link>
+              <p>
+                <Link to="/signup">Signup</Link>
+                {" / "}
+                <Link to="/login">Login</Link>
+              </p>
             </li>
           )}
         </ul>

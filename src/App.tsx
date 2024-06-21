@@ -10,6 +10,7 @@ import MetropolitanArtefactSpotlight from "./components/ArtefactSpotlights/Metro
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Signup from "./components/SignupLogin/Signup";
 import Profile from "./components/Profile/Profile";
+import Login from "./components/SignupLogin/Login";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="/home" element={<Homepage />} />
 
           <Route path="/signup" element={<Signup />} />
+
+          <Route path="/login" element={<Login />} />
 
           <Route path="/profile" element={<Profile />} />
 
