@@ -1,0 +1,68 @@
+@import "../../vars.css";
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 75px;
+  margin-left: 10%;
+  margin-right: 10%;
+  z-index: 1;
+  max-width: 1000px;
+  width: 80vw;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 25px 0 25px;
+}
+
+.title {
+  color: var(--colour-text);
+  text-align: center;
+  font-size: 36px;
+}
+
+.backBtn {
+  height: 40px;
+  width: 200px;
+  padding: 0 10px;
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+  color: var(--colour-text);
+  background: transparent;
+  border: 2px solid var(--colour-text);
+}
+
+.backBtn:hover,
+.backBtn:focus {
+  background: var(--colour-text);
+  color: black;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 49px;
+  gap: 25px;
+  list-style-type: none;
+}
+
+@media screen and (max-width: 830px) {
+  .titleContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .backBtn {
+    width: 90%;
+  }
+}

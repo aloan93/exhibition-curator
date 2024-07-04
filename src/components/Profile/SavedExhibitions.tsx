@@ -1,6 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
+import styles from "./Profile.module.css";
 import { db } from "../../firebase";
 import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 export default function SavedExhibitions(props: { uid: string }): ReactNode {
   const [userExhibitions, setUserExhibitions] = useState<any[]>([]);
@@ -23,19 +25,27 @@ export default function SavedExhibitions(props: { uid: string }): ReactNode {
   }, []);
 
   return (
-    <ul>
-      {userExhibitions.map((exhibition, id) => {
-        return (
-          <li key={id}>
-            <h3>{exhibition.exhibitionName}</h3>
-            {exhibition.artefacts.map((artefact: any, id: any) => {
+    <div className={styles.exhibitionsContainer}>
+      {userExhibitions.length > 0 ? (
+        <>
+          <h2 className={styles.exhibitionsTitle}>Saved Exhibitions</h2>
+          <ul className={styles.exhibitionsList}>
+            {userExhibitions.map((exhibition, id) => {
               return (
-                <p key={id}>{`${artefact.collection} - ${artefact.id}`}</p>
+                <li key={id} className={styles.exhibitionItem}>
+                  <h3 className={styles.exhibitionTitle}>
+                    <Link
+                      to={`/profile/${exhibition.exhibitionName}`}
+                      state={
+                        exhibition.artefacts
+                      }>{`${exhibition.exhibitionName} (${exhibition.artefacts.length})`}</Link>
+                  </h3>
+                </li>
               );
             })}
-          </li>
-        );
-      })}
-    </ul>
+          </ul>
+        </>
+      ) : null}
+    </div>
   );
 }

@@ -1,13 +1,13 @@
 @import "../../vars.css";
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 75px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: 75px 10% 0 10%;
   gap: 49px;
+  width: 80%;
 }
 
 .title {
@@ -16,10 +16,54 @@
   font-size: 30px;
 }
 
+.exhibitionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  gap: 15px;
+}
+
+.exhibitionsTitle {
+  color: var(--colour-text);
+}
+
+.exhibitionsList {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.exhibitionItem {
+  max-width: 450px;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--colour-secondary) 0%,
+    var(--colour-dark) 100%
+  );
+  padding: 20px 30px;
+  border-radius: 20px;
+}
+
+.exhibitionItem a {
+  text-decoration: none;
+  color: var(--colour-text);
+}
+
+.exhibitionItem a:hover,
+.exhibitionItem a:focus {
+  text-decoration: underline;
+}
+
 .logoutBtn {
   height: 40px;
-  width: 350px;
-  max-width: 100%;
+  max-width: 350px;
+  width: 100%;
   padding: 0 10px;
   margin-top: 10px;
   color: #faa0a0;
@@ -56,4 +100,10 @@
   font-size: 20px;
   font-weight: 500;
   color: #faa0a0;
+}
+
+@media screen and (max-width: 830px) {
+  .title {
+    font-size: 20px;
+  }
 }

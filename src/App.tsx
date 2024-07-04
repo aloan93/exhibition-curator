@@ -12,6 +12,7 @@ import Signup from "./components/SignupLogin/Signup";
 import Profile from "./components/Profile/Profile";
 import Login from "./components/SignupLogin/Login";
 import ForgotPassword from "./components/SignupLogin/ForgotPassword";
+import SavedExhibition from "./components/SavedExhibition/SavedExhibition";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
           <Route path="/profile" element={<Profile />} />
+
+          <Route
+            path="/profile/:exhibitionName"
+            element={<SavedExhibition />}
+          />
 
           <Route
             path="/metropolitan-museum-of-art"
