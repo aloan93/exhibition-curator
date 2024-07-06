@@ -36,9 +36,9 @@ export default function SavedExhibitions(props: { uid: string }): ReactNode {
                   <h3 className={styles.exhibitionTitle}>
                     <Link
                       to={`/profile/${exhibition.exhibitionName}`}
-                      state={
-                        exhibition.artefacts
-                      }>{`${exhibition.exhibitionName} (${exhibition.artefacts.length})`}</Link>
+                      state={JSON.stringify(
+                        exhibition
+                      )}>{`${exhibition.exhibitionName} (${exhibition.artefacts.length})`}</Link>
                   </h3>
                 </li>
               );
