@@ -13,7 +13,6 @@ export default function Profile(): ReactNode {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(currentUser);
     !currentUser ? navigate(from, { replace: true }) : null;
   }, [currentUser]);
 
