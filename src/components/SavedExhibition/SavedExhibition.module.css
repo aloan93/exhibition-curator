@@ -13,27 +13,73 @@
   width: 80vw;
 }
 
-.titleContainer {
+.headerContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 0 25px 0 25px;
+  gap: 20px;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
 }
 
 .title {
   color: var(--colour-text);
-  text-align: center;
-  font-size: 36px;
+  font-size: 34px;
+}
+
+.formContainer {
+  display: flex;
+  align-items: center;
+}
+
+.renameInput {
+  height: 40px;
+  width: 350px;
+  max-width: 70vw;
+  font-size: 18px;
+  border: 2px solid var(--colour-text);
+  border-radius: 40px 0 0 40px;
+  border-right: none;
+  padding: 2px 10px;
+}
+
+.renameSubmitBtn {
+  height: 40px;
+  width: 50px;
+  border: 2px solid var(--colour-text);
+  border-radius: 0 40px 40px 0;
+  background: transparent;
+  color: var(--colour-text);
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.renameSubmitBtn:hover,
+.renameSubmitBtn:focus {
+  background: var(--colour-text);
+  border-left: 2px solid black;
+  color: black;
 }
 
 .btnContainer {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
   gap: 10px;
 }
 
-.backBtn {
+.backBtn,
+.renameBtn {
   height: 40px;
   width: 150px;
   padding: 0 10px;
@@ -47,12 +93,15 @@
 }
 
 .backBtn:hover,
-.backBtn:focus {
+.backBtn:focus,
+.renameBtn:hover,
+.renameBtn:focus {
   background: var(--colour-text);
   color: black;
 }
 
-.deleteBtn {
+.deleteBtn,
+.cancelBtn {
   height: 40px;
   width: 150px;
   padding: 0 10px;
@@ -66,7 +115,9 @@
 }
 
 .deleteBtn:hover,
-.deleteBtn:focus {
+.deleteBtn:focus,
+.cancelBtn:hover,
+.cancelBtn:focus {
   background: #faa0a0;
   color: black;
 }
@@ -87,6 +138,10 @@
   width: 40px;
   height: 40px;
   animation: spin 1.5s linear infinite;
+}
+
+.renameLoader {
+  margin-left: 10px;
 }
 
 .largeLoader {
@@ -136,6 +191,13 @@
 @media screen and (max-width: 830px) {
   .titleContainer {
     flex-direction: column;
-    gap: 20px;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .btnContainer {
+    justify-content: center;
   }
 }

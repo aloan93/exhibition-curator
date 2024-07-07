@@ -2,66 +2,167 @@ import { ReactNode, useEffect, useState } from "react";
 import styles from "./SavedExhibition.module.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import EntrySelecter from "../MyExhibition/EntrySelecter";
-import { doc, deleteDoc, getDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import useAuth from "../../hooks/useAuth";
 
 export default function SavedExhibition(): ReactNode {
-  const { exhibitionName } = useParams();
-  const location = useLocation();
-  const exhibition = JSON.parse(location.state) || null;
+  const { exhibitionId } = useParams();
+  const { currentUser } = useAuth();
+  const [exhibition, setExhibition] = useState<any>();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [deletionError, setDeletionError] = useState("");
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/login";
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [initialError, setInitialError] = useState("");
+  const [queryError, setQueryError] = useState("");
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
-  const [deletionSuccess, setDeletionSuccess] = useState("");
+  const [isDeletionSuccess, setIsDeletionSuccess] = useState(false);
+  const [isRenaming, setIsRenaming] = useState(false);
+  const [renameInput, setRenameInput] = useState("");
+  const [isRenameLoading, setIsRenameLoading] = useState(false);
+  const [isRenameSuccess, setIsRenameSuccess] = useState(false);
 
   useEffect(() => {
-    if (exhibition) {
-      setIsLoading(true);
-      setError("");
-      getDoc(doc(db, "Exhibitions", exhibition.exhibitionId))
-        .then((res) => {
-          res.exists() ? null : setError("Exhibition not found");
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setError("Something went wrong. Please try again later");
-          setIsLoading(false);
-        });
-    } else navigate("/notfound", { replace: true });
-  }, []);
+    !currentUser ? navigate(from, { replace: true }) : null;
+  }, [currentUser]);
+
+  useEffect(() => {
+    setIsInitialLoading(true);
+    setInitialError("");
+    getDoc(doc(db, "Exhibitions", exhibitionId || ""))
+      .then((res) => {
+        if (!res.exists()) {
+          setInitialError("Exhibition not found");
+          return null;
+        } else {
+          return res.data();
+        }
+      })
+      .then((document) => {
+        if (document && document.user.id !== currentUser.uid) {
+          setInitialError("No permission to view this exhibition");
+        } else if (document && document.user.id === currentUser.uid) {
+          setExhibition({ ...document, exhibitionId });
+        }
+        setIsInitialLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setInitialError("Something went wrong. Please try again later");
+        setIsInitialLoading(false);
+      });
+  }, [isRenameSuccess]);
 
   function handleDelete(e: any) {
     e.preventDefault();
     setIsDeleteLoading(true);
-    setDeletionSuccess("");
-    setDeletionError("");
+    setIsDeletionSuccess(false);
+    setQueryError("");
     deleteDoc(doc(db, "Exhibitions", exhibition.exhibitionId))
       .then(() => {
-        setDeletionSuccess("Successfully Deleted");
+        setIsDeletionSuccess(true);
         setIsDeleteLoading(false);
       })
       .catch(() => {
-        setDeletionError("Failed to delete exhibition. Please try again later");
+        setQueryError("Failed to delete exhibition. Please try again later");
         setIsDeleteLoading(false);
+      });
+  }
+
+  function handleRename(e: any) {
+    e.preventDefault();
+    setIsRenameLoading(true);
+    setIsRenameSuccess(false);
+    setQueryError("");
+    setDoc(
+      doc(db, "Exhibitions", exhibition.exhibitionId),
+      { exhibitionName: renameInput },
+      { merge: true }
+    )
+      .then(() => {
+        setIsRenameSuccess(true);
+        setIsRenaming(false);
+        setRenameInput("");
+      })
+      .then(() => {
+        setIsRenameLoading(false);
+      })
+      .catch(() => {
+        setQueryError("Failed to rename exhibition. Please try again later");
+        setIsRenaming(false);
+        setIsRenameLoading(false);
       });
   }
 
   return (
     <div className={styles.container}>
-      {isLoading ? (
+      {isInitialLoading ? (
         <div className={styles.largeLoader}></div>
       ) : (
         <>
-          {error ? (
+          {initialError ? (
             <div className={styles.errorContainer}>
-              <p className={styles.error}>{error}</p>
+              <p className={styles.error}>{initialError}</p>
             </div>
           ) : (
             <>
-              <div className={styles.titleContainer}>
-                <h2 className={styles.title}>{exhibitionName}</h2>
+              <div className={styles.headerContainer}>
+                <div className={styles.titleContainer}>
+                  {isRenaming ? (
+                    <>
+                      <form
+                        className={styles.formContainer}
+                        onSubmit={handleRename}>
+                        <input
+                          className={styles.renameInput}
+                          id="rename"
+                          aria-label="Rename Exhibition"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          type="text"
+                          placeholder={exhibition.exhibitionName}
+                          value={renameInput}
+                          onChange={(e) => setRenameInput(e.target.value)}
+                          required
+                        />
+
+                        <button
+                          className={styles.renameSubmitBtn}
+                          aria-label="Submit Rename">
+                          {"✔"}
+                        </button>
+
+                        {isRenameLoading ? (
+                          <div
+                            className={`${styles.renameLoader} ${styles.loader}`}></div>
+                        ) : null}
+                      </form>
+
+                      <button
+                        className={styles.cancelBtn}
+                        aria-label="Cancel Rename"
+                        onClick={() => setIsRenaming(!isRenaming)}
+                        disabled={isDeleteLoading || isRenameLoading}>
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <h2 className={styles.title}>
+                        {exhibition.exhibitionName}
+                      </h2>
+
+                      <button
+                        className={styles.renameBtn}
+                        aria-label="Rename the exhibition"
+                        onClick={() => setIsRenaming(!isRenaming)}
+                        hidden={isDeletionSuccess ? true : false}>
+                        Rename
+                      </button>
+                    </>
+                  )}
+                </div>
 
                 <div className={styles.btnContainer}>
                   <button
@@ -79,20 +180,18 @@ export default function SavedExhibition(): ReactNode {
                       className={styles.deleteBtn}
                       aria-label="Delete the exhibition"
                       onClick={handleDelete}
-                      hidden={deletionSuccess ? true : false}>
+                      hidden={isDeletionSuccess}>
                       Delete
                     </button>
                   )}
                 </div>
               </div>
 
-              {deletionError ? (
-                <p className={styles.error}>{deletionError}</p>
-              ) : null}
+              {queryError ? <p className={styles.error}>{queryError}</p> : null}
 
-              {deletionSuccess ? (
+              {isDeletionSuccess ? (
                 <div>
-                  <p className={styles.prompt}>{deletionSuccess}</p>
+                  <p className={styles.prompt}>Successfully Deleted</p>
                 </div>
               ) : (
                 <ul className={styles.listContainer}>

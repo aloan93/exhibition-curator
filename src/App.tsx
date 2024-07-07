@@ -35,10 +35,7 @@ function App() {
 
           <Route path="/profile" element={<Profile />} />
 
-          <Route
-            path="/profile/:exhibitionName"
-            element={<SavedExhibition />}
-          />
+          <Route path="/profile/:exhibitionId" element={<SavedExhibition />} />
 
           <Route
             path="/metropolitan-museum-of-art"
