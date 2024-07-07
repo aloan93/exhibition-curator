@@ -2,9 +2,11 @@ import { ReactNode, useEffect, useState } from "react";
 import styles from "./SavedExhibition.module.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import EntrySelecter from "../MyExhibition/EntrySelecter";
-import { doc, deleteDoc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import useAuth from "../../hooks/useAuth";
+import TitleContainer from "./TitleContainer";
+import ButtonContainer from "./ButtonContainer";
 
 export default function SavedExhibition(): ReactNode {
   const { exhibitionId } = useParams();
@@ -18,10 +20,7 @@ export default function SavedExhibition(): ReactNode {
   const [queryError, setQueryError] = useState("");
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [isDeletionSuccess, setIsDeletionSuccess] = useState(false);
-  const [isRenaming, setIsRenaming] = useState(false);
-  const [renameInput, setRenameInput] = useState("");
   const [isRenameLoading, setIsRenameLoading] = useState(false);
-  const [isRenameSuccess, setIsRenameSuccess] = useState(false);
 
   useEffect(() => {
     !currentUser ? navigate(from, { replace: true }) : null;
@@ -52,48 +51,7 @@ export default function SavedExhibition(): ReactNode {
         setInitialError("Something went wrong. Please try again later");
         setIsInitialLoading(false);
       });
-  }, [isRenameSuccess]);
-
-  function handleDelete(e: any) {
-    e.preventDefault();
-    setIsDeleteLoading(true);
-    setIsDeletionSuccess(false);
-    setQueryError("");
-    deleteDoc(doc(db, "Exhibitions", exhibition.exhibitionId))
-      .then(() => {
-        setIsDeletionSuccess(true);
-        setIsDeleteLoading(false);
-      })
-      .catch(() => {
-        setQueryError("Failed to delete exhibition. Please try again later");
-        setIsDeleteLoading(false);
-      });
-  }
-
-  function handleRename(e: any) {
-    e.preventDefault();
-    setIsRenameLoading(true);
-    setIsRenameSuccess(false);
-    setQueryError("");
-    setDoc(
-      doc(db, "Exhibitions", exhibition.exhibitionId),
-      { exhibitionName: renameInput },
-      { merge: true }
-    )
-      .then(() => {
-        setIsRenameSuccess(true);
-        setIsRenaming(false);
-        setRenameInput("");
-      })
-      .then(() => {
-        setIsRenameLoading(false);
-      })
-      .catch(() => {
-        setQueryError("Failed to rename exhibition. Please try again later");
-        setIsRenaming(false);
-        setIsRenameLoading(false);
-      });
-  }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -108,83 +66,24 @@ export default function SavedExhibition(): ReactNode {
           ) : (
             <>
               <div className={styles.headerContainer}>
-                <div className={styles.titleContainer}>
-                  {isRenaming ? (
-                    <>
-                      <form
-                        className={styles.formContainer}
-                        onSubmit={handleRename}>
-                        <input
-                          className={styles.renameInput}
-                          id="rename"
-                          aria-label="Rename Exhibition"
-                          autoComplete="off"
-                          autoCorrect="off"
-                          type="text"
-                          placeholder={exhibition.exhibitionName}
-                          value={renameInput}
-                          onChange={(e) => setRenameInput(e.target.value)}
-                          required
-                        />
+                <TitleContainer
+                  exhibition={exhibition}
+                  setQueryError={setQueryError}
+                  isDeleteLoading={isDeleteLoading}
+                  isDeletionSuccess={isDeletionSuccess}
+                  isRenameLoading={isRenameLoading}
+                  setIsRenameLoading={setIsRenameLoading}
+                />
 
-                        <button
-                          className={styles.renameSubmitBtn}
-                          aria-label="Submit Rename">
-                          {"✔"}
-                        </button>
-
-                        {isRenameLoading ? (
-                          <div
-                            className={`${styles.renameLoader} ${styles.loader}`}></div>
-                        ) : null}
-                      </form>
-
-                      <button
-                        className={styles.cancelBtn}
-                        aria-label="Cancel Rename"
-                        onClick={() => setIsRenaming(!isRenaming)}
-                        disabled={isDeleteLoading || isRenameLoading}>
-                        Cancel
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <h2 className={styles.title}>
-                        {exhibition.exhibitionName}
-                      </h2>
-
-                      <button
-                        className={styles.renameBtn}
-                        aria-label="Rename the exhibition"
-                        onClick={() => setIsRenaming(!isRenaming)}
-                        hidden={isDeletionSuccess ? true : false}>
-                        Rename
-                      </button>
-                    </>
-                  )}
-                </div>
-
-                <div className={styles.btnContainer}>
-                  <button
-                    className={styles.backBtn}
-                    aria-label="Back to previous page"
-                    onClick={() => navigate(-1)}
-                    disabled={isDeleteLoading}>
-                    Back
-                  </button>
-
-                  {isDeleteLoading ? (
-                    <div className={styles.loader}></div>
-                  ) : (
-                    <button
-                      className={styles.deleteBtn}
-                      aria-label="Delete the exhibition"
-                      onClick={handleDelete}
-                      hidden={isDeletionSuccess}>
-                      Delete
-                    </button>
-                  )}
-                </div>
+                <ButtonContainer
+                  exhibition={exhibition}
+                  setQueryError={setQueryError}
+                  isRenameLoading={isRenameLoading}
+                  isDeleteLoading={isDeleteLoading}
+                  setIsDeleteLoading={setIsDeleteLoading}
+                  isDeletionSuccess={isDeletionSuccess}
+                  setIsDeletionSuccess={setIsDeletionSuccess}
+                />
               </div>
 
               {queryError ? <p className={styles.error}>{queryError}</p> : null}
