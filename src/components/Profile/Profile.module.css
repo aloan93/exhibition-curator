@@ -21,11 +21,16 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 510px;
   text-align: center;
   gap: 15px;
+  padding: 20px 20px;
+  border: 2px solid var(--colour-dark);
+  border-radius: 20px;
 }
 
-.exhibitionsTitle {
+.exhibitionsTitle,
+.prompt {
   color: var(--colour-text);
 }
 
@@ -46,7 +51,7 @@
     var(--colour-secondary) 0%,
     var(--colour-dark) 100%
   );
-  padding: 20px 30px;
+  padding: 20px 20px;
   border-radius: 20px;
 }
 
@@ -100,6 +105,24 @@
   font-size: 20px;
   font-weight: 500;
   color: #faa0a0;
+}
+
+.loader {
+  border: 5px solid var(--colour-text);
+  border-top: 5px solid var(--colour-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media screen and (max-width: 830px) {
