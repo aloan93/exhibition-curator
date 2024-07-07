@@ -64,7 +64,6 @@ export default function MyExhibition(): ReactNode {
         }
       })
       .then((res) => {
-        console.log(res.id);
         setExhibition([]);
         setSuccess(`${res.id}`);
         setIsLoading(false);
