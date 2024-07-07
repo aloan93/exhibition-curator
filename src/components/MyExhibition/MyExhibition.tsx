@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./MyExhibition.module.css";
 import useExhibition from "../../hooks/useExhibition";
 import EntrySelecter from "./EntrySelecter";
@@ -32,6 +32,7 @@ export default function MyExhibition(): ReactNode {
   const exhibitionsRef = collection(db, "Exhibitions");
   const userRef = currentUser ? doc(db, "Users", currentUser.uid) : null;
   const q = query(exhibitionsRef, where("user", "==", userRef));
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (exhibition.length !== 0 && exhibition.length < 20 * Number(page) - 19) {
@@ -62,9 +63,10 @@ export default function MyExhibition(): ReactNode {
           return Promise.reject("Max Reached");
         }
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res.id);
         setExhibition([]);
-        setSuccess(`Successfully saved the exhibition as "${exhibitionName}"`);
+        setSuccess(`${res.id}`);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -102,8 +104,9 @@ export default function MyExhibition(): ReactNode {
                   </button>
                 </form>
               ) : null}
+
               {error ? <p className={styles.error}>{error}</p> : null}
-              {success ? <p className={styles.success}>{success}</p> : null}
+
               <PageNav
                 page={page}
                 setSearchParams={setSearchParams}
@@ -114,7 +117,18 @@ export default function MyExhibition(): ReactNode {
           ) : (
             <>
               {success ? (
-                <p className={styles.prompt}>{success}</p>
+                <>
+                  <p
+                    className={
+                      styles.prompt
+                    }>{`Successfully saved the exhibition as "${exhibitionName}"`}</p>
+                  <button
+                    className={styles.profileBtn}
+                    aria-label="Go to saved exhibition"
+                    onClick={() => navigate(`/profile/${success}`)}>
+                    View Exhibition
+                  </button>
+                </>
               ) : (
                 <p className={styles.prompt}>
                   {
@@ -133,6 +147,7 @@ export default function MyExhibition(): ReactNode {
               );
             })}
           </ul>
+
           {exhibition.length > 0 ? (
             <PageNav
               page={page}

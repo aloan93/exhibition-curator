@@ -59,6 +59,26 @@
   font-size: 25px;
 }
 
+.profileBtn {
+  height: 40px;
+  width: 90%;
+  padding: 0 10px;
+  margin-top: 49px;
+  color: var(--colour-text);
+  background: transparent;
+  border: 2px solid var(--colour-text);
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.profileBtn:hover,
+.profileBtn:focus {
+  background: var(--colour-text);
+  color: black;
+}
+
 .listContainer {
   display: flex;
   flex-direction: column;
