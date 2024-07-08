@@ -38,10 +38,10 @@ export default function ButtonContainer(props: {
     <div className={styles.btnContainer}>
       <button
         className={styles.backBtn}
-        aria-label="Back to previous page"
-        onClick={() => navigate(-1)}
+        aria-label="Go to Profile"
+        onClick={() => navigate("/profile")}
         disabled={props.isDeleteLoading || props.isRenameLoading}>
-        Back
+        To Profile
       </button>
 
       {props.isDeleteLoading ? (

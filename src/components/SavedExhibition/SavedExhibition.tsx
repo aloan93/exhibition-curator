@@ -1,12 +1,18 @@
 import { ReactNode, useEffect, useState } from "react";
 import styles from "./SavedExhibition.module.css";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import EntrySelecter from "../MyExhibition/EntrySelecter";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import useAuth from "../../hooks/useAuth";
 import TitleContainer from "./TitleContainer";
 import ButtonContainer from "./ButtonContainer";
+import PageNav from "../PageNav/PageNav";
+import EntrySelecter from "../MyExhibition/EntrySelecter";
 
 export default function SavedExhibition(): ReactNode {
   const { exhibitionId } = useParams();
@@ -21,6 +27,12 @@ export default function SavedExhibition(): ReactNode {
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [isDeletionSuccess, setIsDeletionSuccess] = useState(false);
   const [isRenameLoading, setIsRenameLoading] = useState(false);
+
+  // Pagination variables
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") || "1";
+  const [paginatedArtefacts, setPaginatedArtefacts] = useState([]);
+  const artefactsTotal = exhibition?.artefacts.length;
 
   useEffect(() => {
     !currentUser ? navigate(from, { replace: true }) : null;
@@ -43,6 +55,9 @@ export default function SavedExhibition(): ReactNode {
           setInitialError("No permission to view this exhibition");
         } else if (document && document.user.id === currentUser.uid) {
           setExhibition({ ...document, exhibitionId });
+          setPaginatedArtefacts(
+            document.artefacts.slice(Number(page) * 20 - 20, Number(page) * 20)
+          );
         }
         setIsInitialLoading(false);
       })
@@ -51,7 +66,7 @@ export default function SavedExhibition(): ReactNode {
         setInitialError("Something went wrong. Please try again later");
         setIsInitialLoading(false);
       });
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className={styles.container}>
@@ -93,17 +108,36 @@ export default function SavedExhibition(): ReactNode {
                   <p className={styles.prompt}>Successfully Deleted</p>
                 </div>
               ) : (
-                <ul className={styles.listContainer}>
-                  {exhibition.artefacts.map(
-                    (artefact: { collection: string; id: number }, id: any) => {
-                      return (
-                        <li key={id}>
-                          <EntrySelecter entry={artefact} />
-                        </li>
-                      );
-                    }
-                  )}
-                </ul>
+                <>
+                  <PageNav
+                    page={page}
+                    setSearchParams={setSearchParams}
+                    resultsTotal={artefactsTotal}
+                    hideText={false}
+                  />
+
+                  <ul className={styles.listContainer}>
+                    {paginatedArtefacts.map(
+                      (
+                        artefact: { collection: string; id: number },
+                        id: any
+                      ) => {
+                        return (
+                          <li key={id}>
+                            <EntrySelecter entry={artefact} />
+                          </li>
+                        );
+                      }
+                    )}
+                  </ul>
+
+                  <PageNav
+                    page={page}
+                    setSearchParams={setSearchParams}
+                    resultsTotal={artefactsTotal}
+                    hideText={true}
+                  />
+                </>
               )}
             </>
           )}
