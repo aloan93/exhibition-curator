@@ -13,6 +13,7 @@ import Profile from "./components/Profile/Profile";
 import Login from "./components/SignupLogin/Login";
 import ForgotPassword from "./components/SignupLogin/ForgotPassword";
 import SavedExhibition from "./components/SavedExhibition/SavedExhibition";
+import GuestExhibition from "./components/SavedExhibition/GuestExhibition";
 
 function App() {
   return (
@@ -36,6 +37,11 @@ function App() {
           <Route path="/profile" element={<Profile />} />
 
           <Route path="/profile/:exhibitionId" element={<SavedExhibition />} />
+
+          <Route
+            path="/guest-exhibition/:exhibitionId"
+            element={<GuestExhibition />}
+          />
 
           <Route
             path="/metropolitan-museum-of-art"
