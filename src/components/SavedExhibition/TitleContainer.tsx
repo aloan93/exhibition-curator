@@ -17,6 +17,7 @@ export default function TitleContainer(props: {
   );
   const [renameInput, setRenameInput] = useState("");
   const [isRenaming, setIsRenaming] = useState(false);
+  const url = location.href.replace("profile", "guest-exhibition");
 
   function handleRename(e: any) {
     e.preventDefault();
@@ -42,56 +43,80 @@ export default function TitleContainer(props: {
       });
   }
 
+  // function to handle clipboard copy rather than inline due to copy not executing until alert was closed
+  function handleShare(e: any) {
+    e.preventDefault();
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        alert("URL copied to clipboard");
+      })
+      .catch(() => {
+        alert("Failed to copy URL. Please try again later");
+      });
+  }
+
   return (
     <div className={styles.titleContainer}>
-      {isRenaming ? (
-        <>
-          <form className={styles.formContainer} onSubmit={handleRename}>
-            <input
-              className={styles.renameInput}
-              id="rename"
-              aria-label="Rename Exhibition"
-              autoComplete="off"
-              autoCorrect="off"
-              type="text"
-              placeholder={props.exhibition.exhibitionName}
-              value={renameInput}
-              onChange={(e) => setRenameInput(e.target.value)}
-              required
-            />
+      <div className={styles.renameContainer}>
+        {isRenaming ? (
+          <>
+            <form className={styles.formContainer} onSubmit={handleRename}>
+              <input
+                className={styles.renameInput}
+                id="rename"
+                aria-label="Rename Exhibition"
+                autoComplete="off"
+                autoCorrect="off"
+                type="text"
+                placeholder={props.exhibition.exhibitionName}
+                value={renameInput}
+                onChange={(e) => setRenameInput(e.target.value)}
+                required
+              />
+
+              <button
+                className={styles.renameSubmitBtn}
+                aria-label="Submit Rename">
+                {"✔"}
+              </button>
+
+              {props.isRenameLoading ? (
+                <div
+                  className={`${styles.renameLoader} ${styles.loader}`}></div>
+              ) : null}
+            </form>
 
             <button
-              className={styles.renameSubmitBtn}
-              aria-label="Submit Rename">
-              {"✔"}
+              className={styles.cancelBtn}
+              aria-label="Cancel Rename"
+              onClick={() => setIsRenaming(!isRenaming)}
+              disabled={props.isDeleteLoading || props.isRenameLoading}>
+              ❌
             </button>
+          </>
+        ) : (
+          <>
+            <h2 className={styles.title}>{displayedTitle}</h2>
 
-            {props.isRenameLoading ? (
-              <div className={`${styles.renameLoader} ${styles.loader}`}></div>
-            ) : null}
-          </form>
+            <button
+              className={styles.renameBtn}
+              aria-label="Rename the exhibition"
+              onClick={() => setIsRenaming(!isRenaming)}
+              hidden={props.isDeletionSuccess}>
+              🖊
+            </button>
+          </>
+        )}
+      </div>
 
-          <button
-            className={styles.cancelBtn}
-            aria-label="Cancel Rename"
-            onClick={() => setIsRenaming(!isRenaming)}
-            disabled={props.isDeleteLoading || props.isRenameLoading}>
-            Cancel
-          </button>
-        </>
-      ) : (
-        <>
-          <h2 className={styles.title}>{displayedTitle}</h2>
-
-          <button
-            className={styles.renameBtn}
-            aria-label="Rename the exhibition"
-            onClick={() => setIsRenaming(!isRenaming)}
-            hidden={props.isDeletionSuccess}>
-            Rename
-          </button>
-        </>
-      )}
+      <button
+        className={styles.backBtn}
+        aria-label="Copy share link to exhibition"
+        onClick={handleShare}
+        hidden={props.isDeletionSuccess}>
+        Share
+      </button>
     </div>
   );
 }

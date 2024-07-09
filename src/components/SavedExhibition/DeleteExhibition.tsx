@@ -3,9 +3,8 @@ import styles from "./SavedExhibition.module.css";
 import { savedExhibitionType } from "../../types";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useNavigate } from "react-router-dom";
 
-export default function ButtonContainer(props: {
+export default function DeleteExhibition(props: {
   exhibition: savedExhibitionType;
   isRenameLoading: boolean;
   setQueryError: React.Dispatch<React.SetStateAction<string>>;
@@ -14,8 +13,6 @@ export default function ButtonContainer(props: {
   isDeletionSuccess: boolean;
   setIsDeletionSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }): ReactNode {
-  const navigate = useNavigate();
-
   function handleDelete(e: any) {
     e.preventDefault();
     props.setIsDeleteLoading(true);
@@ -35,15 +32,7 @@ export default function ButtonContainer(props: {
   }
 
   return (
-    <div className={styles.btnContainer}>
-      <button
-        className={styles.backBtn}
-        aria-label="Go to Profile"
-        onClick={() => navigate("/profile")}
-        disabled={props.isDeleteLoading || props.isRenameLoading}>
-        To Profile
-      </button>
-
+    <>
       {props.isDeleteLoading ? (
         <div className={styles.loader}></div>
       ) : (
@@ -51,10 +40,11 @@ export default function ButtonContainer(props: {
           className={styles.deleteBtn}
           aria-label="Delete the exhibition"
           onClick={handleDelete}
+          disabled={props.isRenameLoading}
           hidden={props.isDeletionSuccess}>
           Delete
         </button>
       )}
-    </div>
+    </>
   );
 }

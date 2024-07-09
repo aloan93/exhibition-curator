@@ -14,6 +14,7 @@ export default function GuestExhibition(): ReactNode {
   const [exhibition, setExhibition] = useState<any>();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const url = location.href;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
@@ -33,7 +34,7 @@ export default function GuestExhibition(): ReactNode {
         }
       })
       .then((document) => {
-        if (document && document.user.id !== currentUser.uid) {
+        if (document && document.user.id !== currentUser?.uid) {
           setExhibition({ ...document, exhibitionId });
           setPaginatedArtefacts(
             document.artefacts.slice(Number(page) * 20 - 20, Number(page) * 20)
@@ -50,6 +51,18 @@ export default function GuestExhibition(): ReactNode {
       });
   }, [searchParams]);
 
+  function handleShare(e: any) {
+    e.preventDefault();
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        alert("URL copied to clipboard");
+      })
+      .catch(() => {
+        alert("Failed to copy URL. Please try again later");
+      });
+  }
+
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -62,7 +75,16 @@ export default function GuestExhibition(): ReactNode {
             </div>
           ) : (
             <>
-              <h2 className={styles.title}>{exhibition.exhibitionName}</h2>
+              <div className={styles.titleContainer}>
+                <h2 className={styles.title}>{exhibition.exhibitionName}</h2>
+
+                <button
+                  className={styles.backBtn}
+                  aria-label="Copy share link to exhibition"
+                  onClick={handleShare}>
+                  Share
+                </button>
+              </div>
 
               <PageNav
                 page={page}

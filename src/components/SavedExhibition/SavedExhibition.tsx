@@ -10,9 +10,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import useAuth from "../../hooks/useAuth";
 import TitleContainer from "./TitleContainer";
-import ButtonContainer from "./ButtonContainer";
 import PageNav from "../PageNav/PageNav";
 import EntrySelecter from "../MyExhibition/EntrySelecter";
+import DeleteExhibition from "./DeleteExhibition";
 
 export default function SavedExhibition(): ReactNode {
   const { exhibitionId } = useParams();
@@ -51,7 +51,7 @@ export default function SavedExhibition(): ReactNode {
         }
       })
       .then((document) => {
-        if (document && document.user.id !== currentUser.uid) {
+        if (document && document.user.id !== currentUser?.uid) {
           setInitialError("No permission to view this exhibition");
         } else if (document && document.user.id === currentUser.uid) {
           setExhibition({ ...document, exhibitionId });
@@ -88,16 +88,6 @@ export default function SavedExhibition(): ReactNode {
                   isDeletionSuccess={isDeletionSuccess}
                   isRenameLoading={isRenameLoading}
                   setIsRenameLoading={setIsRenameLoading}
-                />
-
-                <ButtonContainer
-                  exhibition={exhibition}
-                  setQueryError={setQueryError}
-                  isRenameLoading={isRenameLoading}
-                  isDeleteLoading={isDeleteLoading}
-                  setIsDeleteLoading={setIsDeleteLoading}
-                  isDeletionSuccess={isDeletionSuccess}
-                  setIsDeletionSuccess={setIsDeletionSuccess}
                 />
               </div>
 
@@ -136,6 +126,16 @@ export default function SavedExhibition(): ReactNode {
                     setSearchParams={setSearchParams}
                     resultsTotal={artefactsTotal}
                     hideText={true}
+                  />
+
+                  <DeleteExhibition
+                    exhibition={exhibition}
+                    setQueryError={setQueryError}
+                    isRenameLoading={isRenameLoading}
+                    isDeleteLoading={isDeleteLoading}
+                    setIsDeleteLoading={setIsDeleteLoading}
+                    isDeletionSuccess={isDeletionSuccess}
+                    setIsDeletionSuccess={setIsDeletionSuccess}
                   />
                 </>
               )}

@@ -30,6 +30,13 @@
   gap: 10px;
 }
 
+.renameContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
 .title {
   color: var(--colour-text);
   font-size: 34px;
@@ -70,16 +77,20 @@
   color: black;
 }
 
-.btnContainer {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
+.renameBtn {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+  color: var(--colour-text);
+  background: transparent;
+  border: 2px solid var(--colour-text);
 }
 
-.backBtn,
-.renameBtn {
+.backBtn {
   height: 40px;
   width: 150px;
   min-width: 113px;
@@ -101,13 +112,26 @@
   color: black;
 }
 
-.deleteBtn,
-.cancelBtn {
+.deleteBtn {
   height: 40px;
   width: 150px;
   min-width: 113px;
+  margin-top: 49px;
   padding: 0 10px;
   border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+  color: #faa0a0;
+  background: transparent;
+  border: 2px solid #faa0a0;
+}
+
+.cancelBtn {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 12px;
   font-size: 20px;
   transition: 0.4s;
   cursor: pointer;
