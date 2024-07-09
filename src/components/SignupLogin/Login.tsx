@@ -22,9 +22,11 @@ export default function Login(): ReactNode {
     setIsLoading(true);
     setError("");
     login(emailInput, passwordInput).catch((err: any) => {
+      if (err.code === "auth/invalid-credential")
+        setError("Invalid login credentials");
+      else setError("Failed to login. Please try again later");
       setIsLoading(false);
-      setError("Failed to login. Please try again later");
-      console.log(err);
+      console.log(err.code);
     });
   }
 
