@@ -1,0 +1,64 @@
+@import "../../vars.css";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 75px;
+  margin-left: 10%;
+  margin-right: 10%;
+  gap: 49px;
+}
+
+.title {
+  color: var(--colour-text);
+  text-align: center;
+  font-size: 30px;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 1000px;
+  max-width: 80vw;
+  gap: 25px;
+}
+
+.museumContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 25px;
+  gap: 10px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    var(--colour-secondary) 0%,
+    var(--colour-dark) 100%
+  );
+  width: 420px;
+  list-style: none;
+  color: var(--colour-text);
+}
+
+.museumImage {
+  width: 100%;
+  border-radius: 20px;
+  border: 2px solid transparent;
+}
+
+.museumTitle {
+  font-size: 25px;
+}
+
+.museumTitle a {
+  text-decoration: none;
+  color: var(--colour-text);
+}
+
+.museumTitle:hover a {
+  text-decoration: underline;
+}

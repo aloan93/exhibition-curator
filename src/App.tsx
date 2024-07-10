@@ -14,6 +14,7 @@ import Login from "./components/SignupLogin/Login";
 import ForgotPassword from "./components/SignupLogin/ForgotPassword";
 import SavedExhibition from "./components/SavedExhibition/SavedExhibition";
 import GuestExhibition from "./components/SavedExhibition/GuestExhibition";
+import MuseumContentsPage from "./components/MuseumContentsPage/MuseumContentsPage";
 
 function App() {
   return (
@@ -43,25 +44,27 @@ function App() {
             element={<GuestExhibition />}
           />
 
+          <Route path="/museum-collections" element={<MuseumContentsPage />} />
+
           <Route
-            path="/metropolitan-museum-of-art"
+            path="/museum-collections/metropolitan-museum-of-art"
             element={<MetMuseumOfArt />}
           />
 
           <Route
-            path="/cleveland-museum-of-art"
+            path="/museum-collections/cleveland-museum-of-art"
             element={<ClevelandMuseumOfArt />}
           />
 
           <Route path="/my-exhibition" element={<MyExhibition />} />
 
           <Route
-            path="/cleveland-museum-of-art/:id"
+            path="/museum-collections/cleveland-museum-of-art/:id"
             element={<ClevelandArtefactSpotlight />}
           />
 
           <Route
-            path="/metropolitan-museum-of-art/:id"
+            path="/museum-collections/metropolitan-museum-of-art/:id"
             element={<MetropolitanArtefactSpotlight />}
           />
 

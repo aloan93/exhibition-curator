@@ -29,13 +29,18 @@ export default function Navbar(): ReactNode {
         <ul
           className={`${styles.menuItems} ${isMenuOpen && styles.menuOpen}`}
           onClick={() => setIsMenuOpen(false)}>
-          <li>
-            <Link to="/cleveland-museum-of-art">Cleveland Museum of Art</Link>
+          {/* <li>
+            <Link to="/museum-collections/cleveland-museum-of-art">
+              Cleveland MoA
+            </Link>
           </li>
           <li>
-            <Link to="/metropolitan-museum-of-art">
-              Metropolitan Museum of Art
+            <Link to="/museum-collections/metropolitan-museum-of-art">
+              Metropolitan MoA
             </Link>
+          </li> */}
+          <li>
+            <Link to="/museum-collections">Museum Collections</Link>
           </li>
           <li>
             <Link to="/my-exhibition">My Exhibition</Link>
@@ -48,7 +53,7 @@ export default function Navbar(): ReactNode {
             <li>
               <p>
                 <Link to="/signup">Signup</Link>
-                {" / "}
+                {" | "}
                 <Link to="/login">Login</Link>
               </p>
             </li>

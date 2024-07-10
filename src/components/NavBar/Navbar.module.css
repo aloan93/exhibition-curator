@@ -11,9 +11,9 @@
 }
 
 .title {
-  font-size: 25px;
+  font-size: 20px;
   width: 80%;
-  margin-right: 35px;
+  margin-right: 47px;
 }
 
 .titleLink {
@@ -37,9 +37,10 @@
 
 .menuItems a,
 .menuItems p {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--colour-text);
   text-decoration: none;
+  text-wrap: nowrap;
 }
 
 @media screen and (max-width: 830px) {

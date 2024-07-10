@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Cleveland Museum of Art",
+    "address": "11150 East Blvd, Cleveland, OH 44106, United States",
+    "imageSrc": "museums/clevelandMuseumOfArt.jpg",
+    "linkText": "cleveland-museum-of-art"
+  },
+  {
+    "name": "Metropolitan Museum of Art",
+    "address": "1000 5th Ave, New York, NY 10028, United States",
+    "imageSrc": "museums/metropolitanMuseumOfArt.jpg",
+    "linkText": "metropolitan-museum-of-art"
+  }
+]
