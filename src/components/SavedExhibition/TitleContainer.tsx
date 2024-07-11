@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./SavedExhibition.module.css";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -18,6 +18,11 @@ export default function TitleContainer(props: {
   const [renameInput, setRenameInput] = useState("");
   const [isRenaming, setIsRenaming] = useState(false);
   const url = location.href.replace("profile", "guest-exhibition");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isRenaming) inputRef.current?.focus();
+  }, [isRenaming]);
 
   function handleRename(e: any) {
     e.preventDefault();
@@ -39,6 +44,7 @@ export default function TitleContainer(props: {
           "Failed to rename exhibition. Please try again later"
         );
         setIsRenaming(false);
+        setRenameInput("");
         props.setIsRenameLoading(false);
       });
   }
@@ -69,9 +75,10 @@ export default function TitleContainer(props: {
                 autoComplete="off"
                 autoCorrect="off"
                 type="text"
-                placeholder={props.exhibition.exhibitionName}
+                placeholder={displayedTitle}
                 value={renameInput}
                 onChange={(e) => setRenameInput(e.target.value)}
+                ref={inputRef}
                 required
               />
 
@@ -80,20 +87,19 @@ export default function TitleContainer(props: {
                 aria-label="Submit Rename">
                 {"✔"}
               </button>
-
-              {props.isRenameLoading ? (
-                <div
-                  className={`${styles.renameLoader} ${styles.loader}`}></div>
-              ) : null}
             </form>
 
-            <button
-              className={styles.cancelBtn}
-              aria-label="Cancel Rename"
-              onClick={() => setIsRenaming(!isRenaming)}
-              disabled={props.isDeleteLoading || props.isRenameLoading}>
-              ❌
-            </button>
+            {props.isRenameLoading ? (
+              <div className={styles.loader}></div>
+            ) : (
+              <button
+                className={styles.cancelBtn}
+                aria-label="Cancel Rename"
+                onClick={() => setIsRenaming(!isRenaming)}
+                disabled={props.isDeleteLoading || props.isRenameLoading}>
+                ❌
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -111,7 +117,7 @@ export default function TitleContainer(props: {
       </div>
 
       <button
-        className={styles.backBtn}
+        className={styles.shareBtn}
         aria-label="Copy share link to exhibition"
         onClick={handleShare}
         hidden={props.isDeletionSuccess}>

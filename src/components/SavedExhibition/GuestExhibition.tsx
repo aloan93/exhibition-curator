@@ -75,15 +75,17 @@ export default function GuestExhibition(): ReactNode {
             </div>
           ) : (
             <>
-              <div className={styles.titleContainer}>
-                <h2 className={styles.title}>{exhibition.exhibitionName}</h2>
+              <div className={styles.headerContainer}>
+                <div className={styles.titleContainer}>
+                  <h2 className={styles.title}>{exhibition.exhibitionName}</h2>
 
-                <button
-                  className={styles.backBtn}
-                  aria-label="Copy share link to exhibition"
-                  onClick={handleShare}>
-                  Share
-                </button>
+                  <button
+                    className={styles.shareBtn}
+                    aria-label="Copy share link to exhibition"
+                    onClick={handleShare}>
+                    Share
+                  </button>
+                </div>
               </div>
 
               <PageNav
