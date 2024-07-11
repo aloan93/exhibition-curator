@@ -2,9 +2,11 @@ import styles from "./Navbar.module.css";
 import { ReactNode, useState } from "react";
 import { getImageURL } from "../../utils";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export default function Navbar(): ReactNode {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { currentUser } = useAuth();
 
   return (
     <nav className={styles.navbar}>
@@ -27,17 +29,35 @@ export default function Navbar(): ReactNode {
         <ul
           className={`${styles.menuItems} ${isMenuOpen && styles.menuOpen}`}
           onClick={() => setIsMenuOpen(false)}>
-          <li>
-            <Link to="/cleveland-museum-of-art">Cleveland Museum of Art</Link>
+          {/* <li>
+            <Link to="/museum-collections/cleveland-museum-of-art">
+              Cleveland MoA
+            </Link>
           </li>
           <li>
-            <Link to="/metropolitan-museum-of-art">
-              Metropolitan Museum of Art
+            <Link to="/museum-collections/metropolitan-museum-of-art">
+              Metropolitan MoA
             </Link>
+          </li> */}
+          <li>
+            <Link to="/museum-collections">Museum Collections</Link>
           </li>
           <li>
             <Link to="/my-exhibition">My Exhibition</Link>
           </li>
+          {currentUser ? (
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          ) : (
+            <li>
+              <p>
+                <Link to="/signup">Signup</Link>
+                {" | "}
+                <Link to="/login">Login</Link>
+              </p>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

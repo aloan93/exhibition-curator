@@ -33,7 +33,7 @@ export default function ClevelandMuseumOfArtCard(props: {
         <h3 className={styles.title}>
           <Link
             className={styles.titleLink}
-            to={`/cleveland-museum-of-art/${props.artefact.id}`}
+            to={`/museum-collections/cleveland-museum-of-art/${props.artefact.id}`}
             state={props.artefact}>
             {props.artefact.title}
           </Link>
@@ -82,7 +82,7 @@ export default function ClevelandMuseumOfArtCard(props: {
       <div className={styles.artefactImageContainer}>
         <Link
           className={styles.artefactImageLink}
-          to={`/cleveland-museum-of-art/${props.artefact.id}`}
+          to={`/museum-collections/cleveland-museum-of-art/${props.artefact.id}`}
           state={props.artefact}>
           <ImageLoader imageLink={props.artefact.images.web.url} />
         </Link>

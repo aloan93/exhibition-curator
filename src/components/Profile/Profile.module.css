@@ -1,0 +1,132 @@
+@import "../../vars.css";
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 75px 10% 0 10%;
+  gap: 49px;
+  width: 80%;
+}
+
+.title {
+  color: var(--colour-text);
+  text-align: center;
+  font-size: 30px;
+}
+
+.exhibitionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 510px;
+  text-align: center;
+  gap: 15px;
+  padding: 20px 20px;
+  border: 2px solid var(--colour-dark);
+  border-radius: 20px;
+}
+
+.exhibitionsTitle,
+.prompt {
+  color: var(--colour-text);
+}
+
+.exhibitionsList {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.exhibitionItem {
+  max-width: 450px;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--colour-secondary) 0%,
+    var(--colour-dark) 100%
+  );
+  padding: 20px 20px;
+  border-radius: 20px;
+}
+
+.exhibitionItem a {
+  text-decoration: none;
+  color: var(--colour-text);
+}
+
+.exhibitionItem a:hover,
+.exhibitionItem a:focus {
+  text-decoration: underline;
+}
+
+.logoutBtn {
+  height: 40px;
+  max-width: 350px;
+  width: 100%;
+  padding: 0 10px;
+  margin-top: 10px;
+  color: #faa0a0;
+  background: transparent;
+  border: 2px solid #faa0a0;
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.logoutBtn:hover,
+.logoutBtn:focus {
+  background: #faa0a0;
+  color: black;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    180deg,
+    var(--colour-secondary) 0%,
+    var(--colour-dark) 100%
+  );
+  border-radius: 20px;
+  padding: 20px 25px;
+  width: 1000px;
+  max-width: 80vw;
+}
+
+.error {
+  font-size: 20px;
+  font-weight: 500;
+  color: #faa0a0;
+}
+
+.loader {
+  border: 5px solid var(--colour-text);
+  border-top: 5px solid var(--colour-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .title {
+    font-size: 20px;
+  }
+}

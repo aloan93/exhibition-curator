@@ -34,7 +34,7 @@ export default function MetMuseumOfArtCard(props: {
         <h3 className={styles.title}>
           <Link
             className={styles.titleLink}
-            to={`/metropolitan-museum-of-art/${props.artefact.objectID}`}
+            to={`/museum-collections/metropolitan-museum-of-art/${props.artefact.objectID}`}
             state={props.artefact}>
             {props.artefact.title}
           </Link>
@@ -95,7 +95,7 @@ export default function MetMuseumOfArtCard(props: {
       <div className={styles.artefactImageContainer}>
         <Link
           className={styles.artefactImageLink}
-          to={`/metropolitan-museum-of-art/${props.artefact.objectID}`}
+          to={`/museum-collections/metropolitan-museum-of-art/${props.artefact.objectID}`}
           state={props.artefact}>
           {props.artefact.primaryImageSmall ? (
             <ImageLoader imageLink={props.artefact.primaryImageSmall} />
