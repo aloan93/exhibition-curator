@@ -19,7 +19,11 @@ export default function Homepage(): ReactNode {
         <p>{`Browse antiquities & fine artwork from a selection of public collections and curate your own virtual exhibitions`}</p>
         <p>{`Explore artefacts in more detail by clicking on their title or image`}</p>
         <p>{`- - - - - - - -`}</p>
-        <p>{`PS. virtual exhibitions are temporary for the time you are engaged with the site -\nnavigating away from the site or refreshing the page will cause your virtual exhibition to be reset`}</p>
+        <p>
+          <strong>PS. </strong>
+          {`"My Exhibition" is temporary for the time you are engaged with the site -\nnavigating away from the site or refreshing the page will cause your virtual exhibition to be reset`}
+        </p>
+        <p>{`Up to 3 "My Exhibition" collections can be saved to a registered user account for permanent viewing and sharing`}</p>
       </article>
     </div>
   );
