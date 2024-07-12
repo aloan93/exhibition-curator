@@ -12,6 +12,7 @@ export default function Login(): ReactNode {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/profile";
+  const hasBeenADeletion = location.state?.isDeleted;
 
   useEffect(() => {
     currentUser ? navigate(from, { replace: true }) : null;
@@ -32,6 +33,10 @@ export default function Login(): ReactNode {
 
   return (
     <div className={styles.container}>
+      {hasBeenADeletion ? (
+        <p className={styles.message}>Account Successfully Deleted</p>
+      ) : null}
+
       <h2 className={styles.title}>Login</h2>
 
       <form className={styles.formContainer} onSubmit={handleLogin}>

@@ -3,6 +3,7 @@ import styles from "./Profile.module.css";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import SavedExhibitions from "./SavedExhibitions";
+import DeleteAccount from "./DeleteAccount";
 
 export default function Profile(): ReactNode {
   const { currentUser, logout } = useAuth();
@@ -11,9 +12,12 @@ export default function Profile(): ReactNode {
   const from = location.state?.from?.pathname || "/login";
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
-    !currentUser ? navigate(from, { replace: true }) : null;
+    !currentUser
+      ? navigate(from, { replace: true, state: { isDeleted } })
+      : null;
   }, [currentUser]);
 
   function handleLogout(e: any) {
@@ -46,6 +50,12 @@ export default function Profile(): ReactNode {
         disabled={isLoading}>
         Logout
       </button>
+
+      <DeleteAccount
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        setIsDeleted={setIsDeleted}
+      />
     </div>
   );
 }

@@ -1,5 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  deleteUser,
+  EmailAuthCredential,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const authContextDefault = {
   currentUser: null as any,
@@ -11,6 +19,10 @@ const authContextDefault = {
   logout: () => any,
   // @ts-ignore
   resetPassword: (_email: string) => any,
+  // @ts-ignore
+  deleteAccount: (_user: any) => any,
+  // @ts-ignore
+  reauth: (_user: any, _credential: EmailAuthCredential) => any,
 };
 
 const AuthContext = createContext(authContextDefault);
@@ -22,11 +34,11 @@ function AuthProvider(props: { children: any }) {
   const [isLoading, setIsLoading] = useState(true);
 
   function signup(email: string, password: string) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   }
 
   function login(email: string, password: string) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   }
 
   function logout() {
@@ -34,7 +46,15 @@ function AuthProvider(props: { children: any }) {
   }
 
   function resetPassword(email: string) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email);
+  }
+
+  function deleteAccount(user: any) {
+    return deleteUser(user);
+  }
+
+  function reauth(user: any, credential: EmailAuthCredential) {
+    return reauthenticateWithCredential(user, credential);
   }
 
   useEffect(() => {
@@ -48,7 +68,15 @@ function AuthProvider(props: { children: any }) {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, signup, login, logout, resetPassword }}>
+      value={{
+        currentUser,
+        signup,
+        login,
+        logout,
+        resetPassword,
+        deleteAccount,
+        reauth,
+      }}>
       {!isLoading && props.children}
     </AuthContext.Provider>
   );
