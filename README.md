@@ -4,7 +4,10 @@ Hosted here --> https://aloan93-exhibitioncurator.netlify.app/
 
 A web application where users can browse antiquities & fine artwork from public collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the ['Metropolitan Museum of Art'](https://metmuseum.github.io/) and the ['Cleveland Museum of Art'](https://openaccess-api.clevelandart.org/) via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
 
-**PS. Users' own virtual exhibitions persist for the duration of their session only! (Navigating away from the site or refreshing will cause the exhibition to be flushed)**
+The application utilises both Firebase Authentication and Firestore Database to allow users to sign-up and log-in with an email address and password. Registered users are able to save up to three virtual exhibitions for permanent viewing and sharing. Sharing links are also able to be viewed by non-registered users.
+
+**PS. Users' collections under "My Exhibition" persist for the duration of their session only! (Navigating away from the site or refreshing will cause the exhibition to be flushed) -**
+**Users can save these collections permanently to their profile if signed in with a registered account**
 
 ## Running the App Locally
 
@@ -31,9 +34,36 @@ Install all the packages required to run this depositry via NPM using the follow
 npm install
 ```
 
-### Step 3: Launching the App
+### Step 3: Creating the '.env' File
 
-Once all the dependancies have been installed you will then be able to run the application, and for this purpose you can use the following script in your terminal:
+In order for the application to connect to firebase you will need to create a **.env** file within the root directory. This file will need to include the following variables:
+
+```
+REACT_APP_FIREBASE_API_KEY
+REACT_APP_FIREBASE_AUTH_DOMAIN
+REACT_APP_FIREBASE_PROJECT_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+REACT_APP_FIREBASE_APP_ID
+```
+
+For access to the development values, please feel free to contact myself - ['aloan93'](https://github.com/aloan93)
+
+Alternatively, you can create your own firebase project. This will need to make use of email/password authentication and firestore.
+
+For firestore, only one database is required - "Exhibitions". Exhibition ids will need to be set to auto-generate, and documents will need to adhere to the follow structure:
+
+```
+{
+    artefacts: { collection: string, id: number }[],
+    exhibitionName: string,
+    user: reference
+}
+```
+
+### Step 4: Launching the App
+
+Once all the dependancies have been installed and your .env file is in place with a valid set of variables and values, you will then be able to run the application, and for this purpose you can use the following script in your terminal:
 
 ```
 npm run dev

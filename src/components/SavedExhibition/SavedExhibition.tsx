@@ -41,6 +41,7 @@ export default function SavedExhibition(): ReactNode {
   useEffect(() => {
     setIsInitialLoading(true);
     setInitialError("");
+    setQueryError("");
     getDoc(doc(db, "Exhibitions", exhibitionId || ""))
       .then((res) => {
         if (!res.exists()) {
@@ -91,7 +92,11 @@ export default function SavedExhibition(): ReactNode {
                 />
               </div>
 
-              {queryError ? <p className={styles.error}>{queryError}</p> : null}
+              {queryError ? (
+                <div className={styles.errorContainer}>
+                  <p className={styles.error}>{queryError}</p>
+                </div>
+              ) : null}
 
               {isDeletionSuccess ? (
                 <div>

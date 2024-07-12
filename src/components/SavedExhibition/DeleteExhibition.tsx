@@ -27,6 +27,7 @@ export default function DeleteExhibition(props: {
         props.setQueryError(
           "Failed to delete exhibition. Please try again later"
         );
+        window.scroll(0, 0);
         props.setIsDeleteLoading(false);
       });
   }
@@ -42,7 +43,7 @@ export default function DeleteExhibition(props: {
           onClick={handleDelete}
           disabled={props.isRenameLoading}
           hidden={props.isDeletionSuccess}>
-          Delete
+          Delete Exhibition
         </button>
       )}
     </>
