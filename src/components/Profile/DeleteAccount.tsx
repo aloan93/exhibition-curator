@@ -2,6 +2,15 @@ import { ReactNode, useState } from "react";
 import styles from "./Profile.module.css";
 import useAuth from "../../hooks/useAuth";
 import { EmailAuthProvider } from "firebase/auth";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 export default function DeleteAccount(props: {
   isLoading: boolean;
@@ -17,11 +26,25 @@ export default function DeleteAccount(props: {
     passwordInput
   );
 
+  const exhibitionsRef = collection(db, "Exhibitions");
+  const userRef = doc(db, "Users", currentUser.uid);
+  const q = query(exhibitionsRef, where("user", "==", userRef));
+
   function handleDeleteAccount(e: any) {
     e.preventDefault();
     props.setIsLoading(true);
     setError("");
     reauth(currentUser, credential)
+      .then(() => {
+        return getDocs(q);
+      })
+      .then((res: any) => {
+        const deleteQueryArray = res.docs.map((document: any) => {
+          return deleteDoc(doc(db, "Exhibitions", document.id));
+        });
+
+        return Promise.all([...deleteQueryArray]);
+      })
       .then(() => {
         return deleteAccount(currentUser);
       })
@@ -36,7 +59,6 @@ export default function DeleteAccount(props: {
         setPasswordInput("");
         setIsDeletionRequested(false);
         props.setIsLoading(false);
-        console.log(err.code);
       });
   }
 
@@ -85,7 +107,10 @@ export default function DeleteAccount(props: {
       ) : (
         <button
           className={styles.deleteBtn}
-          onClick={() => setIsDeletionRequested(true)}
+          onClick={() => {
+            setError("");
+            setIsDeletionRequested(true);
+          }}
           disabled={props.isLoading}>
           Delete Account
         </button>
