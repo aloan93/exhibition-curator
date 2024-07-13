@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { metMuseumAPI, clevelandMuseumAPI } from "../../api/api";
-import styles from "./MyExhibition.module.css";
+import styles from "./MyCollection.module.css";
 import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
 import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
 import useExhibition from "../../hooks/useExhibition";

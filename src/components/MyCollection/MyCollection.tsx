@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import styles from "./MyExhibition.module.css";
+import styles from "./MyCollection.module.css";
 import useExhibition from "../../hooks/useExhibition";
 import EntrySelecter from "./EntrySelecter";
 import PageNav from "../PageNav/PageNav";
@@ -15,7 +15,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export default function MyExhibition(): ReactNode {
+export default function MyCollection(): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
@@ -78,7 +78,7 @@ export default function MyExhibition(): ReactNode {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>My Exhibiton</h2>
+      <h2 className={styles.title}>My Collection</h2>
       {isLoading ? (
         <div className={styles.largeLoader} aria-label="Loading"></div>
       ) : (
@@ -90,7 +90,7 @@ export default function MyExhibition(): ReactNode {
                   <input
                     className={styles.saveInput}
                     type="text"
-                    aria-label="Save Exhibition Name Input"
+                    aria-label="Save exhibition name input"
                     autoComplete="off"
                     autoCorrect="off"
                     placeholder="Exhibition Name"
@@ -98,6 +98,7 @@ export default function MyExhibition(): ReactNode {
                     required
                     disabled={isLoading}
                   />
+
                   <button className={styles.saveBtn} disabled={isLoading}>
                     Save
                   </button>
@@ -121,22 +122,33 @@ export default function MyExhibition(): ReactNode {
                     className={
                       styles.prompt
                     }>{`Successfully saved the exhibition as "${exhibitionName}"`}</p>
+
                   <button
-                    className={styles.profileBtn}
+                    className={styles.redirectBtn}
                     aria-label="Go to saved exhibition"
                     onClick={() => navigate(`/profile/${success}`)}>
                     View Exhibition
                   </button>
                 </>
               ) : (
-                <p className={styles.prompt}>
-                  {
-                    "No artefacts currently in this exhibition - Try adding some!"
-                  }
-                </p>
+                <>
+                  <p className={styles.prompt}>
+                    {
+                      "No artefacts currently in your collection - Try browsing the museum collections and adding some!"
+                    }
+                  </p>
+
+                  <button
+                    className={styles.redirectBtn}
+                    aria-label="Go to museum collections"
+                    onClick={() => navigate("/museum-collections")}>
+                    To Museum Collections
+                  </button>
+                </>
               )}
             </>
           )}
+
           <ul className={styles.listContainer}>
             {paginatedExhibition.map((entry) => {
               return (

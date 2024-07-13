@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import useAuth from "../../hooks/useAuth";
 import PageNav from "../PageNav/PageNav";
-import EntrySelecter from "../MyExhibition/EntrySelecter";
+import EntrySelecter from "../MyCollection/EntrySelecter";
 
 export default function GuestExhibition(): ReactNode {
   const { exhibitionId } = useParams();

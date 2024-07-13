@@ -10,7 +10,7 @@ export default function MetMuseumOfArtCard(props: {
 }): ReactNode {
   const { exhibition, setExhibition } = useExhibition();
 
-  function addToExhibition(e: any) {
+  function addToMyCollection(e: any) {
     e.preventDefault();
     setExhibition([
       ...exhibition,
@@ -18,7 +18,7 @@ export default function MetMuseumOfArtCard(props: {
     ]);
   }
 
-  function removeFromExhibition(e: any) {
+  function removeFromMyCollection(e: any) {
     e.preventDefault();
     setExhibition(
       [...exhibition].filter(
@@ -79,16 +79,16 @@ export default function MetMuseumOfArtCard(props: {
 
         <button
           className={styles.addArtefactBtn}
-          onClick={addToExhibition}
+          onClick={addToMyCollection}
           hidden={exhibition.some((e) => e.id === props.artefact.objectID)}>
-          Add to exhibition
+          Add to MyCollection
         </button>
 
         <button
           className={styles.removeArtefactBtn}
-          onClick={removeFromExhibition}
+          onClick={removeFromMyCollection}
           hidden={!exhibition.some((e) => e.id === props.artefact.objectID)}>
-          Remove from exhibition
+          Remove from MyCollection
         </button>
       </div>
 
