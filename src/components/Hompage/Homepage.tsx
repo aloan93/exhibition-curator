@@ -16,14 +16,14 @@ export default function Homepage(): ReactNode {
           styles.title
         }>{`Welcome to Exhibition Curator\nby aloan93`}</h2>
       <article className={styles.infoContainer}>
-        <p>{`Browse antiquities & fine artwork from a selection of public collections and curate your own virtual exhibitions`}</p>
-        <p>{`Explore artefacts in more detail by clicking on their title or image`}</p>
+        <p>{`Browse antiquities & fine artwork from a selection of public collections and curate your own virtual collections`}</p>
+        <p>{`Explore artefacts in more detail whilst browsing museum collections by clicking on their title or image`}</p>
         <p>{`- - - - - - - -`}</p>
         <p>
           <strong>PS. </strong>
-          {`"My Exhibition" is temporary for the time you are engaged with the site -\nnavigating away from the site or refreshing the page will cause your virtual exhibition to be reset`}
+          {`"My Collection" is temporary for the time you are engaged with the site -\nnavigating away from the site or refreshing the page will cause your collection to be reset`}
         </p>
-        <p>{`Up to 3 "My Exhibition" collections can be saved to a registered user account for permanent viewing and sharing`}</p>
+        <p>{`Registered users can save up to three collections as "Exhibitions", which can be viewed and shared at any time`}</p>
       </article>
     </div>
   );

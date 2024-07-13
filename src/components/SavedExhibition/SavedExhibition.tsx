@@ -11,7 +11,7 @@ import { db } from "../../firebase";
 import useAuth from "../../hooks/useAuth";
 import TitleContainer from "./TitleContainer";
 import PageNav from "../PageNav/PageNav";
-import EntrySelecter from "../MyExhibition/EntrySelecter";
+import EntrySelecter from "../MyCollection/EntrySelecter";
 import DeleteExhibition from "./DeleteExhibition";
 
 export default function SavedExhibition(): ReactNode {

@@ -151,12 +151,13 @@
   }
 
   .addArtefactBtn {
+    font-size: 15px;
     min-width: 218px;
     width: 90%;
   }
 
   .removeArtefactBtn {
-    font-size: 18px;
+    font-size: 15px;
     min-width: 218px;
     width: 90%;
     height: 40px;

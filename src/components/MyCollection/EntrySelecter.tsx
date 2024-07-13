@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useState } from "react";
 import { metMuseumAPI, clevelandMuseumAPI } from "../../api/api";
-import styles from "./MyExhibition.module.css";
+import styles from "./MyCollection.module.css";
 import ClevelandMuseumOfArtCard from "../MuseumCollectionCards/ClevelandMuseumOfArtCard";
 import MetMuseumOfArtCard from "../MuseumCollectionCards/MetMuseumOfArtCard";
-import useExhibition from "../../hooks/useExhibition";
+import useCollection from "../../hooks/useCollection";
 
 type entryType = {
   collection: string;
@@ -14,7 +14,7 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
   const [artefact, setArtefact] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const { exhibition, setExhibition } = useExhibition();
+  const { collection, setCollection } = useCollection();
 
   useEffect(() => {
     if (props.entry.collection === "cleveland") {
@@ -56,8 +56,8 @@ export default function EntrySelecter(props: { entry: entryType }): ReactNode {
 
   function removeFromExhibition(e: any) {
     e.preventDefault();
-    setExhibition(
-      [...exhibition].filter(
+    setCollection(
+      [...collection].filter(
         (a) =>
           a.collection !== props.entry.collection || a.id !== props.entry.id
       )

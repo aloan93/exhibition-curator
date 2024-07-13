@@ -4,7 +4,7 @@ import { clevelandMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import SpotlightImage from "./SpotlightImage";
-import useExhibition from "../../hooks/useExhibition";
+import useCollection from "../../hooks/useCollection";
 
 export default function ClevelandArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { exhibition, setExhibition } = useExhibition();
+  const { collection, setCollection } = useCollection();
 
   useEffect(() => {
     if (!artefact) {
@@ -39,18 +39,18 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
     }
   }, []);
 
-  function addToExhibition(e: any) {
+  function addToMyCollection(e: any) {
     e.preventDefault();
-    setExhibition([
-      ...exhibition,
+    setCollection([
+      ...collection,
       { collection: "cleveland", id: artefact.id },
     ]);
   }
 
-  function removeFromExhibition(e: any) {
+  function removeFromMyCollection(e: any) {
     e.preventDefault();
-    setExhibition(
-      [...exhibition].filter(
+    setCollection(
+      [...collection].filter(
         (a) => a.collection !== "cleveland" || a.id !== artefact.id
       )
     );
@@ -167,16 +167,16 @@ export default function ClevelandArtefactSpotlight(): ReactNode {
 
               <button
                 className={styles.addArtefactBtn}
-                onClick={addToExhibition}
-                hidden={exhibition.some((e) => e.id === artefact.id)}>
-                Add to exhibition
+                onClick={addToMyCollection}
+                hidden={collection.some((e) => e.id === artefact.id)}>
+                Add to My Collection
               </button>
 
               <button
                 className={styles.removeArtefactBtn}
-                onClick={removeFromExhibition}
-                hidden={!exhibition.some((e) => e.id === artefact.id)}>
-                Remove from exhibition
+                onClick={removeFromMyCollection}
+                hidden={!collection.some((e) => e.id === artefact.id)}>
+                Remove from My Collection
               </button>
 
               <button

@@ -16,55 +16,6 @@
   font-size: 30px;
 }
 
-.exhibitionsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 510px;
-  text-align: center;
-  gap: 15px;
-  padding: 20px 20px;
-  border: 2px solid var(--colour-dark);
-  border-radius: 20px;
-}
-
-.exhibitionsTitle,
-.prompt {
-  color: var(--colour-text);
-}
-
-.exhibitionsList {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 15px;
-}
-
-.exhibitionItem {
-  max-width: 450px;
-  width: 100%;
-  background: linear-gradient(
-    180deg,
-    var(--colour-secondary) 0%,
-    var(--colour-dark) 100%
-  );
-  padding: 20px 20px;
-  border-radius: 20px;
-}
-
-.exhibitionItem a {
-  text-decoration: none;
-  color: var(--colour-text);
-}
-
-.exhibitionItem a:hover,
-.exhibitionItem a:focus {
-  text-decoration: underline;
-}
-
 .logoutBtn,
 .deleteBtn {
   height: 40px;

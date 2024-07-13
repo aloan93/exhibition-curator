@@ -60,9 +60,11 @@
   text-align: center;
 }
 
-.profileBtn {
+.redirectBtn {
   height: 40px;
-  width: 90%;
+  width: 100%;
+  min-width: 235px;
+  max-width: 400px;
   padding: 0 10px;
   margin-top: 49px;
   color: var(--colour-text);
@@ -74,8 +76,8 @@
   cursor: pointer;
 }
 
-.profileBtn:hover,
-.profileBtn:focus {
+.redirectBtn:hover,
+.redirectBtn:focus {
   background: var(--colour-text);
   color: black;
 }

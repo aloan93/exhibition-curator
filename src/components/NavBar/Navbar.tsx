@@ -15,6 +15,7 @@ export default function Navbar(): ReactNode {
           Exhibition Curator
         </Link>
       </h1>
+
       <div className={styles.menu}>
         <img
           className={styles.menuBtn}
@@ -26,29 +27,28 @@ export default function Navbar(): ReactNode {
           alt="menu-button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
+
         <ul
           className={`${styles.menuItems} ${isMenuOpen && styles.menuOpen}`}
           onClick={() => setIsMenuOpen(false)}>
-          {/* <li>
-            <Link to="/museum-collections/cleveland-museum-of-art">
-              Cleveland MoA
-            </Link>
-          </li>
-          <li>
-            <Link to="/museum-collections/metropolitan-museum-of-art">
-              Metropolitan MoA
-            </Link>
-          </li> */}
           <li>
             <Link to="/museum-collections">Museum Collections</Link>
           </li>
+
           <li>
-            <Link to="/my-exhibition">My Exhibition</Link>
+            <Link to="/my-collection">My Collection</Link>
           </li>
+
           {currentUser ? (
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/saved-exhibitions">Saved Exhibitions</Link>
+              </li>
+
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+            </>
           ) : (
             <li>
               <p>

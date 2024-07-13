@@ -4,7 +4,6 @@ import Navbar from "./components/NavBar/Navbar";
 import Homepage from "./components/Hompage/Homepage";
 import MetMuseumOfArt from "./components/MuseumCollections/MetMuseumOfArt";
 import ClevelandMuseumOfArt from "./components/MuseumCollections/ClevelandMuseumOfArt";
-import MyExhibition from "./components/MyExhibition/MyExhibition";
 import ClevelandArtefactSpotlight from "./components/ArtefactSpotlights/ClevelandArtefactSpotlight";
 import MetropolitanArtefactSpotlight from "./components/ArtefactSpotlights/MetropolitanArtefactSpotlight";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
@@ -15,6 +14,8 @@ import ForgotPassword from "./components/SignupLogin/ForgotPassword";
 import SavedExhibition from "./components/SavedExhibition/SavedExhibition";
 import GuestExhibition from "./components/SavedExhibition/GuestExhibition";
 import MuseumContentsPage from "./components/MuseumContentsPage/MuseumContentsPage";
+import MyCollection from "./components/MyCollection/MyCollection";
+import SavedExhibitions from "./components/SavedExhibitions/SavedExhibitions";
 
 function App() {
   return (
@@ -37,7 +38,14 @@ function App() {
 
           <Route path="/profile" element={<Profile />} />
 
-          <Route path="/profile/:exhibitionId" element={<SavedExhibition />} />
+          <Route path="/my-collection" element={<MyCollection />} />
+
+          <Route path="/saved-exhibitions" element={<SavedExhibitions />} />
+
+          <Route
+            path="/saved-exhibitions/:exhibitionId"
+            element={<SavedExhibition />}
+          />
 
           <Route
             path="/guest-exhibition/:exhibitionId"
@@ -55,8 +63,6 @@ function App() {
             path="/museum-collections/cleveland-museum-of-art"
             element={<ClevelandMuseumOfArt />}
           />
-
-          <Route path="/my-exhibition" element={<MyExhibition />} />
 
           <Route
             path="/museum-collections/cleveland-museum-of-art/:id"
