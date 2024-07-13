@@ -1,13 +1,13 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./MyCollection.module.css";
-import useExhibition from "../../hooks/useExhibition";
+import useCollection from "../../hooks/useCollection";
 import EntrySelecter from "./EntrySelecter";
 import PageNav from "../PageNav/PageNav";
 import useAuth from "../../hooks/useAuth";
 import {
   doc,
-  collection,
+  collection as fbCollection,
   addDoc,
   getDocs,
   query,
@@ -16,32 +16,32 @@ import {
 import { db } from "../../firebase";
 
 export default function MyCollection(): ReactNode {
-  const { exhibition, setExhibition } = useExhibition();
+  const { collection, setCollection } = useCollection();
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
-  const paginatedExhibition = exhibition.slice(
+  const paginatedExhibition = collection.slice(
     Number(page) * 20 - 20,
     Number(page) * 20
   );
-  const resultsTotal = exhibition.length;
+  const resultsTotal = collection.length;
   const { currentUser } = useAuth();
   const [exhibitionName, setExhibitionName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const exhibitionsRef = collection(db, "Exhibitions");
+  const exhibitionsRef = fbCollection(db, "Exhibitions");
   const userRef = currentUser ? doc(db, "Users", currentUser.uid) : null;
   const q = query(exhibitionsRef, where("user", "==", userRef));
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (exhibition.length !== 0 && exhibition.length < 20 * Number(page) - 19) {
+    if (collection.length !== 0 && collection.length < 20 * Number(page) - 19) {
       setSearchParams((prev) => {
         prev.set("page", String(Number(page) - 1));
         return prev;
       });
     }
-  }, [exhibition]);
+  }, [collection]);
 
   function submitSave(e: any) {
     e.preventDefault();
@@ -55,7 +55,7 @@ export default function MyCollection(): ReactNode {
       .then((userOwnedExhibitions) => {
         if (userOwnedExhibitions < 3) {
           return addDoc(exhibitionsRef, {
-            artefacts: [...exhibition],
+            artefacts: [...collection],
             exhibitionName,
             user: userRef,
           });
@@ -64,7 +64,7 @@ export default function MyCollection(): ReactNode {
         }
       })
       .then((res) => {
-        setExhibition([]);
+        setCollection([]);
         setSuccess(`${res.id}`);
         setIsLoading(false);
       })
@@ -83,7 +83,7 @@ export default function MyCollection(): ReactNode {
         <div className={styles.largeLoader} aria-label="Loading"></div>
       ) : (
         <>
-          {exhibition.length > 0 ? (
+          {collection.length > 0 ? (
             <>
               {currentUser ? (
                 <form className={styles.formContainer} onSubmit={submitSave}>
@@ -159,7 +159,7 @@ export default function MyCollection(): ReactNode {
             })}
           </ul>
 
-          {exhibition.length > 0 ? (
+          {collection.length > 0 ? (
             <PageNav
               page={page}
               setSearchParams={setSearchParams}

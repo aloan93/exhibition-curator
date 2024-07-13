@@ -4,7 +4,7 @@ import { metMuseumAPI } from "../../api/api";
 import styles from "./ArtefactSpotlights.module.css";
 import { getDateRangeString, capitaliseString, getImageURL } from "../../utils";
 import SpotlightImage from "./SpotlightImage";
-import useExhibition from "../../hooks/useExhibition";
+import useCollection from "../../hooks/useCollection";
 
 export default function MetropolitanArtefactSpotlight(): ReactNode {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { exhibition, setExhibition } = useExhibition();
+  const { collection, setCollection } = useCollection();
 
   useEffect(() => {
     if (!artefact) {
@@ -39,18 +39,18 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
     }
   }, []);
 
-  function addToExhibition(e: any) {
+  function addToMyCollection(e: any) {
     e.preventDefault();
-    setExhibition([
-      ...exhibition,
+    setCollection([
+      ...collection,
       { collection: "metropolitan", id: artefact.objectID },
     ]);
   }
 
-  function removeFromExhibition(e: any) {
+  function removeFromMyCollection(e: any) {
     e.preventDefault();
-    setExhibition(
-      [...exhibition].filter(
+    setCollection(
+      [...collection].filter(
         (a) => a.collection !== "metropolitan" || a.id !== artefact.objectID
       )
     );
@@ -172,16 +172,16 @@ export default function MetropolitanArtefactSpotlight(): ReactNode {
 
               <button
                 className={styles.addArtefactBtn}
-                onClick={addToExhibition}
-                hidden={exhibition.some((e) => e.id === artefact.objectID)}>
-                Add to exhibition
+                onClick={addToMyCollection}
+                hidden={collection.some((e) => e.id === artefact.objectID)}>
+                Add to My Collection
               </button>
 
               <button
                 className={styles.removeArtefactBtn}
-                onClick={removeFromExhibition}
-                hidden={!exhibition.some((e) => e.id === artefact.objectID)}>
-                Remove from exhibition
+                onClick={removeFromMyCollection}
+                hidden={!collection.some((e) => e.id === artefact.objectID)}>
+                Remove from My Collection
               </button>
 
               <button

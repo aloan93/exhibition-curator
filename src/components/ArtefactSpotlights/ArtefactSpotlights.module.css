@@ -259,10 +259,7 @@
   .removeArtefactBtn {
     min-width: 218px;
     width: 90%;
-  }
-
-  .removeArtefactBtn {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .imagesContainer,

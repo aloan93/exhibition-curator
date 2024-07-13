@@ -1,27 +1,27 @@
 import { ReactNode } from "react";
 import styles from "./MuseumCollectionCards.module.css";
 import { getDateRangeString } from "../../utils";
-import useExhibition from "../../hooks/useExhibition";
+import useCollection from "../../hooks/useCollection";
 import { Link } from "react-router-dom";
 import ImageLoader from "../ImageLoader/ImageLoader";
 
 export default function ClevelandMuseumOfArtCard(props: {
   artefact: any;
 }): ReactNode {
-  const { exhibition, setExhibition } = useExhibition();
+  const { collection, setCollection } = useCollection();
 
   function addToMyCollection(e: any) {
     e.preventDefault();
-    setExhibition([
-      ...exhibition,
+    setCollection([
+      ...collection,
       { collection: "cleveland", id: props.artefact.id },
     ]);
   }
 
   function removeFromMyCollection(e: any) {
     e.preventDefault();
-    setExhibition(
-      [...exhibition].filter(
+    setCollection(
+      [...collection].filter(
         (a) => a.collection !== "cleveland" || a.id !== props.artefact.id
       )
     );
@@ -67,14 +67,14 @@ export default function ClevelandMuseumOfArtCard(props: {
         <button
           className={styles.addArtefactBtn}
           onClick={addToMyCollection}
-          hidden={exhibition.some((e) => e.id === props.artefact.id)}>
+          hidden={collection.some((e) => e.id === props.artefact.id)}>
           Add to My Collection
         </button>
 
         <button
           className={styles.removeArtefactBtn}
           onClick={removeFromMyCollection}
-          hidden={!exhibition.some((e) => e.id === props.artefact.id)}>
+          hidden={!collection.some((e) => e.id === props.artefact.id)}>
           Remove from My Collection
         </button>
       </div>
