@@ -40,9 +40,15 @@ export default function Navbar(): ReactNode {
           </li>
 
           {currentUser ? (
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/saved-exhibitions">Saved Exhibitions</Link>
+              </li>
+
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+            </>
           ) : (
             <li>
               <p>

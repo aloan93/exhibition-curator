@@ -15,6 +15,7 @@ import SavedExhibition from "./components/SavedExhibition/SavedExhibition";
 import GuestExhibition from "./components/SavedExhibition/GuestExhibition";
 import MuseumContentsPage from "./components/MuseumContentsPage/MuseumContentsPage";
 import MyCollection from "./components/MyCollection/MyCollection";
+import SavedExhibitions from "./components/SavedExhibitions/SavedExhibitions";
 
 function App() {
   return (
@@ -37,7 +38,14 @@ function App() {
 
           <Route path="/profile" element={<Profile />} />
 
-          <Route path="/profile/:exhibitionId" element={<SavedExhibition />} />
+          <Route path="/my-collection" element={<MyCollection />} />
+
+          <Route path="/saved-exhibitions" element={<SavedExhibitions />} />
+
+          <Route
+            path="/saved-exhibitions/:exhibitionId"
+            element={<SavedExhibition />}
+          />
 
           <Route
             path="/guest-exhibition/:exhibitionId"
@@ -55,8 +63,6 @@ function App() {
             path="/museum-collections/cleveland-museum-of-art"
             element={<ClevelandMuseumOfArt />}
           />
-
-          <Route path="/my-collection" element={<MyCollection />} />
 
           <Route
             path="/museum-collections/cleveland-museum-of-art/:id"

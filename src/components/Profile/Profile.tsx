@@ -2,7 +2,6 @@ import { ReactNode, useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import SavedExhibitions from "./SavedExhibitions";
 import DeleteAccount from "./DeleteAccount";
 
 export default function Profile(): ReactNode {
@@ -41,8 +40,6 @@ export default function Profile(): ReactNode {
           <p className={styles.error}>{error}</p>
         </div>
       ) : null}
-
-      <SavedExhibitions uid={currentUser.uid} />
 
       <button
         className={styles.logoutBtn}

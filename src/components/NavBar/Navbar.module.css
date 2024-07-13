@@ -7,13 +7,13 @@
   justify-content: space-between;
   padding-top: 61px;
   z-index: 2;
-  margin: 0 10%;
+  margin: 0 8%;
 }
 
 .title {
   font-size: 20px;
   width: 80%;
-  margin-right: 47px;
+  margin-right: 35px;
 }
 
 .titleLink {
@@ -31,7 +31,7 @@
 
 .menuItems {
   display: flex;
-  gap: 47px;
+  gap: 35px;
   list-style: none;
 }
 

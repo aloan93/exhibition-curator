@@ -17,7 +17,7 @@ export default function TitleContainer(props: {
   );
   const [renameInput, setRenameInput] = useState("");
   const [isRenaming, setIsRenaming] = useState(false);
-  const url = location.href.replace("profile", "guest-exhibition");
+  const url = location.href.replace("saved-exhibitions", "guest-exhibition");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {

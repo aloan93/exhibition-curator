@@ -40,7 +40,7 @@ export default function GuestExhibition(): ReactNode {
             document.artefacts.slice(Number(page) * 20 - 20, Number(page) * 20)
           );
         } else if (document && document.user.id === currentUser.uid) {
-          navigate(`/profile/${exhibitionId}`, { replace: true });
+          navigate(`/saved-exhibitions/${exhibitionId}`, { replace: true });
         }
         setIsLoading(false);
       })
