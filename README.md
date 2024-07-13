@@ -2,12 +2,12 @@
 
 Hosted here --> https://aloan93-exhibitioncurator.netlify.app/
 
-A web application where users can browse antiquities & fine artwork from public collections and curate their own virtual exhibitions. Currently users have the ability to browse collections from the ['Metropolitan Museum of Art'](https://metmuseum.github.io/) and the ['Cleveland Museum of Art'](https://openaccess-api.clevelandart.org/) via open access APIs. Collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
+A web application where users can browse antiquities & fine artwork from public collections and curate their own virtual collections/exhibitions. Currently users have the ability to browse collections from the ['Metropolitan Museum of Art'](https://metmuseum.github.io/) and the ['Cleveland Museum of Art'](https://openaccess-api.clevelandart.org/) via open access APIs. Museum collections can be queried with a text input which will return all artworks that relate to the query within their API data set. Artefacts in list view can be viewed in isolation where they will return more images and information when available, including links to their original collection's website to learn more.
 
-The application utilises both Firebase Authentication and Firestore Database to allow users to sign-up and log-in with an email address and password. Registered users are able to save up to three virtual exhibitions for permanent viewing and sharing. Sharing links are also able to be viewed by non-registered users.
+The application utilises both Firebase Authentication and Firestore Database to allow users to sign-up and log-in with an email address and password. Registered users are able to save up to three collections as exhibitions for permanent viewing and sharing. Sharing links are also able to be viewed by non-registered users.
 
-**PS. Users' collections under "My Exhibition" persist for the duration of their session only! (Navigating away from the site or refreshing will cause the exhibition to be flushed) -**
-**Users can save these collections permanently to their profile if signed in with a registered account**
+**PS. A user's "My Collection" persists for the duration of their session only! (Navigating away from the site or refreshing will cause the collection to be flushed) -**
+**Users can save up to three of these collections permanently to their profile if signed in with a registered account**
 
 ## Running the App Locally
 
