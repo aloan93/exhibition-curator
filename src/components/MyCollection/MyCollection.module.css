@@ -17,6 +17,16 @@
   font-size: 30px;
 }
 
+.altLink {
+  color: var(--colour-text);
+  font-size: 20px;
+  margin-top: 49px;
+}
+
+.altLink a {
+  color: #99a5d6;
+}
+
 .formContainer {
   display: flex;
   align-items: center;
