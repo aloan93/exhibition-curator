@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./MyCollection.module.css";
 import useCollection from "../../hooks/useCollection";
 import EntrySelecter from "./EntrySelecter";
@@ -103,7 +103,13 @@ export default function MyCollection(): ReactNode {
                     Save
                   </button>
                 </form>
-              ) : null}
+              ) : (
+                <p className={styles.altLink}>
+                  <Link to="/login">Login</Link> or{" "}
+                  <Link to="/signup">Signup</Link> to save this collection as an
+                  exhibition
+                </p>
+              )}
 
               {error ? <p className={styles.error}>{error}</p> : null}
 
