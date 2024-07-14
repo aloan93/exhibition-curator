@@ -132,7 +132,7 @@ export default function MyCollection(): ReactNode {
                   <button
                     className={styles.redirectBtn}
                     aria-label="Go to saved exhibition"
-                    onClick={() => navigate(`/profile/${success}`)}>
+                    onClick={() => navigate(`/saved-exhibitions/${success}`)}>
                     View Exhibition
                   </button>
                 </>
