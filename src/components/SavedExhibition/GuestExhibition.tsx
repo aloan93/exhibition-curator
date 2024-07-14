@@ -44,8 +44,7 @@ export default function GuestExhibition(): ReactNode {
         }
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setError("Something went wrong. Please try again later");
         setIsLoading(false);
       });

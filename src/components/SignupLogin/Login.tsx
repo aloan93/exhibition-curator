@@ -27,7 +27,6 @@ export default function Login(): ReactNode {
         setError("Invalid login credentials");
       else setError("Failed to login. Please try again later");
       setIsLoading(false);
-      console.log(err.code);
     });
   }
 

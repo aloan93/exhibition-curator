@@ -23,10 +23,9 @@ export default function Profile(): ReactNode {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    logout().catch((err: any) => {
+    logout().catch(() => {
       setError("Failed to Logout. Please try again later");
       setIsLoading(false);
-      console.log(err);
     });
   }
 

@@ -104,10 +104,28 @@
   border: 2px solid var(--colour-text);
 }
 
+.redirectBtn {
+  height: 40px;
+  width: 100%;
+  min-width: 235px;
+  max-width: 400px;
+  padding: 0 10px;
+  margin-top: 49px;
+  color: var(--colour-text);
+  background: transparent;
+  border: 2px solid var(--colour-text);
+  border-radius: 40px;
+  font-size: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
 .shareBtn:hover,
 .shareBtn:focus,
 .renameBtn:hover,
-.renameBtn:focus {
+.renameBtn:focus,
+.redirectBtn:hover,
+.redirectBtn:focus {
   background: var(--colour-text);
   color: black;
 }
@@ -190,6 +208,7 @@
   color: var(--colour-text);
   margin-top: 49px;
   font-size: 25px;
+  text-align: center;
 }
 
 .errorContainer {
