@@ -62,8 +62,7 @@ export default function SavedExhibition(): ReactNode {
         }
         setIsInitialLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setInitialError("Something went wrong. Please try again later");
         setIsInitialLoading(false);
       });

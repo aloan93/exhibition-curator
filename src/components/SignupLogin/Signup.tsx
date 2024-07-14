@@ -27,10 +27,9 @@ export default function Signup(): ReactNode {
     }
     setIsLoading(true);
     setError("");
-    signup(emailInput, passwordInput).catch((err: any) => {
+    signup(emailInput, passwordInput).catch(() => {
       setError("Failed to create an account. Please try again later");
       setIsLoading(false);
-      console.log(err);
     });
   }
 

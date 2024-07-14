@@ -27,10 +27,9 @@ export default function ForgotPassword(): ReactNode {
         setMessage("Check your email inbox for further instruction");
         setIsLoading(false);
       })
-      .catch((err: any) => {
+      .catch(() => {
         setError("Failed to reset password. Please try again later");
         setIsLoading(false);
-        console.log(err);
       });
   }
 
