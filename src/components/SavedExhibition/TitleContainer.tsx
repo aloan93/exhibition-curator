@@ -10,7 +10,6 @@ export default function TitleContainer(props: {
   setIsRenameLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setQueryError: React.Dispatch<React.SetStateAction<string>>;
   isDeleteLoading: boolean;
-  isDeletionSuccess: boolean;
 }): ReactNode {
   const [displayedTitle, setDisplayedTitle] = useState(
     props.exhibition.exhibitionName
@@ -108,8 +107,7 @@ export default function TitleContainer(props: {
             <button
               className={styles.renameBtn}
               aria-label="Rename the exhibition"
-              onClick={() => setIsRenaming(!isRenaming)}
-              hidden={props.isDeletionSuccess}>
+              onClick={() => setIsRenaming(!isRenaming)}>
               🖊
             </button>
           </>
@@ -119,8 +117,7 @@ export default function TitleContainer(props: {
       <button
         className={styles.shareBtn}
         aria-label="Copy share link to exhibition"
-        onClick={handleShare}
-        hidden={props.isDeletionSuccess}>
+        onClick={handleShare}>
         Share
       </button>
     </div>

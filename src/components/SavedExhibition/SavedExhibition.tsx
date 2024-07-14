@@ -81,29 +81,37 @@ export default function SavedExhibition(): ReactNode {
             </div>
           ) : (
             <>
-              <div className={styles.headerContainer}>
-                <TitleContainer
-                  exhibition={exhibition}
-                  setQueryError={setQueryError}
-                  isDeleteLoading={isDeleteLoading}
-                  isDeletionSuccess={isDeletionSuccess}
-                  isRenameLoading={isRenameLoading}
-                  setIsRenameLoading={setIsRenameLoading}
-                />
-              </div>
-
-              {queryError ? (
-                <div className={styles.errorContainer}>
-                  <p className={styles.error}>{queryError}</p>
-                </div>
-              ) : null}
-
               {isDeletionSuccess ? (
-                <div>
-                  <p className={styles.prompt}>Successfully Deleted</p>
-                </div>
+                <>
+                  <p className={styles.prompt}>
+                    Exhibition Successfully Deleted
+                  </p>
+
+                  <button
+                    className={styles.redirectBtn}
+                    aria-label="Go to saved exhibitions"
+                    onClick={() => navigate("/saved-exhibitions")}>
+                    To Saved Exhibitions
+                  </button>
+                </>
               ) : (
                 <>
+                  <div className={styles.headerContainer}>
+                    <TitleContainer
+                      exhibition={exhibition}
+                      setQueryError={setQueryError}
+                      isDeleteLoading={isDeleteLoading}
+                      isRenameLoading={isRenameLoading}
+                      setIsRenameLoading={setIsRenameLoading}
+                    />
+                  </div>
+
+                  {queryError ? (
+                    <div className={styles.errorContainer}>
+                      <p className={styles.error}>{queryError}</p>
+                    </div>
+                  ) : null}
+
                   <PageNav
                     page={page}
                     setSearchParams={setSearchParams}
